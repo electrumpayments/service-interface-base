@@ -1,16 +1,20 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
  * The data required in all value added service requests
  **/
-public abstract class VasRequest {
+@ApiModel(description = "The data required in all value added service requests")
+public class BasicRequest {
 
    protected UUID id = null;
    protected DateTime time = null;
@@ -18,14 +22,14 @@ public abstract class VasRequest {
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
-    * 4122](https://tools.ietf.org/html/rfc4122). This field should match the {requestId} url parameter
+    * 4122](https://tools.ietf.org/html/rfc4122)
     **/
-   public VasRequest id(UUID id) {
+   public BasicRequest id(UUID id) {
       this.id = id;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122). This field should match the {requestId} url parameter")
+   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
    public UUID getId() {
@@ -41,7 +45,7 @@ public abstract class VasRequest {
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
     **/
-   public VasRequest time(DateTime time) {
+   public BasicRequest time(DateTime time) {
       this.time = time;
       return this;
    }
@@ -60,7 +64,7 @@ public abstract class VasRequest {
    /**
     * Data relating to the originator of the transaction
     **/
-   public VasRequest sender(Sender sender) {
+   public BasicRequest sender(Sender sender) {
       this.sender = sender;
       return this;
    }
@@ -74,5 +78,34 @@ public abstract class VasRequest {
 
    public void setSender(Sender sender) {
       this.sender = sender;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) {
+         return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+         return false;
+      }
+      BasicRequest vasRequest = (BasicRequest) o;
+      return Objects.equals(id, vasRequest.id);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(id);
+   }
+
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("class BasicRequest {\n");
+
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
+      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
+      sb.append("    sender: ").append(Utils.toIndentedString(sender)).append("\n");
+      sb.append("}");
+      return sb.toString();
    }
 }
