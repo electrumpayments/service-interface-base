@@ -1,14 +1,18 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
 
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
+
+import javax.validation.constraints.NotNull;
+
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * The data required in all value added service requests
@@ -92,7 +96,7 @@ public class BasicResponse {
       return this;
    }
 
-   @ApiModelProperty(value = "This object may be used by the ervice implementation to link a payment to a payment confirmation or cancellation, and should be provided unaltered by clients in corresponding requests")
+   @ApiModelProperty(value = "This object may be used by the service implementation to link a payment to a payment confirmation or cancellation, and should be provided unaltered by clients in corresponding requests")
    @JsonProperty("linkData")
    public Object getLinkData() {
       return linkData;
