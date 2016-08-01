@@ -47,7 +47,7 @@ public class Sender {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The id that uniquely identifies each device or system in a sender institution capable of sending requests. Required for transactions initiated from physical card entry or point-of-sale devices")
+   @ApiModelProperty(required = true, value = "The ID that uniquely identifies each device or system in a sender institution capable of sending requests. Required for transactions initiated from physical card entry or point-of-sale devices")
    @JsonProperty("terminalId")
    @Pattern(regexp = "[a-zA-Z0-9]{8}")
    public String getTerminalId() {

@@ -15,7 +15,7 @@ import static io.electrum.vas.Utils.toIndentedString;
  * service implementations where additional information is present in the confirmation. Otherwise, a single message
  * implementation is preferable
  */
-@ApiModel(description = "An advice that notifies of the successful completion of a transaction. Confirmations should only be implemented by service implementations where additional information is present in the confirmation. Otherwise, a single message implementation is preferable")
+@ApiModel(description = "An advice that notifies of the successful completion of a transaction.")
 public class TenderAdvice extends BasicAdvice {
 
    protected List<Tender> tenders = new ArrayList<>();
