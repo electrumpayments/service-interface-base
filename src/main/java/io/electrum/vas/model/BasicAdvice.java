@@ -23,7 +23,7 @@ public class BasicAdvice {
    protected UUID id = null;
    protected UUID requestId = null;
    protected DateTime time = null;
-   protected Object linkData = null;
+   protected Identifier identifier = null;
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
@@ -86,23 +86,23 @@ public class BasicAdvice {
    }
 
    /**
-    * The unaltered linkData object as supplied in the related BasicResponse message. Required if linkData was present in
-    * the BasicResponse. Shall not be populated if linkData was not present in the BasicResponse, or no BasicResponse was
-    * received
+    * The unaltered identifier object as supplied in the related BasicResponse message. Required if identifier field was
+    * present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received
+    * then this should be set to the identifier sent in the original request.
     **/
-   public BasicAdvice linkData(Object linkData) {
-      this.linkData = linkData;
+   public BasicAdvice identifier(Identifier identifier) {
+      this.identifier = identifier;
       return this;
    }
 
-   @ApiModelProperty(value = "The unaltered linkData object as supplied in the related BasicResponse message. Required if linkData was present in the BasicResponse. Shall not be populated if linkData was not present in the BasicResponse, or no BasicResponse was received")
-   @JsonProperty("linkData")
-   public Object getLinkData() {
-      return linkData;
+   @ApiModelProperty(value = "The unaltered identifier object as supplied in the related BasicResponse message. Required if identifier field was present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received then this should be set to the identifier sent in the original request.")
+   @JsonProperty("identifier")
+   public Identifier getIdentifier() {
+      return identifier;
    }
 
-   public void setLinkData(Object linkData) {
-      this.linkData = linkData;
+   public void setIdentifier(Identifier identifier) {
+      this.identifier = identifier;
    }
 
    @Override
@@ -130,7 +130,7 @@ public class BasicAdvice {
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    linkData: ").append(Utils.toIndentedString(linkData)).append("\n");
+      sb.append("    identifier: ").append(Utils.toIndentedString(identifier)).append("\n");
       sb.append("}");
       return sb.toString();
    }

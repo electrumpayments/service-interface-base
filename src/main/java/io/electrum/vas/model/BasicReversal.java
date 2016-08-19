@@ -12,9 +12,9 @@ import static io.electrum.vas.Utils.toIndentedString;
 
 /**
  * An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation,
- * or as a result of recieving a non-final response (or no response) to a request
+ * or as a result of receiving a non-final response (or no response) to a request
  */
-@ApiModel(description = "An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation, or as a result of recieving a non-final response (or no response) to a request")
+@ApiModel(description = "An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation, or as a result of receiving a non-final response (or no response) to a request")
 public class BasicReversal extends BasicAdvice {
 
    public enum ReversalReason {
@@ -62,7 +62,7 @@ public class BasicReversal extends BasicAdvice {
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    linkData: ").append(Utils.toIndentedString(linkData)).append("\n");
+      sb.append("    identifier: ").append(Utils.toIndentedString(identifier)).append("\n");
       sb.append("    reversalReason: ").append(toIndentedString(reversalReason)).append("\n");
       sb.append("}");
       return sb.toString();

@@ -1,6 +1,8 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -80,19 +82,9 @@ public class Institution {
       StringBuilder sb = new StringBuilder();
       sb.append("class Institution {\n");
 
-      sb.append("    id: ").append(toIndentedString(id)).append("\n");
-      sb.append("    name: ").append(toIndentedString(name)).append("\n");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

@@ -22,10 +22,11 @@ public class BasicResponse {
 
    protected UUID id = null;
    protected DateTime time = null;
-   protected Sender sender = null;
-   protected Object linkData = null;
-   protected Institution processor = null;
+   protected Originator originator = null;
+   protected Institution client = null;
+   protected Institution settlementEntity = null;
    protected Institution receiver = null;
+   protected Identifier identifier = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -71,68 +72,69 @@ public class BasicResponse {
    /**
     * Data relating to the originator of the transaction
     **/
-   public BasicResponse sender(Sender sender) {
-      this.sender = sender;
+   public BasicResponse originator(Originator originator) {
+      this.originator = originator;
       return this;
    }
 
    @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction")
-   @JsonProperty("sender")
+   @JsonProperty("originator")
    @NotNull
-   public Sender getSender() {
-      return sender;
+   public Originator getOriginator() {
+      return originator;
    }
 
-   public void setSender(Sender sender) {
-      this.sender = sender;
+   public void setOriginator(Originator originator) {
+      this.originator = originator;
    }
 
    /**
-    * This object may be used by the service implementation to link a payment to a payment confirmation or cancellation,
-    * and should be provided unaltered by clients in corresponding requests
+    * Data relating to the sender of BasicRequest.
     **/
-   public BasicResponse linkData(Object linkData) {
-      this.linkData = linkData;
+   public BasicResponse client(Institution client) {
+      this.client = client;
       return this;
    }
 
-   @ApiModelProperty(value = "This object may be used by the service implementation to link a payment to a payment confirmation or cancellation, and should be provided unaltered by clients in corresponding requests")
-   @JsonProperty("linkData")
-   public Object getLinkData() {
-      return linkData;
+   @ApiModelProperty(required = true, value = "Data relating to the sender of BasicRequest.")
+   @JsonProperty("client")
+   @NotNull
+   public Institution getClient() {
+      return client;
    }
 
-   public void setLinkData(Object linkData) {
-      this.linkData = linkData;
+   public void setClient(Institution client) {
+      this.client = client;
    }
 
    /**
-    * Detail regarding the institution that processed the message
+    * Data relating to the entity with whom the Merchant will settle the transaction.
     **/
-   public BasicResponse processor(Institution processor) {
-      this.processor = processor;
+   public BasicResponse settlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
       return this;
    }
 
-   @ApiModelProperty(value = "Detail regarding the institution that processed the message")
-   @JsonProperty("processor")
-   public Institution getProcessor() {
-      return processor;
+   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @JsonProperty("settlementEntity")
+   @NotNull
+   public Institution getSettlementEntity() {
+      return settlementEntity;
    }
 
-   public void setProcessor(Institution processor) {
-      this.processor = processor;
+   public void setSettlementEntity(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
    }
 
    /**
-    * Detail regarding the bill issuing institution
+    * Data relating to the entity which ultimately processes the request.
     **/
    public BasicResponse receiver(Institution receiver) {
       this.receiver = receiver;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Detail regarding the bill issuing institution")
+   @ApiModelProperty(required = true, value = "Data relating to the entity which ultimately processes the request.")
    @JsonProperty("receiver")
    @NotNull
    public Institution getReceiver() {
@@ -141,6 +143,25 @@ public class BasicResponse {
 
    public void setReceiver(Institution receiver) {
       this.receiver = receiver;
+   }
+
+   /**
+    * A collection of identifiers which each identify the transaction within an entity's system.
+    **/
+   public BasicResponse identifier(Identifier identifier) {
+      this.identifier = identifier;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "A collection of identifiers which each identify the transaction within an entity's system.")
+   @JsonProperty("identifier")
+   @NotNull
+   public Identifier getIdentifier() {
+      return identifier;
+   }
+
+   public void setIdentifier(Identifier identifier) {
+      this.identifier = identifier;
    }
 
    @Override
@@ -167,10 +188,11 @@ public class BasicResponse {
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    sender: ").append(Utils.toIndentedString(sender)).append("\n");
-      sb.append("    linkData: ").append(Utils.toIndentedString(linkData)).append("\n");
-      sb.append("    processor: ").append(Utils.toIndentedString(processor)).append("\n");
+      sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
+      sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
+      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
+      sb.append("    identifier: ").append(Utils.toIndentedString(identifier)).append("\n");
       sb.append("}");
       return sb.toString();
    }

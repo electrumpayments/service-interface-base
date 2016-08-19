@@ -46,7 +46,7 @@ public class TenderAdvice extends BasicAdvice {
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    linkData: ").append(Utils.toIndentedString(linkData)).append("\n");
+      sb.append("    linkData: ").append(Utils.toIndentedString(identifier)).append("\n");
       sb.append("    tenders: ").append(toIndentedString(tenders)).append("\n");
       sb.append("}");
       return sb.toString();
