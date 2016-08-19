@@ -23,7 +23,7 @@ public class BasicAdvice {
    protected UUID id = null;
    protected UUID requestId = null;
    protected DateTime time = null;
-   protected Identifier identifier = null;
+   protected ThirdPartyIdentifier identifier = null;
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
@@ -90,18 +90,18 @@ public class BasicAdvice {
     * present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received
     * then this should be set to the identifier sent in the original request.
     **/
-   public BasicAdvice identifier(Identifier identifier) {
+   public BasicAdvice identifier(ThirdPartyIdentifier identifier) {
       this.identifier = identifier;
       return this;
    }
 
    @ApiModelProperty(value = "The unaltered identifier object as supplied in the related BasicResponse message. Required if identifier field was present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received then this should be set to the identifier sent in the original request.")
    @JsonProperty("identifier")
-   public Identifier getIdentifier() {
+   public ThirdPartyIdentifier getIdentifier() {
       return identifier;
    }
 
-   public void setIdentifier(Identifier identifier) {
+   public void setIdentifier(ThirdPartyIdentifier identifier) {
       this.identifier = identifier;
    }
 

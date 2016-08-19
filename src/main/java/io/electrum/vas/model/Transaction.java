@@ -11,10 +11,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * The data required in all value added service requests
+ * The data required in all value added service transactions.
  **/
-@ApiModel(description = "The data required in all value added service requests")
-public class BasicRequest {
+@ApiModel(description = "The data required in all value added service transactions.")
+public class Transaction {
 
    protected UUID id = null;
    protected DateTime time = null;
@@ -22,13 +22,13 @@ public class BasicRequest {
    protected Institution client = null;
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
-   protected Identifier identifier = null;
+   protected ThirdPartyIdentifier [] thirdPartyIdentifiers = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
-   public BasicRequest id(UUID id) {
+   public Transaction id(UUID id) {
       this.id = id;
       return this;
    }
@@ -49,7 +49,7 @@ public class BasicRequest {
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
     **/
-   public BasicRequest time(DateTime time) {
+   public Transaction time(DateTime time) {
       this.time = time;
       return this;
    }
@@ -68,7 +68,7 @@ public class BasicRequest {
    /**
     * Data relating to the originator of the transaction
     **/
-   public BasicRequest originator(Originator originator) {
+   public Transaction originator(Originator originator) {
       this.originator = originator;
       return this;
    }
@@ -87,7 +87,7 @@ public class BasicRequest {
    /**
     * Data relating to the sender of BasicRequest.
     **/
-   public BasicRequest client(Institution client) {
+   public Transaction client(Institution client) {
       this.client = client;
       return this;
    }
@@ -106,7 +106,7 @@ public class BasicRequest {
    /**
     * Data relating to the entity with whom the Merchant will settle the transaction.
     **/
-   public BasicRequest settlementEntity(Institution settlementEntity) {
+   public Transaction settlementEntity(Institution settlementEntity) {
       this.settlementEntity = settlementEntity;
       return this;
    }
@@ -124,7 +124,7 @@ public class BasicRequest {
    /**
     * Data relating to the entity which ultimately processes the request.
     **/
-   public BasicRequest receiver(Institution receiver) {
+   public Transaction receiver(Institution receiver) {
       this.receiver = receiver;
       return this;
    }
@@ -140,22 +140,22 @@ public class BasicRequest {
    }
 
    /**
-    * A collection of identifiers which each identify the transaction within an entity's system.
+    * An array of identifiers which each identify the transaction within an entity's system.
     **/
-   public BasicRequest identifier(Identifier identifier) {
-      this.identifier = identifier;
+   public Transaction thirdPartyIdentifiers(ThirdPartyIdentifier [] transactionIdentifiers) {
+      this.thirdPartyIdentifiers = transactionIdentifiers;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "A collection of identifiers which each identify the transaction within an entity's system.")
-   @JsonProperty("identifier")
+   @ApiModelProperty(required = true, value = "An array of identifiers which each identify the transaction within an entity's system.")
+   @JsonProperty("thirdPartyIdentifier")
    @NotNull
-   public Identifier getIdentifier() {
-      return identifier;
+   public ThirdPartyIdentifier [] getThirdPartyIdentifiers() {
+      return thirdPartyIdentifiers;
    }
 
-   public void setIdentifier(Identifier identifier) {
-      this.identifier = identifier;
+   public void setThirdPartyIdentifiers(ThirdPartyIdentifier [] transactionIdentifiers) {
+      this.thirdPartyIdentifiers = transactionIdentifiers;
    }
 
    @Override
@@ -166,7 +166,7 @@ public class BasicRequest {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      BasicRequest vasRequest = (BasicRequest) o;
+      Transaction vasRequest = (Transaction) o;
       return Objects.equals(id, vasRequest.id);
    }
 
@@ -178,7 +178,7 @@ public class BasicRequest {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class BasicRequest {\n");
+      sb.append("class Transaction {\n");
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
@@ -186,7 +186,12 @@ public class BasicRequest {
       sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
-      sb.append("    identifier: ").append(Utils.toIndentedString(identifier)).append("\n");
+      sb.append("    transactionIdentifiers: [");
+      for(ThirdPartyIdentifier thirdPartyIdentifier : thirdPartyIdentifiers)
+      {
+         sb.append(Utils.toIndentedString("\n    ")).append(Utils.toIndentedString(thirdPartyIdentifier));
+      }
+      sb.append("    ]\n");
       sb.append("}");
       return sb.toString();
    }

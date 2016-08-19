@@ -2,7 +2,7 @@ package io.electrum.vas.example.api;
 
 import io.electrum.vas.example.model.ExampleReversal;
 import io.electrum.vas.model.TenderAdvice;
-import io.electrum.vas.model.BasicRequest;
+import io.electrum.vas.model.Transaction;
 
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.core.HttpHeaders;
@@ -13,7 +13,7 @@ public interface IExampleResource {
 
    void createTran(
          String id,
-         BasicRequest body,
+         Transaction body,
          SecurityContext securityContext,
          AsyncResponse asyncResponse,
          HttpHeaders httpHeaders,

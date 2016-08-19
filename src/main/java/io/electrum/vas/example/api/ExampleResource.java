@@ -1,18 +1,5 @@
 package io.electrum.vas.example.api;
 
-import io.electrum.vas.example.model.ExampleReversal;
-import io.electrum.vas.model.BasicResponse;
-import io.electrum.vas.model.TenderAdvice;
-import io.electrum.vas.model.ErrorDetail;
-import io.electrum.vas.model.BasicRequest;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
-import io.swagger.annotations.ResponseHeader;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -23,6 +10,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+
+import io.electrum.vas.example.model.ExampleReversal;
+import io.electrum.vas.model.ErrorDetail;
+import io.electrum.vas.model.TenderAdvice;
+import io.electrum.vas.model.Transaction;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+import io.swagger.annotations.ResponseHeader;
 
 @Path("/transactions")
 @Consumes({ "application/json" })
@@ -36,16 +35,16 @@ public abstract class ExampleResource {
    @Path("/{requestId}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "Create a transaction request", notes = "Create a transactions request")
+   @ApiOperation(value = "Create a transaction request", notes = "Create a transactions resource.")
    @ApiResponses(value = {
-         @ApiResponse(code = 201, message = "Created", response = BasicResponse.class, responseHeaders = { @ResponseHeader(name = "Location", description = "The location of the created transaction resource", response = String.class) }),
+         @ApiResponse(code = 201, message = "Created", response = Transaction.class, responseHeaders = { @ResponseHeader(name = "Location", description = "The location of the created transaction resource", response = String.class) }),
          @ApiResponse(code = 400, message = "Bad request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public void createTran(
          @ApiParam(value = "The randomly generated UUID of this request", required = true) @PathParam("requestId") String requestId,
-         @ApiParam(value = "A transaction request", required = true) BasicRequest body,
+         @ApiParam(value = "A transaction request", required = true) Transaction body,
          @Context SecurityContext securityContext,
          @Context AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
