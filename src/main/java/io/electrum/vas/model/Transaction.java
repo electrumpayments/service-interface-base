@@ -150,7 +150,7 @@ public class Transaction {
    }
 
    @ApiModelProperty(required = true, value = "An array of identifiers which each identify the transaction within each entity's system.")
-   @JsonProperty("thirdPartyIdentifier")
+   @JsonProperty("thirdPartyIdentifiers")
    @NotNull
    public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
       return thirdPartyIdentifiers;
