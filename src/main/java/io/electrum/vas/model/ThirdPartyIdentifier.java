@@ -79,7 +79,7 @@ public class ThirdPartyIdentifier {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class TransactionIdentifier {\n");
+      sb.append("class ThirdPartyIdentifier {\n");
       
       sb.append("    institutionId: ").append(Utils.toIndentedString(institutionId)).append("\n");
       sb.append("    transactionIdentifier: ").append(Utils.toIndentedString(transactionIdentifier)).append("\n");
