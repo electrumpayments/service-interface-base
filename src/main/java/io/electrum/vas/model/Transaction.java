@@ -94,7 +94,7 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the sender of BasicRequest.")
+   @ApiModelProperty(required = true, value = "Data relating to the sender of Transaction.")
    @JsonProperty("client")
    @NotNull
    public Institution getClient() {
