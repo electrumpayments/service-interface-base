@@ -1,12 +1,9 @@
 package io.electrum.vas.model;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,9 +12,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Identifiers assigned by various entities which process the message. Identifiers are keyed by institution ID thereby enabling any institution to recall a transaction within the entity's own system using the entity's own identifier. Entity's must not alter the identifier set by another entity. Once an identifier has been set by an entity, all other entity's must send that identifier in subsequent messages.
+ * An identifier assigned by an entity which process the message. Identifiers are keyed by institution ID thereby enabling any institution to recall a transaction within the entity's own system using the entity's own identifier. Entity's must not alter the identifier set by another entity. Once an identifier has been set by an entity, all other entity's must send that identifier in subsequent messages.
  **/
-@ApiModel(description = "Identifiers assigned by various entities which process the message. Identifiers are keyed by institution ID thereby enabling any institution to recall a transaction within the entity's own system using the entity's own identifier. Entity's must not alter the identifier set by another entity. Once an identifier has been set by an entity, all other entity's must send that identifier in subsequent messages.")
+@ApiModel(description = "An identifier assigned by an entity which process the message. Identifiers are keyed by institution ID thereby enabling any institution to recall a transaction within the entity's own system using the entity's own identifier. Entity's must not alter the identifier set by another entity. Once an identifier has been set by an entity, all other entity's must send that identifier in subsequent messages.")
 public class ThirdPartyIdentifier {
 
    private String institutionId = null;

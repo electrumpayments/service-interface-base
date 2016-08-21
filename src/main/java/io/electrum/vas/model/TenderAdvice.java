@@ -1,14 +1,13 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static io.electrum.vas.Utils.toIndentedString;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * An advice that notifies of the successful completion of a transaction. Confirmations should only be implemented by
@@ -46,8 +45,8 @@ public class TenderAdvice extends BasicAdvice {
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    linkData: ").append(Utils.toIndentedString(identifier)).append("\n");
-      sb.append("    tenders: ").append(toIndentedString(tenders)).append("\n");
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    tenders: ").append(Utils.toIndentedString(tenders)).append("\n");
       sb.append("}");
       return sb.toString();
    }

@@ -2,6 +2,8 @@ package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -127,20 +129,10 @@ public class ErrorDetail {
       StringBuilder sb = new StringBuilder();
       sb.append("class ErrorDetail {\n");
 
-      sb.append("    errorType: ").append(toIndentedString(errorType)).append("\n");
-      sb.append("    responseMessage: ").append(toIndentedString(errorMessage)).append("\n");
-      sb.append("    detailMessage: ").append(toIndentedString(detailMessage)).append("\n");
+      sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append("\n");
+      sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append("\n");
+      sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

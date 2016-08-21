@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -22,7 +24,7 @@ public class Transaction {
    protected Institution client = null;
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
-   protected ThirdPartyIdentifier [] thirdPartyIdentifiers = null;
+   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -140,21 +142,21 @@ public class Transaction {
    }
 
    /**
-    * An array of identifiers which each identify the transaction within an entity's system.
+    * An array of identifiers which each identify the transaction within each entity's system.
     **/
-   public Transaction thirdPartyIdentifiers(ThirdPartyIdentifier [] transactionIdentifiers) {
+   public Transaction thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "An array of identifiers which each identify the transaction within an entity's system.")
+   @ApiModelProperty(required = true, value = "An array of identifiers which each identify the transaction within each entity's system.")
    @JsonProperty("thirdPartyIdentifier")
    @NotNull
-   public ThirdPartyIdentifier [] getThirdPartyIdentifiers() {
+   public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
       return thirdPartyIdentifiers;
    }
 
-   public void setThirdPartyIdentifiers(ThirdPartyIdentifier [] transactionIdentifiers) {
+   public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
    }
 
@@ -186,12 +188,7 @@ public class Transaction {
       sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
-      sb.append("    transactionIdentifiers: [");
-      for(ThirdPartyIdentifier thirdPartyIdentifier : thirdPartyIdentifiers)
-      {
-         sb.append(Utils.toIndentedString("\n    ")).append(Utils.toIndentedString(thirdPartyIdentifier));
-      }
-      sb.append("    ]\n");
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("}");
       return sb.toString();
    }

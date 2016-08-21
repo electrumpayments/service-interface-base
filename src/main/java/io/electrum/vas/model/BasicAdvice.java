@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import io.electrum.vas.Utils;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class BasicAdvice {
    protected UUID id = null;
    protected UUID requestId = null;
    protected DateTime time = null;
-   protected ThirdPartyIdentifier identifier = null;
+   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = null;
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
@@ -86,23 +87,23 @@ public class BasicAdvice {
    }
 
    /**
-    * The unaltered identifier object as supplied in the related BasicResponse message. Required if identifier field was
-    * present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received
-    * then this should be set to the identifier sent in the original request.
+    * The unaltered thirdPartyIdentifiers array as supplied in the related BasicResponse message. Required if thirdPartyIdentifiers field was
+    * present in the BasicResponse. If no thirdPartyIdentifiers was received in the BasicResponse or no BasicResponse was received
+    * then this should be set to the thirdPartyIdentifiers sent in the original request.
     **/
-   public BasicAdvice identifier(ThirdPartyIdentifier identifier) {
-      this.identifier = identifier;
+   public BasicAdvice transactionIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
+      this.thirdPartyIdentifiers = transactionIdentifiers;
       return this;
    }
 
-   @ApiModelProperty(value = "The unaltered identifier object as supplied in the related BasicResponse message. Required if identifier field was present in the BasicResponse. If no identifier was received in the BasicResponse or no BasicResponse was received then this should be set to the identifier sent in the original request.")
+   @ApiModelProperty(value = "The unaltered thirdPartyIdentifiers array as supplied in the related BasicResponse message. Required if thirdPartyIdentifiers field was present in the BasicResponse. If no thirdPartyIdentifiers was received in the BasicResponse or no BasicResponse was received then this should be set to the thirdPartyIdentifiers sent in the original request.")
    @JsonProperty("identifier")
-   public ThirdPartyIdentifier getIdentifier() {
-      return identifier;
+   public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
+      return thirdPartyIdentifiers;
    }
 
-   public void setIdentifier(ThirdPartyIdentifier identifier) {
-      this.identifier = identifier;
+   public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
+      this.thirdPartyIdentifiers = transactionIdentifiers;
    }
 
    @Override
@@ -130,7 +131,7 @@ public class BasicAdvice {
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    identifier: ").append(Utils.toIndentedString(identifier)).append("\n");
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("}");
       return sb.toString();
    }
