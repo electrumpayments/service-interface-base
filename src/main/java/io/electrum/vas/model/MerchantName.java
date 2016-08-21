@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
- * A container object representing the Cardholder Name and Location
+ * A container object representing the Merchant Name and Location
  **/
-@ApiModel(description = "A container object representing the Cardholder Name and Location")
+@ApiModel(description = "A container object representing the Merchant Name and Location")
 public class MerchantName {
 
    private String name = null;
