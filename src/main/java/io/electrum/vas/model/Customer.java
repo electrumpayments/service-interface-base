@@ -1,6 +1,8 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -8,9 +10,9 @@ import org.hibernate.validator.constraints.Length;
 import java.util.Objects;
 
 /**
- * A bill payment customer
+ * A customer who ultimately requests a transaction be performed.
  **/
-@ApiModel(description = "A bill payment customer")
+@ApiModel(description = "A customer who ultimately requests a transaction be performed.")
 public class Customer {
 
    private String firstName = null;
@@ -97,20 +99,10 @@ public class Customer {
       StringBuilder sb = new StringBuilder();
       sb.append("class Customer {\n");
 
-      sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
-      sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
-      sb.append("    address: ").append(toIndentedString(address)).append("\n");
+      sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
+      sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
+      sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

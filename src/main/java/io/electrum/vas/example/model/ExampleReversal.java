@@ -2,7 +2,7 @@ package io.electrum.vas.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.model.BasicAdvice;
-import io.electrum.vas.model.BasicRequest;
+import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -11,12 +11,12 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public abstract class ExampleReversal extends BasicAdvice {
 
-   protected BasicRequest request = null;
+   protected Transaction request = null;
 
    /**
     * The request this reversal refers to
     **/
-   public ExampleReversal request(BasicRequest request) {
+   public ExampleReversal request(Transaction request) {
       this.request = request;
       return this;
    }
@@ -24,11 +24,11 @@ public abstract class ExampleReversal extends BasicAdvice {
    @ApiModelProperty(required = true, value = "The request this reversal refers to")
    @JsonProperty("request")
    @NotEmpty
-   public BasicRequest getRequests() {
+   public Transaction getRequests() {
       return request;
    }
 
-   public void setRequest(BasicRequest request) {
+   public void setRequest(Transaction request) {
       this.request = request;
    }
 }

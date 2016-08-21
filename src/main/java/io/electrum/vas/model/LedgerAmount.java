@@ -2,6 +2,8 @@ package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -120,20 +122,10 @@ public class LedgerAmount {
       StringBuilder sb = new StringBuilder();
       sb.append("class LedgerAmount {\n");
 
-      sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
-      sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
-      sb.append("    ledgerIndicator: ").append(toIndentedString(ledgerIndicator)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    currency: ").append(Utils.toIndentedString(currency)).append("\n");
+      sb.append("    ledgerIndicator: ").append(Utils.toIndentedString(ledgerIndicator)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

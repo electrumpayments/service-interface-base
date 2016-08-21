@@ -1,6 +1,8 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -122,21 +124,11 @@ public class MerchantName {
       StringBuilder sb = new StringBuilder();
       sb.append("class MerchantName {\n");
 
-      sb.append("    name: ").append(toIndentedString(name)).append("\n");
-      sb.append("    city: ").append(toIndentedString(city)).append("\n");
-      sb.append("    region: ").append(toIndentedString(region)).append("\n");
-      sb.append("    country: ").append(toIndentedString(country)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    city: ").append(Utils.toIndentedString(city)).append("\n");
+      sb.append("    region: ").append(Utils.toIndentedString(region)).append("\n");
+      sb.append("    country: ").append(Utils.toIndentedString(country)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }
