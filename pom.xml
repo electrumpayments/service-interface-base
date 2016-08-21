@@ -108,7 +108,7 @@
               <locations>io.electrum.vas.example.api</locations>
               <schemes>https</schemes>
               <host>sandbox.electrum.io</host>
-              <basePath>/example/v1</basePath>
+              <basePath>/example/v2</basePath>
               <info>
                 <title>Example Service Interface</title>
                 <version>${project.version}</version>
