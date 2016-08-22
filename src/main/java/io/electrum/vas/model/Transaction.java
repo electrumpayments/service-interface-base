@@ -47,7 +47,7 @@ public class Transaction {
    }
 
    /**
-    * The date and time of the request in UTC, as recorded by the sender. The format shall be as defined for date-time
+    * The date and time of the message in UTC, as recorded by the sender. The format shall be as defined for date-time
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
     **/
@@ -56,7 +56,7 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The date and time of the request as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
+   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
    @JsonProperty("time")
    @NotNull
    public DateTime getTime() {
