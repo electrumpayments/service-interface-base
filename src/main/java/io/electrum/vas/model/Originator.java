@@ -51,6 +51,7 @@ public class Originator {
    @ApiModelProperty(required = true, value = "The ID that uniquely identifies each device or system in an originator's institution capable of sending requests. Required for transactions initiated from physical card entry or point-of-sale devices")
    @JsonProperty("terminalId")
    @Pattern(regexp = "[a-zA-Z0-9]{8}")
+   @NotNull
    public String getTerminalId() {
       return terminalId;
    }
@@ -67,8 +68,9 @@ public class Originator {
       return this;
    }
 
-   @ApiModelProperty(value = "Merchant data. Required if available")
+   @ApiModelProperty(required = true, value = "Merchant data. Required if available")
    @JsonProperty("merchant")
+   @NotNull
    public Merchant getMerchant() {
       return merchant;
    }
