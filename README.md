@@ -12,7 +12,7 @@ To include this package in your service interface definitions, include the below
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>service-interface-base</artifactId>
-    <version>1.0.1</version>
+    <version>2.0.3/version>
 </dependency>
 ```
 
