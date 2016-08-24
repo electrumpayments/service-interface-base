@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class Transaction {
    protected Institution client = null;
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
-   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = null;
+   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
