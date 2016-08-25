@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import io.electrum.vas.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class BasicAdvice {
    protected UUID id = null;
    protected UUID requestId = null;
    protected DateTime time = null;
-   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = null;
+   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
