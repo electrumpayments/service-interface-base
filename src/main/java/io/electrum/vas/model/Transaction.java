@@ -26,6 +26,7 @@ public class Transaction {
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
+   protected Amounts amounts = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -159,6 +160,24 @@ public class Transaction {
 
    public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
+   }
+
+   /**
+    * The various amounts which make up the transaction.
+    **/
+   public Transaction amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   @ApiModelProperty(value = "The various amounts which make up the transaction.")
+   @JsonProperty("amounts")
+   public Amounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(Amounts amounts) {
+      this.amounts = amounts;
    }
 
    @Override
