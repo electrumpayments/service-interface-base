@@ -15,16 +15,18 @@ import io.swagger.annotations.ApiModelProperty;
 public class Amounts {
 
    protected LedgerAmount requestAmount = null;
-
-   /**
-    * The transaction amount requested by the customer to be authorised or approved. This is the total amount the
-    * customer wishes to pay for a service or virtual product.
-    **/
    public Amounts requestAmount(LedgerAmount requestAmount) {
       this.requestAmount = requestAmount;
       return this;
    }
 
+
+   /**
+    * The transaction amount requested by the customer to be authorised or approved. This is the total amount the
+    * customer wishes to pay for a service or virtual product.
+    * 
+    * @return requestAmount
+    **/
    @ApiModelProperty(value = "The transaction amount requested by the customer to be authorised or approved. This is the total amount the customer wishes to pay for a service or virtual product.")
    @JsonProperty("requestAmount")
    public LedgerAmount getRequestAmount() {
