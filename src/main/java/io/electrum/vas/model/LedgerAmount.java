@@ -37,9 +37,9 @@ public class LedgerAmount {
       }
    }
 
-   private Long amount = null;
-   private String currency = null;
-   private LedgerIndicator ledgerIndicator = null;
+   protected Long amount = null;
+   protected String currency = null;
+   protected LedgerIndicator ledgerIndicator = null;
 
    /**
     * Amount in minor denomination, e.g. R799.95 is encoded as 79995
