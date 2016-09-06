@@ -91,7 +91,7 @@ public class Amounts {
     * @return balanceAmount
     **/
    @ApiModelProperty(value = "The remaining balance on the customer's account.")
-   @JsonProperty("requestAmount")
+   @JsonProperty("balanceAmount")
    public LedgerAmount getBalanceAmount() {
       return balanceAmount;
    }
