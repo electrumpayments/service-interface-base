@@ -1,4 +1,4 @@
-package io.electrum.vas.model;
+package io.electrum.vas.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;

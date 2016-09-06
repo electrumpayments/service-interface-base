@@ -11,8 +11,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import io.electrum.vas.example.model.ErrorDetail;
 import io.electrum.vas.example.model.ExampleReversal;
-import io.electrum.vas.model.ErrorDetail;
 import io.electrum.vas.model.TenderAdvice;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.Api;
