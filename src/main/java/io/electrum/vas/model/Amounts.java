@@ -17,12 +17,12 @@ public class Amounts {
    protected LedgerAmount requestAmount = null;
    protected LedgerAmount approvedAmount = null;
    protected LedgerAmount feeAmount = null;
-   
+   protected LedgerAmount balanceAmount = null;
+
    public Amounts requestAmount(LedgerAmount requestAmount) {
       this.requestAmount = requestAmount;
       return this;
    }
-
 
    /**
     * The transaction amount requested by the customer to be authorised or approved. This is the total amount the
@@ -40,12 +40,10 @@ public class Amounts {
       this.requestAmount = requestAmount;
    }
 
-   
    public Amounts approvedAmount(LedgerAmount approvedAmount) {
       this.approvedAmount = approvedAmount;
       return this;
    }
-
 
    /**
     * The transaction amount which was approved by the upstream entity.
@@ -62,12 +60,10 @@ public class Amounts {
       this.approvedAmount = approvedAmount;
    }
 
-   
    public Amounts feeAmount(LedgerAmount feeAmount) {
       this.feeAmount = feeAmount;
       return this;
    }
-
 
    /**
     * Fees charged by the upstream entity for processing the transaction.
@@ -84,6 +80,26 @@ public class Amounts {
       this.feeAmount = feeAmount;
    }
 
+   public Amounts balanceAmount(LedgerAmount balanceAmount) {
+      this.balanceAmount = balanceAmount;
+      return this;
+   }
+
+   /**
+    * The remaining balance on the customer's account.
+    * 
+    * @return balanceAmount
+    **/
+   @ApiModelProperty(value = "The remaining balance on the customer's account.")
+   @JsonProperty("requestAmount")
+   public LedgerAmount getBalanceAmount() {
+      return balanceAmount;
+   }
+
+   public void setBalanceAmount(LedgerAmount balanceAmount) {
+      this.balanceAmount = balanceAmount;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -93,12 +109,14 @@ public class Amounts {
          return false;
       }
       Amounts tender = (Amounts) o;
-      return Objects.equals(requestAmount, tender.requestAmount) && Objects.equals(approvedAmount, tender.approvedAmount) &&Objects.equals(feeAmount, tender.feeAmount);
+      return Objects.equals(requestAmount, tender.requestAmount)
+            && Objects.equals(approvedAmount, tender.approvedAmount) && Objects.equals(feeAmount, tender.feeAmount)
+            && Objects.equals(balanceAmount, tender.balanceAmount);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(requestAmount, approvedAmount, feeAmount);
+      return Objects.hash(requestAmount, approvedAmount, feeAmount, balanceAmount);
    }
 
    @Override
@@ -109,6 +127,7 @@ public class Amounts {
       sb.append("    requestAmount: ").append(Utils.toIndentedString(requestAmount)).append("\n");
       sb.append("    approvedAmount: ").append(Utils.toIndentedString(approvedAmount)).append("\n");
       sb.append("    feeAmount: ").append(Utils.toIndentedString(feeAmount)).append("\n");
+      sb.append("    balanceAmount: ").append(Utils.toIndentedString(balanceAmount)).append("\n");
       sb.append("}");
       return sb.toString();
    }
