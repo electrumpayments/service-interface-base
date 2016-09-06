@@ -15,6 +15,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class Amounts {
 
    protected LedgerAmount requestAmount = null;
+   protected LedgerAmount approvedAmount = null;
+   protected LedgerAmount feeAmount = null;
+   
    public Amounts requestAmount(LedgerAmount requestAmount) {
       this.requestAmount = requestAmount;
       return this;
@@ -37,6 +40,50 @@ public class Amounts {
       this.requestAmount = requestAmount;
    }
 
+   
+   public Amounts approvedAmount(LedgerAmount approvedAmount) {
+      this.approvedAmount = approvedAmount;
+      return this;
+   }
+
+
+   /**
+    * The transaction amount which was approved by the upstream entity.
+    * 
+    * @return approvedAmount
+    **/
+   @ApiModelProperty(value = "The transaction amount which was approved by the upstream entity.")
+   @JsonProperty("approvedAmount")
+   public LedgerAmount getApprovedAmount() {
+      return approvedAmount;
+   }
+
+   public void setApprovedAmount(LedgerAmount approvedAmount) {
+      this.approvedAmount = approvedAmount;
+   }
+
+   
+   public Amounts feeAmount(LedgerAmount feeAmount) {
+      this.feeAmount = feeAmount;
+      return this;
+   }
+
+
+   /**
+    * Fees charged by the upstream entity for processing the transaction.
+    * 
+    * @return feeAmount
+    **/
+   @ApiModelProperty(value = "Fees charged by the upstream entity for processing the transaction.")
+   @JsonProperty("feeAmount")
+   public LedgerAmount getFeeAmount() {
+      return feeAmount;
+   }
+
+   public void setFeeAmount(LedgerAmount feeAmount) {
+      this.feeAmount = feeAmount;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -46,12 +93,12 @@ public class Amounts {
          return false;
       }
       Amounts tender = (Amounts) o;
-      return Objects.equals(requestAmount, tender.requestAmount);
+      return Objects.equals(requestAmount, tender.requestAmount) && Objects.equals(approvedAmount, tender.approvedAmount) &&Objects.equals(feeAmount, tender.feeAmount);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(requestAmount);
+      return Objects.hash(requestAmount, approvedAmount, feeAmount);
    }
 
    @Override
@@ -60,6 +107,8 @@ public class Amounts {
       sb.append("class Amounts {\n");
 
       sb.append("    requestAmount: ").append(Utils.toIndentedString(requestAmount)).append("\n");
+      sb.append("    approvedAmount: ").append(Utils.toIndentedString(approvedAmount)).append("\n");
+      sb.append("    feeAmount: ").append(Utils.toIndentedString(feeAmount)).append("\n");
       sb.append("}");
       return sb.toString();
    }
