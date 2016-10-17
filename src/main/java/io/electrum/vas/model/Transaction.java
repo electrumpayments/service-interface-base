@@ -1,17 +1,18 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
-import javax.validation.constraints.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
+
+import javax.validation.constraints.NotNull;
+
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * The data required in all value added service transactions.
@@ -19,7 +20,7 @@ import java.util.UUID;
 @ApiModel(description = "The data required in all value added service transactions.")
 public class Transaction {
 
-   protected UUID id = null;
+   protected String id = null;
    protected DateTime time = null;
    protected Originator originator = null;
    protected Institution client = null;
@@ -31,7 +32,7 @@ public class Transaction {
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
-   public Transaction id(UUID id) {
+   public Transaction id(String id) {
       this.id = id;
       return this;
    }
@@ -39,11 +40,11 @@ public class Transaction {
    @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
-   public UUID getId() {
+   public String getId() {
       return id;
    }
 
-   public void setId(UUID id) {
+   public void setId(String id) {
       this.id = id;
    }
 
