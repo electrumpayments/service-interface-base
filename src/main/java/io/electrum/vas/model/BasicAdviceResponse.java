@@ -1,11 +1,8 @@
 package io.electrum.vas.model;
 
-import io.electrum.vas.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,6 +10,7 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,8 +20,8 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Basic advice response information.")
 public class BasicAdviceResponse {
 
-   protected UUID id = null;
-   protected UUID requestId = null;
+   protected String id = null;
+   protected String requestId = null;
    protected DateTime time = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
 
@@ -31,7 +29,7 @@ public class BasicAdviceResponse {
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
-   public BasicAdviceResponse id(UUID id) {
+   public BasicAdviceResponse id(String id) {
       this.id = id;
       return this;
    }
@@ -39,18 +37,18 @@ public class BasicAdviceResponse {
    @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
-   public UUID getId() {
+   public String getId() {
       return id;
    }
 
-   public void setId(UUID id) {
+   public void setId(String id) {
       this.id = id;
    }
 
    /**
     * The UUID identifying the request that this advice relates to
     **/
-   public BasicAdviceResponse requestId(UUID requestId) {
+   public BasicAdviceResponse requestId(String requestId) {
       this.requestId = requestId;
       return this;
    }
@@ -58,11 +56,11 @@ public class BasicAdviceResponse {
    @ApiModelProperty(required = true, value = "The UUID identifying the request that this advice relates to")
    @JsonProperty("requestId")
    @NotNull
-   public UUID getRequestId() {
+   public String getRequestId() {
       return requestId;
    }
 
-   public void setRequestId(UUID requestId) {
+   public void setRequestId(String requestId) {
       this.requestId = requestId;
    }
 
@@ -88,9 +86,10 @@ public class BasicAdviceResponse {
    }
 
    /**
-    * The unaltered thirdPartyIdentifiers array as supplied in the related BasicResponse message. Required if thirdPartyIdentifiers field was
-    * present in the BasicResponse. If no thirdPartyIdentifiers was received in the BasicResponse or no BasicResponse was received
-    * then this should be set to the thirdPartyIdentifiers sent in the original request.
+    * The unaltered thirdPartyIdentifiers array as supplied in the related BasicResponse message. Required if
+    * thirdPartyIdentifiers field was present in the BasicResponse. If no thirdPartyIdentifiers was received in the
+    * BasicResponse or no BasicResponse was received then this should be set to the thirdPartyIdentifiers sent in the
+    * original request.
     **/
    public BasicAdviceResponse transactionIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;

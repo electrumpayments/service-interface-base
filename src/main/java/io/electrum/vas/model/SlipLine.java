@@ -47,11 +47,11 @@ public class SlipLine {
    }
 
    /**
-    * Scale factor for font width
+    * Scale factor for font width. Assume 1.0 (i.e. normal size) if not present.
     * 
     * @return fontWidthScaleFactor
     */
-   @ApiModelProperty(value = "Scale factor for font width")
+   @ApiModelProperty(value = "Scale factor for font width. Assume 1.0 (i.e. normal size) if not present.")
    public double getFontWidthScaleFactor() {
       return fontWidthScaleFactor;
    }
@@ -66,11 +66,11 @@ public class SlipLine {
    }
 
    /**
-    * Scale factor for font height
+    * Scale factor for font height. Assume 1.0 (i.e. normal size) if not present.
     * 
     * @return fontHeightScaleFactor
     */
-   @ApiModelProperty(value = "Scale factor for font height")
+   @ApiModelProperty(value = "Scale factor for font height. Assume 1.0 (i.e. normal size) if not present.")
    public double getFontHeightScaleFactor() {
       return fontHeightScaleFactor;
    }
@@ -85,11 +85,11 @@ public class SlipLine {
    }
 
    /**
-    * Denotes a solid line on the slip.
+    * Denotes a solid line on the slip. Assume false if not present.
     * 
     * @return line
     */
-   @ApiModelProperty(value = "Denotes a solid line on the slip.")
+   @ApiModelProperty(value = "Denotes a solid line on the slip. Assume false if not present.")
    public boolean getLine() {
       return line;
    }
@@ -104,11 +104,11 @@ public class SlipLine {
    }
 
    /**
-    * Indicates the slip should be cut at this line.
+    * Indicates the slip should be cut at this line. Assume false if not present.
     * 
     * @return cut
     */
-   @ApiModelProperty(value = "Indicates the slip should be cut at this line.")
+   @ApiModelProperty(value = "Indicates the slip should be cut at this line. Assume false if not present.")
    public boolean getCut() {
       return cut;
    }
