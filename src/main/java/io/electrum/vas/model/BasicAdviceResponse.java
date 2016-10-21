@@ -15,10 +15,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The data required in all value added service requests
+ * Basic advice response information.
  **/
-@ApiModel(description = "The data required in all value added service requests")
-public class BasicAdvice {
+@ApiModel(description = "Basic advice response information.")
+public class BasicAdviceResponse {
 
    protected String id = null;
    protected String requestId = null;
@@ -29,7 +29,7 @@ public class BasicAdvice {
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
-   public BasicAdvice id(String id) {
+   public BasicAdviceResponse id(String id) {
       this.id = id;
       return this;
    }
@@ -48,7 +48,7 @@ public class BasicAdvice {
    /**
     * The UUID identifying the request that this advice relates to
     **/
-   public BasicAdvice requestId(String requestId) {
+   public BasicAdviceResponse requestId(String requestId) {
       this.requestId = requestId;
       return this;
    }
@@ -69,7 +69,7 @@ public class BasicAdvice {
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
     **/
-   public BasicAdvice time(DateTime time) {
+   public BasicAdviceResponse time(DateTime time) {
       this.time = time;
       return this;
    }
@@ -91,7 +91,7 @@ public class BasicAdvice {
     * BasicResponse or no BasicResponse was received then this should be set to the thirdPartyIdentifiers sent in the
     * original request.
     **/
-   public BasicAdvice transactionIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
+   public BasicAdviceResponse transactionIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
       return this;
    }
@@ -115,7 +115,7 @@ public class BasicAdvice {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      BasicAdvice vasAdvice = (BasicAdvice) o;
+      BasicAdviceResponse vasAdvice = (BasicAdviceResponse) o;
       return Objects.equals(id, vasAdvice.id);
    }
 
@@ -127,7 +127,7 @@ public class BasicAdvice {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class BasicAdvice {\n");
+      sb.append("class BasicAdviceResponse {\n");
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
