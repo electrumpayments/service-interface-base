@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,6 +26,7 @@ public class Transaction {
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
+   protected SlipData slipData = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -162,6 +162,26 @@ public class Transaction {
       this.thirdPartyIdentifiers = transactionIdentifiers;
    }
 
+   public Transaction slipData(SlipData slipData) {
+      this.slipData = slipData;
+      return this;
+   }
+
+   /**
+    * Text to be printed on the customer receipt.
+    * 
+    * @return slipData
+    **/
+   @ApiModelProperty(value = "Text to be printed on the customer receipt.")
+   @JsonProperty("slipData")
+   public SlipData getSlipData() {
+      return slipData;
+   }
+
+   public void setSlipData(SlipData slipData) {
+      this.slipData = slipData;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -191,6 +211,7 @@ public class Transaction {
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("}");
       return sb.toString();
    }
