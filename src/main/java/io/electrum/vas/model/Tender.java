@@ -55,6 +55,8 @@ public class Tender {
       DEBIT_CARD("DEBIT_CARD"),
       WALLET("WALLET"),
       ROUNDING("ROUNDING"),
+      GIFT_CARD("GIFT_CARD"),
+      LOYALTY_CARD("LOYALTY_CARD"),
       OTHER("OTHER");
 
       private String value;
