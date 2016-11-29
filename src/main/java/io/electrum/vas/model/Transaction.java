@@ -27,6 +27,7 @@ public class Transaction {
    protected Institution receiver = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected SlipData slipData = null;
+   protected String basketRef = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -182,6 +183,24 @@ public class Transaction {
       this.slipData = slipData;
    }
 
+   /**
+    * Used to group multiple transactions which would otherwise be considered independent.
+    **/
+   public Transaction basketRef(String basketRef) {
+      this.basketRef = basketRef;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "Used to group multiple transactions which would otherwise be considered independent.")
+   @JsonProperty("basketRef")
+   public String getBasketRef() {
+      return basketRef;
+   }
+
+   public void setBasketRef(String basketRef) {
+      this.basketRef = basketRef;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -212,6 +231,7 @@ public class Transaction {
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    basketRef: ").append(Utils.toIndentedString(basketRef)).append("\n");
       sb.append("}");
       return sb.toString();
    }

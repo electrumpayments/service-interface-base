@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.constraints.Pattern;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -17,6 +20,7 @@ public class SlipData {
 
    protected List<SlipLine> messageLines = new ArrayList<SlipLine>();
    protected int slipWidth;
+   protected String issuerReference = null;
 
    /**
     * An array of free text lines to be printed on the customer slip
@@ -54,6 +58,27 @@ public class SlipData {
       this.slipWidth = slipWidth;
    }
 
+   /**
+    * An identifier that is printed on the customer slip and uniquely identifies the payment on the service provider's
+    * system. This value is used by the customer to request a refund when the service supports this function, and it is
+    * thus important that this number is unique.
+    **/
+   public SlipData issuerReference(String issuerReference) {
+      this.issuerReference = issuerReference;
+      return this;
+   }
+
+   @ApiModelProperty(value = "An identifier that is printed on the customer slip and uniquely identifies the payment on the service provider's system. This value is used by the customer to request a refund when the service supports this function, and it is thus important that this number is unique.")
+   @JsonProperty("issuerReference")
+   @Pattern(regexp = "[A-Z0-9]{1,40}")
+   public String getIssuerReference() {
+      return issuerReference;
+   }
+
+   public void setIssuerReference(String issuerReference) {
+      this.issuerReference = issuerReference;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -63,12 +88,13 @@ public class SlipData {
          return false;
       }
       SlipData slipData = (SlipData) o;
-      return Objects.equals(messageLines, slipData.messageLines) && Objects.equals(slipWidth, slipData.slipWidth);
+      return Objects.equals(messageLines, slipData.messageLines) && Objects.equals(slipWidth, slipData.slipWidth)
+            && Objects.equals(issuerReference, slipData.issuerReference);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(messageLines, slipWidth);
+      return Objects.hash(messageLines, slipWidth, issuerReference);
    }
 
    @Override
@@ -76,19 +102,10 @@ public class SlipData {
       StringBuilder sb = new StringBuilder();
       sb.append("class SlipData {\n");
 
-      sb.append("    messageLines: ").append(toIndentedString(messageLines)).append("\n");
-      sb.append("    slipWidth: ").append(toIndentedString(slipWidth)).append("\n");
+      sb.append("    messageLines: ").append(Utils.toIndentedString(messageLines)).append("\n");
+      sb.append("    slipWidth: ").append(Utils.toIndentedString(slipWidth)).append("\n");
+      sb.append("    issuerReference: ").append(Utils.toIndentedString(issuerReference)).append("\n");
       sb.append("}");
       return sb.toString();
-   }
-
-   /**
-    * Convert the given object to string with each line indented by 4 spaces (except the first line).
-    */
-   private String toIndentedString(Object o) {
-      if (o == null) {
-         return "null";
-      }
-      return o.toString().replace("\n", "\n    ");
    }
 }

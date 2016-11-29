@@ -8,6 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+
 import java.util.Objects;
 
 /**
@@ -50,7 +53,7 @@ public class Originator {
 
    @ApiModelProperty(required = true, value = "The ID that uniquely identifies each device or system in an originator's institution capable of sending requests. Required for transactions initiated from physical card entry or point-of-sale devices")
    @JsonProperty("terminalId")
-   @Pattern(regexp = "[a-zA-Z0-9]{8}")
+   @Length(min = 8, max = 8)
    @NotNull
    public String getTerminalId() {
       return terminalId;
