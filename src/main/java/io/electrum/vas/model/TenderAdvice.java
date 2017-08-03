@@ -9,6 +9,8 @@ import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
+
 /**
  * An advice that notifies of the successful completion of a transaction. Confirmations should only be implemented by
  * service implementations where additional information is present in the confirmation. Otherwise, a single message
@@ -29,6 +31,7 @@ public class TenderAdvice extends BasicAdvice {
 
    @ApiModelProperty(required = true, value = "An array of tenders used to pay for the transaction")
    @JsonProperty("tenders")
+   @Valid
    public List<Tender> getTenders() {
       return tenders;
    }

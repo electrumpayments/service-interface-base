@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.DateTime;
@@ -62,6 +63,7 @@ public class Transaction {
    @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
    @JsonProperty("time")
    @NotNull
+   @Valid
    public DateTime getTime() {
       return time;
    }
@@ -81,6 +83,7 @@ public class Transaction {
    @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction")
    @JsonProperty("originator")
    @NotNull
+   @Valid
    public Originator getOriginator() {
       return originator;
    }
@@ -100,6 +103,7 @@ public class Transaction {
    @ApiModelProperty(required = true, value = "Data relating to the sender of Transaction.")
    @JsonProperty("client")
    @NotNull
+   @Valid
    public Institution getClient() {
       return client;
    }
@@ -118,6 +122,7 @@ public class Transaction {
 
    @ApiModelProperty(value = "Data relating to the entity with whom the Merchant will settle the transaction.")
    @JsonProperty("settlementEntity")
+   @Valid
    public Institution getSettlementEntity() {
       return settlementEntity;
    }
@@ -136,6 +141,7 @@ public class Transaction {
 
    @ApiModelProperty(value = "Data relating to the entity which ultimately processes the request.")
    @JsonProperty("receiver")
+   @Valid
    public Institution getReceiver() {
       return receiver;
    }
@@ -155,6 +161,7 @@ public class Transaction {
    @ApiModelProperty(required = true, value = "An array of identifiers which each identify the transaction within each entity's system.")
    @JsonProperty("thirdPartyIdentifiers")
    @NotNull
+   @Valid
    public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
       return thirdPartyIdentifiers;
    }
@@ -175,6 +182,7 @@ public class Transaction {
     **/
    @ApiModelProperty(value = "Text to be printed on the customer receipt.")
    @JsonProperty("slipData")
+   @Valid
    public SlipData getSlipData() {
       return slipData;
    }

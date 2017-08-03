@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +33,7 @@ public class SlipData {
 
    @ApiModelProperty(value = "An array of text lines and optional formatting to be printed on the customer slip.")
    @JsonProperty("messageLines")
+   @Valid
    public List<SlipLine> getMessageLines() {
       return messageLines;
    }
