@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -107,6 +108,7 @@ public class Tender {
    @ApiModelProperty(required = true, value = "The tendered amount")
    @JsonProperty("amount")
    @NotNull
+   @Valid
    public LedgerAmount getAmount() {
       return amount;
    }

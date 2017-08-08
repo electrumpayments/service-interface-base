@@ -32,7 +32,7 @@ public class BasicReversal extends BasicAdvice {
       }
    }
 
-   protected ReversalReason reversalReason = null;
+   protected ReversalReason reversalReason;
 
    /**
     * The reason for the reversal

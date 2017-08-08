@@ -6,6 +6,7 @@ import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -34,6 +35,7 @@ public class Originator {
    @ApiModelProperty(required = true, value = "The institution originating the request, as issued by Electrum")
    @JsonProperty("institution")
    @NotNull
+   @Valid
    public Institution getInstitution() {
       return institution;
    }
@@ -74,6 +76,7 @@ public class Originator {
    @ApiModelProperty(required = true, value = "Merchant data. Required if available")
    @JsonProperty("merchant")
    @NotNull
+   @Valid
    public Merchant getMerchant() {
       return merchant;
    }

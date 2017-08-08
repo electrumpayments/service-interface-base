@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.joda.time.DateTime;
@@ -20,9 +21,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "The data required in all value added service requests")
 public class BasicAdvice {
 
-   protected String id = null;
-   protected String requestId = null;
-   protected DateTime time = null;
+   protected String id;
+   protected String requestId;
+   protected DateTime time;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
 
    /**
@@ -77,6 +78,7 @@ public class BasicAdvice {
    @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
    @JsonProperty("time")
    @NotNull
+   @Valid
    public DateTime getTime() {
       return time;
    }
@@ -99,6 +101,7 @@ public class BasicAdvice {
    @ApiModelProperty(required = true, value = "The unaltered thirdPartyIdentifiers array as supplied in the related BasicResponse message. Required if thirdPartyIdentifiers field was present in the BasicResponse. If no thirdPartyIdentifiers was received in the BasicResponse or no BasicResponse was received then this should be set to the thirdPartyIdentifiers sent in the original request.")
    @JsonProperty("thirdPartyIdentifiers")
    @NotNull
+   @Valid
    public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
       return thirdPartyIdentifiers;
    }

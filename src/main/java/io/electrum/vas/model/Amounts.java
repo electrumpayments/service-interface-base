@@ -8,6 +8,8 @@ import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
+
 /**
  * Amounts which make up the transaction. Absent amounts have zero value.
  **/
@@ -32,6 +34,7 @@ public class Amounts {
     **/
    @ApiModelProperty(value = "The transaction amount requested by the customer to be authorised or approved. This is the total amount the customer wishes to pay for a service or virtual product.")
    @JsonProperty("requestAmount")
+   @Valid
    public LedgerAmount getRequestAmount() {
       return requestAmount;
    }
@@ -52,6 +55,7 @@ public class Amounts {
     **/
    @ApiModelProperty(value = "The transaction amount which was approved by the upstream entity.")
    @JsonProperty("approvedAmount")
+   @Valid
    public LedgerAmount getApprovedAmount() {
       return approvedAmount;
    }
@@ -72,6 +76,7 @@ public class Amounts {
     **/
    @ApiModelProperty(value = "Fees charged by the upstream entity for processing the transaction.")
    @JsonProperty("feeAmount")
+   @Valid
    public LedgerAmount getFeeAmount() {
       return feeAmount;
    }
@@ -92,6 +97,7 @@ public class Amounts {
     **/
    @ApiModelProperty(value = "The remaining balance on the customer's account.")
    @JsonProperty("balanceAmount")
+   @Valid
    public LedgerAmount getBalanceAmount() {
       return balanceAmount;
    }
