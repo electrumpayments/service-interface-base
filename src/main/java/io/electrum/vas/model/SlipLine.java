@@ -148,16 +148,16 @@ public class SlipLine {
          return false;
       }
       SlipLine printableLine = (SlipLine) o;
-      return Objects.equals(this.barcode, printableLine.barcode)
-            && Objects.equals(this.text, printableLine.text)
+      return Objects.equals(this.text, printableLine.text)
             && Objects.equals(this.fontWidthScaleFactor, printableLine.fontWidthScaleFactor)
             && Objects.equals(this.fontHeightScaleFactor, printableLine.fontHeightScaleFactor)
-            && Objects.equals(this.line, printableLine.line) && Objects.equals(this.cut, printableLine.cut);
+            && Objects.equals(this.line, printableLine.line) && Objects.equals(this.cut, printableLine.cut)
+            && Objects.equals(this.barcode, printableLine.barcode);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(barcode, text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut);
+      return Objects.hash(text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut, barcode);
    }
 
    @Override
@@ -165,12 +165,12 @@ public class SlipLine {
       StringBuilder sb = new StringBuilder();
       sb.append("class SlipLine {\n");
 
-      sb.append("    barcode: ").append(Utils.toIndentedString(barcode)).append("\n");
       sb.append("    text: ").append(Utils.toIndentedString(text)).append("\n");
       sb.append("    fontWidthScaleFactor: ").append(Utils.toIndentedString(fontWidthScaleFactor)).append("\n");
       sb.append("    fontHeightScaleFactor: ").append(Utils.toIndentedString(fontHeightScaleFactor)).append("\n");
       sb.append("    line: ").append(Utils.toIndentedString(line)).append("\n");
       sb.append("    cut: ").append(Utils.toIndentedString(cut)).append("\n");
+      sb.append("    barcode: ").append(Utils.toIndentedString(barcode)).append("\n");
       sb.append("}");
       return sb.toString();
    }
