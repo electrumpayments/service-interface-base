@@ -15,11 +15,31 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "A line of text to be printed on the till slip")
 public class SlipLine {
 
+   private SlipBarcode barcode;
    private String text;
    private double fontWidthScaleFactor = 1;
    private double fontHeightScaleFactor = 1;
    private boolean line = false;
    private boolean cut = false;
+
+   public SlipLine barcode(SlipBarcode barcode) {
+      this.barcode = barcode;
+      return this;
+   }
+
+   /**
+    * Barcode information for this line
+    *
+    * @return barcode
+    */
+   @ApiModelProperty(value = "Barcode information for this line")
+   public SlipBarcode getBarcode() {
+      return barcode;
+   }
+
+   public void setBarcode(SlipBarcode barcode) {
+      this.barcode = barcode;
+   }
 
    public SlipLine text(String text) {
       this.text = text;
