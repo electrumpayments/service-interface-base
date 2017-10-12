@@ -12,12 +12,12 @@ import java.util.Objects;
  * 
  */
 @ApiModel(description = "Used to indicate barcode information for a slip line.")
-public class SlipBarcode {
+public class Barcode {
    
    private String data;
    private String encoding;
    
-   public SlipBarcode data(String data) {
+   public Barcode data(String data) {
       this.data = data;
       return this;
    }
@@ -37,7 +37,7 @@ public class SlipBarcode {
       this.data = data;
    }
    
-   public SlipBarcode encoding(String encoding) {
+   public Barcode encoding(String encoding) {
       this.encoding = encoding;
       return this;
    }
@@ -64,8 +64,8 @@ public class SlipBarcode {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      SlipBarcode slipBarcode = (SlipBarcode) o;
-      return Objects.equals(this.data, slipBarcode.data) && Objects.equals(this.encoding, slipBarcode.encoding);
+      Barcode barcode = (Barcode) o;
+      return Objects.equals(this.data, barcode.data) && Objects.equals(this.encoding, barcode.encoding);
    }
 
    @Override
@@ -76,7 +76,7 @@ public class SlipBarcode {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class SlipBarcode {\n");
+      sb.append("class Barcode {\n");
 
       sb.append("    data: ").append(Utils.toIndentedString(data)).append("\n");
       sb.append("    encoding: ").append(Utils.toIndentedString(encoding)).append("\n");

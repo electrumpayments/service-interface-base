@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.electrum.vas.Utils;
@@ -15,14 +16,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "A line of text to be printed on the till slip")
 public class SlipLine {
 
-   private SlipBarcode barcode;
+   private Barcode barcode;
    private String text;
    private double fontWidthScaleFactor = 1;
    private double fontHeightScaleFactor = 1;
    private boolean line = false;
    private boolean cut = false;
 
-   public SlipLine barcode(SlipBarcode barcode) {
+   public SlipLine barcode(Barcode barcode) {
       this.barcode = barcode;
       return this;
    }
@@ -33,11 +34,12 @@ public class SlipLine {
     * @return barcode
     */
    @ApiModelProperty(value = "Barcode information for this line")
-   public SlipBarcode getBarcode() {
+   @Valid
+   public Barcode getBarcode() {
       return barcode;
    }
 
-   public void setBarcode(SlipBarcode barcode) {
+   public void setBarcode(Barcode barcode) {
       this.barcode = barcode;
    }
 
@@ -146,7 +148,8 @@ public class SlipLine {
          return false;
       }
       SlipLine printableLine = (SlipLine) o;
-      return Objects.equals(this.text, printableLine.text)
+      return Objects.equals(this.barcode, printableLine.barcode)
+            && Objects.equals(this.text, printableLine.text)
             && Objects.equals(this.fontWidthScaleFactor, printableLine.fontWidthScaleFactor)
             && Objects.equals(this.fontHeightScaleFactor, printableLine.fontHeightScaleFactor)
             && Objects.equals(this.line, printableLine.line) && Objects.equals(this.cut, printableLine.cut);
@@ -154,7 +157,7 @@ public class SlipLine {
 
    @Override
    public int hashCode() {
-      return Objects.hash(text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut);
+      return Objects.hash(barcode, text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut);
    }
 
    @Override
@@ -162,6 +165,7 @@ public class SlipLine {
       StringBuilder sb = new StringBuilder();
       sb.append("class SlipLine {\n");
 
+      sb.append("    barcode: ").append(Utils.toIndentedString(barcode)).append("\n");
       sb.append("    text: ").append(Utils.toIndentedString(text)).append("\n");
       sb.append("    fontWidthScaleFactor: ").append(Utils.toIndentedString(fontWidthScaleFactor)).append("\n");
       sb.append("    fontHeightScaleFactor: ").append(Utils.toIndentedString(fontHeightScaleFactor)).append("\n");
