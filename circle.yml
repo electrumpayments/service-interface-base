@@ -23,7 +23,7 @@ test:
 
 deployment:
   release:
-    branch: master
+    branch: /.*/
     commands:
       # deploy docs to github-pages (not done for service-interface-base, the docs are only for example use)
       #- ~/circlecitools/bin/deployGithubPages.sh target/devguide/site billpay-service-interface-docs
