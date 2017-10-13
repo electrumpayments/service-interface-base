@@ -13,7 +13,11 @@ import java.util.Objects;
  */
 @ApiModel(description = "Used to indicate barcode information for a slip line.")
 public class Barcode {
-   
+
+   public class Encodings {
+      public static final String ITF = "ITF";
+   }
+
    private String data;
    private String encoding;
    
