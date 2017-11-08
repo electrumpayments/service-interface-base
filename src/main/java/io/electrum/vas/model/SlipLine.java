@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import io.electrum.vas.Utils;
@@ -15,11 +16,32 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "A line of text to be printed on the till slip")
 public class SlipLine {
 
+   private Barcode barcode;
    private String text;
    private double fontWidthScaleFactor = 1;
    private double fontHeightScaleFactor = 1;
    private boolean line = false;
    private boolean cut = false;
+
+   public SlipLine barcode(Barcode barcode) {
+      this.barcode = barcode;
+      return this;
+   }
+
+   /**
+    * Barcode information for this line
+    *
+    * @return barcode
+    */
+   @ApiModelProperty(value = "Barcode information for this line")
+   @Valid
+   public Barcode getBarcode() {
+      return barcode;
+   }
+
+   public void setBarcode(Barcode barcode) {
+      this.barcode = barcode;
+   }
 
    public SlipLine text(String text) {
       this.text = text;
@@ -129,12 +151,13 @@ public class SlipLine {
       return Objects.equals(this.text, printableLine.text)
             && Objects.equals(this.fontWidthScaleFactor, printableLine.fontWidthScaleFactor)
             && Objects.equals(this.fontHeightScaleFactor, printableLine.fontHeightScaleFactor)
-            && Objects.equals(this.line, printableLine.line) && Objects.equals(this.cut, printableLine.cut);
+            && Objects.equals(this.line, printableLine.line) && Objects.equals(this.cut, printableLine.cut)
+            && Objects.equals(this.barcode, printableLine.barcode);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut);
+      return Objects.hash(text, fontWidthScaleFactor, fontHeightScaleFactor, line, cut, barcode);
    }
 
    @Override
@@ -147,6 +170,7 @@ public class SlipLine {
       sb.append("    fontHeightScaleFactor: ").append(Utils.toIndentedString(fontHeightScaleFactor)).append("\n");
       sb.append("    line: ").append(Utils.toIndentedString(line)).append("\n");
       sb.append("    cut: ").append(Utils.toIndentedString(cut)).append("\n");
+      sb.append("    barcode: ").append(Utils.toIndentedString(barcode)).append("\n");
       sb.append("}");
       return sb.toString();
    }
