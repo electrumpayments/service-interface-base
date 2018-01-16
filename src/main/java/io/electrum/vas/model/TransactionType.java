@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 public class TransactionType{
 
-
     /*
     Type definition to set the transaction type
      */
