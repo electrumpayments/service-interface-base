@@ -1,17 +1,16 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
 
-import javax.validation.constraints.NotNull;
 
-public class AccountType{
 
+    @ApiModel(description = "Indicates the type of account being used in a transaction")
     /*
-    Type definition to set the account type
+    Indicates the type of account being used in a transaction
      */
-    public enum AccType {
+    public enum AccountType {
         DEFAULT("DEFAULT"),
         SAVINGS("SAVINGS"),
         CHEQUE("CHEQUE"),
@@ -21,7 +20,7 @@ public class AccountType{
 
         private String value;
 
-        AccType(String value) {
+        AccountType(String value) {
             this.value = value;
         }
 
@@ -31,48 +30,12 @@ public class AccountType{
         public String toString() {
             return String.valueOf(value);
         }
+
     }
 
-    private AccType accType;
 
-    /**
-     * The type of account being used
-     **/
-    public AccountType accountType(AccType accType) {
-        this.accType = accType;
-        return this;
-    }
 
-    @ApiModelProperty(value = "The Account Type")
-    @JsonProperty("accountType")
-    @NotNull
-    public AccType getAccountType() {return accType;}
 
-    public void setAccountType(AccountType.AccType accType) {
-        this.accType = accType;
-    }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class Account Type {\n");
-        sb.append("AccType: ");
-        sb.append(accType.toString());
-        sb.append("}");
-        return sb.toString();
-    }
 
-    @Override
-    public boolean equals(Object other){
-        if(other instanceof AccountType)
-            if((((AccountType) other).getAccountType()).equals(this.accType)) return true;
-        return false;
-    }
-
-    @Override
-    public int hashCode(){
-        return accType.hashCode();
-    }
-
-}
 

@@ -29,9 +29,9 @@ public class Transaction {
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected SlipData slipData = null;
    protected String basketRef = null;
-   protected TransactionType transactionType = null;
+   protected TranType tranType = null;
    protected AccountType srcAccType = null;
-   protected AccountType desAccType = null;
+   protected AccountType destAccType = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -214,22 +214,21 @@ public class Transaction {
 
 
    /**
-    * The transaction type from ISO8583 DE03
-    *
+    * Creates a Transaction object from a TranType
     **/
-   public Transaction transactionType(TransactionType transactionType){
-      this.transactionType = transactionType;
+   public Transaction tranType(TranType tranType){
+      this.tranType = tranType;
       return this;
    }
 
    @ApiModelProperty(value = "Used to hold the value of the transaction type from DE03")
    @JsonProperty("transactionType")
-   public TransactionType getTransactionType() {
-      return transactionType;
+   public TranType getTranType() {
+      return tranType;
    }
 
-   public void setTransactionType(TransactionType transactionType){
-      this.transactionType = transactionType;
+   public void setTranType(TranType tranType){
+      this.tranType = tranType;
    }
 
 
@@ -253,22 +252,22 @@ public class Transaction {
    }
 
    /**
-    * The destination account type from ISO8583 DE03
+    * Creates a Transaction object from a destination account type
     *
     **/
    public Transaction desAccType(AccountType desAccType){
-      this.desAccType = desAccType;
+      this.destAccType = desAccType;
       return this;
    }
 
-   @ApiModelProperty(value = "Used to hold the destination account type from DE03")
-   @JsonProperty("desAccType")
-   public AccountType getDesAccType() {
-      return desAccType;
+   @ApiModelProperty(value = "Gets the account type for the destination account in the transaction")
+   @JsonProperty("destAccType")
+   public AccountType getDestAccType() {
+      return destAccType;
    }
 
-   public void setDesAccType(AccountType desAccType) {
-      this.desAccType = desAccType;
+   public void setDestAccType(AccountType destAccType) {
+      this.destAccType = destAccType;
    }
 
    @Override
@@ -302,9 +301,9 @@ public class Transaction {
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    basketRef: ").append(Utils.toIndentedString(basketRef)).append("\n");
-      sb.append("    transactionType: ").append(Utils.toIndentedString(transactionType)).append("\n");
+      sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
-      sb.append("    desAccType: ").append(Utils.toIndentedString(desAccType)).append("\n");
+      sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
       sb.append("}");
       return sb.toString();
    }
