@@ -43,7 +43,7 @@ public class AccountType{
         return this;
     }
 
-    @ApiModelProperty(value = "The Accounnt Type")
+    @ApiModelProperty(value = "The Account Type")
     @JsonProperty("accountType")
     @NotNull
     public AccType getAccountType() {return accType;}
