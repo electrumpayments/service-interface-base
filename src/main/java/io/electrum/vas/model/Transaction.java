@@ -29,6 +29,9 @@ public class Transaction {
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected SlipData slipData = null;
    protected String basketRef = null;
+   protected TransactionType transactionType = null;
+   protected AccountType srcAccType = null;
+   protected AccountType desAccType = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -209,6 +212,54 @@ public class Transaction {
       this.basketRef = basketRef;
    }
 
+   public Transaction transactionType(TransactionType transactionType){
+      this.transactionType = transactionType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "Used to hold the value of the transaction type from DE03")
+   @JsonProperty("transactionType")
+   public TransactionType getTransactionType() {
+      return transactionType;
+   }
+
+   public void setTransactionType(TransactionType transactionType){
+      this.transactionType = transactionType;
+   }
+
+
+   public Transaction srcAccType(AccountType srcAccType){
+      this.srcAccType = srcAccType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "Used to hold the source account type from DE03")
+   @JsonProperty("srcAccType")
+   public AccountType getSrcAccType() {
+      return srcAccType;
+   }
+
+   public void setSrcAccType(AccountType srcAccType) {
+      this.srcAccType = srcAccType;
+   }
+
+   public Transaction desAccType(AccountType desAccType){
+      this.desAccType = desAccType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "Used to hold the destination account type from DE03")
+   @JsonProperty("desAccType")
+   public AccountType getDesAccType() {
+      return desAccType;
+   }
+
+   public void setDesAccType(AccountType desAccType) {
+      this.desAccType = desAccType;
+   }
+
+
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -240,6 +291,9 @@ public class Transaction {
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    basketRef: ").append(Utils.toIndentedString(basketRef)).append("\n");
+      sb.append("    transactionType: ").append(Utils.toIndentedString(transactionType)).append("\n");
+      sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
+      sb.append("    desAccType: ").append(Utils.toIndentedString(desAccType)).append("\n");
       sb.append("}");
       return sb.toString();
    }

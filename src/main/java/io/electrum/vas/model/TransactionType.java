@@ -74,6 +74,7 @@ public class TransactionType{
             sb.append("class Transaction Type {\n");
             sb.append("TransType: ");
             sb.append(transType.toString());
+            sb.append("}");
             return sb.toString();
         }
 

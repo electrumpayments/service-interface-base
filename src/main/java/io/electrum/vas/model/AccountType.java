@@ -58,6 +58,7 @@ public class AccountType{
         sb.append("class Account Type {\n");
         sb.append("AccType: ");
         sb.append(accType.toString());
+        sb.append("}");
         return sb.toString();
     }
 
