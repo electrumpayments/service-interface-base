@@ -270,7 +270,7 @@ public class Transaction {
    public void setDesAccType(AccountType desAccType) {
       this.desAccType = desAccType;
    }
-   
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {

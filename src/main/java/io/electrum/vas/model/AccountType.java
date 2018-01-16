@@ -12,12 +12,12 @@ public class AccountType{
     Type definition to set the account type
      */
     public enum AccType {
-        DEFAULT("Default"),
-        SAVINGS("Savings"),
-        CHEQUE("Cheque"),
-        CREDIT("Credit"),
-        ELECTRONIC_PURSE("Electronic Purse"),
-        GIFT_STORED_VALUE_CARD("Gift/Stored Value Card");
+        DEFAULT("DEFAULT"),
+        SAVINGS("SAVINGS"),
+        CHEQUE("CHEQUE"),
+        CREDIT("CREDIT"),
+        ELECTRONIC_PURSE("ELECTRONIC_PURSE"),
+        GIFT_STORED_VALUE_CARD("GIFT_STORED_VALUE_CARD");
 
         private String value;
 
