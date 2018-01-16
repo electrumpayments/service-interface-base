@@ -212,6 +212,11 @@ public class Transaction {
       this.basketRef = basketRef;
    }
 
+
+   /**
+    * The transaction type from ISO8583 DE03
+    *
+    **/
    public Transaction transactionType(TransactionType transactionType){
       this.transactionType = transactionType;
       return this;
@@ -228,6 +233,10 @@ public class Transaction {
    }
 
 
+   /**
+    * The source account type from ISO8583 DE03
+    *
+    **/
    public Transaction srcAccType(AccountType srcAccType){
       this.srcAccType = srcAccType;
       return this;
@@ -243,6 +252,10 @@ public class Transaction {
       this.srcAccType = srcAccType;
    }
 
+   /**
+    * The destination account type from ISO8583 DE03
+    *
+    **/
    public Transaction desAccType(AccountType desAccType){
       this.desAccType = desAccType;
       return this;
@@ -257,9 +270,7 @@ public class Transaction {
    public void setDesAccType(AccountType desAccType) {
       this.desAccType = desAccType;
    }
-
-
-
+   
    @Override
    public boolean equals(Object o) {
       if (this == o) {
