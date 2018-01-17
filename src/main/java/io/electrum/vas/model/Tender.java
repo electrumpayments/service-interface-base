@@ -21,30 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Details of the Tender used by a customer towards a payment")
 public class Tender {
 
-   /**
-    * The type of account
-    */
-   public enum AccountType {
-      DEFAULT("DEFAULT"),
-      SAVINGS("SAVINGS"),
-      CHEQUE("CHEQUE"),
-      CREDIT("CREDIT"),
-      UNIVERSAL("UNIVERSAL"),
-      ELECTRONIC_PURSE("ELECTRONIC_PURSE"),
-      STORED_VALUE("STORED_VALUE");
 
-      private String value;
-
-      AccountType(String value) {
-         this.value = value;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
-   }
 
    /**
     * The type of tender used
