@@ -3,12 +3,9 @@ package io.electrum.vas.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
 import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -29,6 +26,9 @@ public class Transaction {
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected SlipData slipData = null;
    protected String basketRef = null;
+   protected TranType tranType = null;
+   protected AccountType srcAccType = null;
+   protected AccountType destAccType = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -80,7 +80,7 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction")
+   @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction.")
    @JsonProperty("originator")
    @NotNull
    @Valid
@@ -199,7 +199,7 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "Used to group multiple transactions which would otherwise be considered independent.")
+   @ApiModelProperty(value = "Used to group multiple transactions which would otherwise be considered independent.")
    @JsonProperty("basketRef")
    public String getBasketRef() {
       return basketRef;
@@ -207,6 +207,62 @@ public class Transaction {
 
    public void setBasketRef(String basketRef) {
       this.basketRef = basketRef;
+   }
+
+   /**
+    * Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.).
+    **/
+   public Transaction tranType(TranType tranType) {
+      this.tranType = tranType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.).")
+   @JsonProperty("tranType")
+   public TranType getTranType() {
+      return tranType;
+   }
+
+   public void setTranType(TranType tranType) {
+      this.tranType = tranType;
+   }
+
+   /**
+    * This specifies the type of source account being used in the transaction (i.e. cheque, savings).
+    *
+    **/
+   public Transaction srcAccType(AccountType srcAccType) {
+      this.srcAccType = srcAccType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "This specifies the type of source account being used in the transaction (i.e. cheque, savings).")
+   @JsonProperty("srcAccType")
+   public AccountType getSrcAccType() {
+      return srcAccType;
+   }
+
+   public void setSrcAccType(AccountType srcAccType) {
+      this.srcAccType = srcAccType;
+   }
+
+   /**
+    * This specifies the type of destination account being used in the transaction (i.e. cheque, savings).
+    *
+    **/
+   public Transaction destAccType(AccountType destAccType) {
+      this.destAccType = destAccType;
+      return this;
+   }
+
+   @ApiModelProperty(value = "This specifies the type of destination account being used in the transaction (i.e. cheque, savings).")
+   @JsonProperty("destAccType")
+   public AccountType getDestAccType() {
+      return destAccType;
+   }
+
+   public void setDestAccType(AccountType destAccType) {
+      this.destAccType = destAccType;
    }
 
    @Override
@@ -230,7 +286,6 @@ public class Transaction {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class Transaction {\n");
-
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
@@ -240,6 +295,9 @@ public class Transaction {
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    basketRef: ").append(Utils.toIndentedString(basketRef)).append("\n");
+      sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
+      sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
+      sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
       sb.append("}");
       return sb.toString();
    }
