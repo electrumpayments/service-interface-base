@@ -3,9 +3,9 @@ package io.electrum.vas.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 
-@ApiModel(description = "Indicates the transaction type (i.e Goods and Services or Cash Withdrawal)")
+@ApiModel(description = "Indicates the transaction type (i.e. Goods and Services or Cash Withdrawal)")
 /*
- * Indicates the transaction type (i.e Goods and Services or Cash Withdrawal)
+ * Indicates the transaction type (i.e. Goods and Services or Cash Withdrawal)
  */
 public enum TranType {
    GOODS_AND_SERVICES("GOODS_AND_SERVICES"),

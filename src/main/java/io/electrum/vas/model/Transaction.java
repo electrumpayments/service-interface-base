@@ -218,11 +218,11 @@ public class Transaction {
    }
 
    /**
-    * Gets the type of transaction being processed
+    * Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.)
     *
     * @return tranType
     */
-   @ApiModelProperty(value = "Gets the type of transaction being processed")
+   @ApiModelProperty(value = "Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.)")
    @JsonProperty("transactionType")
    public TranType getTranType() {
       return tranType;
@@ -242,11 +242,11 @@ public class Transaction {
    }
 
    /**
-    * Gets the account type for the source account in the transaction
+    * This specifies the type of source account being used in the transaction (i.e. cheque, savings)
     * 
     * @return srcAccTypes
     */
-   @ApiModelProperty(value = "Gets the account type for the source account in the transaction")
+   @ApiModelProperty(value = "This specifies the type of source account being used in the transaction (i.e. cheque, savings)")
    @JsonProperty("srcAccType")
    public AccountType getSrcAccType() {
       return srcAccType;
@@ -266,11 +266,11 @@ public class Transaction {
    }
 
    /**
-    * Gets the account type for the destination account in the transaction
+    * This specifies the type of destination account being used in the transaction (i.e. cheque, savings)
     *
     * @return destAccType
     **/
-   @ApiModelProperty(value = "Gets the account type for the destination account in the transaction")
+   @ApiModelProperty(value = "This specifies the type of destination account being used in the transaction (i.e. cheque, savings)")
    @JsonProperty("destAccType")
    public AccountType getDestAccType() {
       return destAccType;
@@ -301,7 +301,6 @@ public class Transaction {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class Transaction {\n");
-
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");

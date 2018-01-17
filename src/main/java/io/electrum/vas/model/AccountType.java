@@ -3,13 +3,11 @@ package io.electrum.vas.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 
-@ApiModel(description = "Indicates the type of account being used in a transaction process.")
-/*
- * Indicates the type of account being used in a transaction process.
- */
+
 /**
  * The type of account
  */
+@ApiModel(description = "Indicates the type of account being used in a transaction process.")
 public enum AccountType {
    DEFAULT("DEFAULT"),
    SAVINGS("SAVINGS"),
