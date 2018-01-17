@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * The data required in all value added service transactions.
  **/
-@ApiModel(description = "The data required in all value added service transactions.")
+@ApiModel(description = "The data required in all value added service transactions")
 public class Transaction {
 
    protected String id = null;
@@ -217,11 +217,13 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(value = "Gets the type of transaction being processed")
-   @JsonProperty("transactionType")
    /**
     * Gets the type of transaction being processed
+    *
+    * @return tranType
     */
+   @ApiModelProperty(value = "Gets the type of transaction being processed")
+   @JsonProperty("transactionType")
    public TranType getTranType() {
       return tranType;
    }
@@ -239,13 +241,13 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(value = "Gets the account type for the source account in the transaction")
-   @JsonProperty("srcAccType")
    /**
     * Gets the account type for the source account in the transaction
     * 
     * @return srcAccTypes
     */
+   @ApiModelProperty(value = "Gets the account type for the source account in the transaction")
+   @JsonProperty("srcAccType")
    public AccountType getSrcAccType() {
       return srcAccType;
    }
@@ -263,13 +265,13 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(value = "Gets the account type for the destination account in the transaction")
-   @JsonProperty("destAccType")
    /**
     * Gets the account type for the destination account in the transaction
-    * 
+    *
     * @return destAccType
     **/
+   @ApiModelProperty(value = "Gets the account type for the destination account in the transaction")
+   @JsonProperty("destAccType")
    public AccountType getDestAccType() {
       return destAccType;
    }

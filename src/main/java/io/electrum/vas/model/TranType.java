@@ -33,7 +33,6 @@ public enum TranType {
 
    private String value;
 
-
    TranType(String value) {
       this.value = value;
    }
