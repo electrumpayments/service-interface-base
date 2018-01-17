@@ -6,9 +6,9 @@ import io.swagger.annotations.ApiModel;
 
 
 
-    @ApiModel(description = "Indicates the type of account being used in a transaction")
+    @ApiModel(description = "Indicates the type of account being used in a transaction process")
     /*
-    Indicates the type of account being used in a transaction
+    Indicates the type of account being used in a transaction process
      */
     public enum AccountType {
         DEFAULT("DEFAULT"),

@@ -3,12 +3,9 @@ package io.electrum.vas.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
 import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -214,7 +211,7 @@ public class Transaction {
 
 
    /**
-    * Creates a Transaction object from a TranType
+    * Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.)
     **/
    public Transaction tranType(TranType tranType){
       this.tranType = tranType;
@@ -233,7 +230,7 @@ public class Transaction {
 
 
    /**
-    * The source account type from ISO8583 DE03
+    *  This specifies the type of source account being used in the transaction (i.e. cheque, savings)
     *
     **/
    public Transaction srcAccType(AccountType srcAccType){
@@ -241,8 +238,12 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(value = "Used to hold the source account type from DE03")
+   @ApiModelProperty(value = "Gets the account type for the source account in the transaction")
    @JsonProperty("srcAccType")
+   /**
+    * Gets the account type for the source account in the transaction
+    * @return srcAccTypes
+    */
    public AccountType getSrcAccType() {
       return srcAccType;
    }
@@ -252,16 +253,20 @@ public class Transaction {
    }
 
    /**
-    * Creates a Transaction object from a destination account type
+    * This specifies the type of destination account being used in the transaction (i.e. cheque, savings)
     *
     **/
-   public Transaction desAccType(AccountType desAccType){
-      this.destAccType = desAccType;
+   public Transaction destAccType(AccountType destAccType){
+      this.destAccType = destAccType;
       return this;
    }
 
    @ApiModelProperty(value = "Gets the account type for the destination account in the transaction")
    @JsonProperty("destAccType")
+   /**
+    * Gets the account type for the destination account in the transaction
+    * @return destAccType
+    **/
    public AccountType getDestAccType() {
       return destAccType;
    }
