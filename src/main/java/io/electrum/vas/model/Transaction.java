@@ -219,9 +219,13 @@ public class Transaction {
 
    @ApiModelProperty(value = "Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.).")
    @JsonProperty("tranType")
-   public TranType getTranType() { return tranType; }
+   public TranType getTranType() {
+      return tranType;
+   }
 
-   public void setTranType(TranType tranType) { this.tranType = tranType; }
+   public void setTranType(TranType tranType) {
+      this.tranType = tranType;
+   }
 
    /**
     * This specifies the type of source account being used in the transaction (i.e. cheque, savings).
@@ -234,9 +238,13 @@ public class Transaction {
 
    @ApiModelProperty(value = "This specifies the type of source account being used in the transaction (i.e. cheque, savings).")
    @JsonProperty("srcAccType")
-   public AccountType getSrcAccType() { return srcAccType; }
+   public AccountType getSrcAccType() {
+      return srcAccType;
+   }
 
-   public void setSrcAccType(AccountType srcAccType) { this.srcAccType = srcAccType; }
+   public void setSrcAccType(AccountType srcAccType) {
+      this.srcAccType = srcAccType;
+   }
 
    /**
     * This specifies the type of destination account being used in the transaction (i.e. cheque, savings).
@@ -249,9 +257,13 @@ public class Transaction {
 
    @ApiModelProperty(value = "This specifies the type of destination account being used in the transaction (i.e. cheque, savings).")
    @JsonProperty("destAccType")
-   public AccountType getDestAccType() { return destAccType; }
+   public AccountType getDestAccType() {
+      return destAccType;
+   }
 
-   public void setDestAccType(AccountType destAccType) { this.destAccType = destAccType; }
+   public void setDestAccType(AccountType destAccType) {
+      this.destAccType = destAccType;
+   }
 
    @Override
    public boolean equals(Object o) {

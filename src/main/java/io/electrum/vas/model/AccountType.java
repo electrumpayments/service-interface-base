@@ -3,7 +3,6 @@ package io.electrum.vas.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 
-
 /**
  * The type of account
  */
