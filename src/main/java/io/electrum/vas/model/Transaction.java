@@ -209,31 +209,32 @@ public class Transaction {
       this.basketRef = basketRef;
    }
 
-
    /**
     * Data relating to the type of transaction taking place (i.e. cash withdrawal, goods and services etc.)
     **/
-   public Transaction tranType(TranType tranType){
+   public Transaction tranType(TranType tranType) {
       this.tranType = tranType;
       return this;
    }
 
-   @ApiModelProperty(value = "Used to hold the value of the transaction type from DE03")
+   @ApiModelProperty(value = "Gets the type of transaction being processed")
    @JsonProperty("transactionType")
+   /**
+    * Gets the type of transaction being processed
+    */
    public TranType getTranType() {
       return tranType;
    }
 
-   public void setTranType(TranType tranType){
+   public void setTranType(TranType tranType) {
       this.tranType = tranType;
    }
 
-
    /**
-    *  This specifies the type of source account being used in the transaction (i.e. cheque, savings)
+    * This specifies the type of source account being used in the transaction (i.e. cheque, savings)
     *
     **/
-   public Transaction srcAccType(AccountType srcAccType){
+   public Transaction srcAccType(AccountType srcAccType) {
       this.srcAccType = srcAccType;
       return this;
    }
@@ -242,6 +243,7 @@ public class Transaction {
    @JsonProperty("srcAccType")
    /**
     * Gets the account type for the source account in the transaction
+    * 
     * @return srcAccTypes
     */
    public AccountType getSrcAccType() {
@@ -256,7 +258,7 @@ public class Transaction {
     * This specifies the type of destination account being used in the transaction (i.e. cheque, savings)
     *
     **/
-   public Transaction destAccType(AccountType destAccType){
+   public Transaction destAccType(AccountType destAccType) {
       this.destAccType = destAccType;
       return this;
    }
@@ -265,6 +267,7 @@ public class Transaction {
    @JsonProperty("destAccType")
    /**
     * Gets the account type for the destination account in the transaction
+    * 
     * @return destAccType
     **/
    public AccountType getDestAccType() {

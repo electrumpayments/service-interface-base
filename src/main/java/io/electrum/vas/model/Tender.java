@@ -21,8 +21,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Details of the Tender used by a customer towards a payment")
 public class Tender {
 
-
-
    /**
     * The type of tender used
     */
