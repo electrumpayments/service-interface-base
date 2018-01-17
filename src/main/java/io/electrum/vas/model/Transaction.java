@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * The data required in all value added service transactions.
  **/
-@ApiModel(description = "The data required in all value added service transactions")
+@ApiModel(description = "The data required in all value added service transactions.")
 public class Transaction {
 
    protected String id = null;
@@ -80,7 +80,7 @@ public class Transaction {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction")
+   @ApiModelProperty(required = true, value = "Data relating to the originator of the transaction.")
    @JsonProperty("originator")
    @NotNull
    @Valid

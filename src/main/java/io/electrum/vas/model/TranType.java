@@ -3,7 +3,6 @@ package io.electrum.vas.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 
-
 /*
  * Indicates the transaction type (i.e. Goods and Services or Cash Withdrawal).
  */
