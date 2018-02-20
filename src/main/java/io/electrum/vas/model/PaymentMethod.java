@@ -44,7 +44,7 @@ public class PaymentMethod {
 
    protected String name;
 
-   @ApiModelProperty(required = true, value = "The general method pf payment used")
+   @ApiModelProperty(required = true, value = "The general method of payment used")
    @JsonProperty("type")
    @NotNull
    public PaymentMethodType getType() {
