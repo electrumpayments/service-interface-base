@@ -31,9 +31,8 @@ public class PaymentMethod {
 
    protected PaymentMethodType type = null;
 
-   @ApiModelProperty(required = true, value = "The specific method of payment used")
+   @ApiModelProperty(value = "The specific method of payment used")
    @JsonProperty("name")
-   @NotNull
    public String getName() {
       return name;
    }
