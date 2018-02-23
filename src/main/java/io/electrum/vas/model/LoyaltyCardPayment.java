@@ -14,6 +14,12 @@ public class LoyaltyCardPayment extends PaymentMethod {
 
    private String cardNumber = null;
 
+   public LoyaltyCardPayment() {
+      // The method used to deserialise child models based on a discriminator leaves the discriminator field null
+      // So we set it explicitly in the default constructor
+      setType(PaymentMethodType.LOYALTY_CARD);
+   }
+
    @ApiModelProperty(required = true, value = "Primary account number of the loyalty programme card used to make a payment")
    @JsonProperty("cardNumber")
    @NotNull

@@ -14,6 +14,12 @@ public class An32TokenPayment extends PaymentMethod {
 
    private String token = null;
 
+   public An32TokenPayment() {
+      // The method used to deserialise child models based on a discriminator leaves the discriminator field null
+      // So we set it explicitly in the default constructor
+      setType(PaymentMethodType.AN_32_TOKEN);
+   }
+
    @ApiModelProperty(required = true, value = "32 character alphanumeric code which identifies a token")
    @JsonProperty("token")
    @NotNull
