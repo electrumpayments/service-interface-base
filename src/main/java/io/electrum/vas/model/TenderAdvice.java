@@ -16,7 +16,7 @@ import javax.validation.Valid;
  * service implementations where additional information is present in the confirmation. Otherwise, a single message
  * implementation is preferable
  */
-@ApiModel(description = "An advice that notifies of the successful completion of a transaction.")
+@ApiModel(description = "An advice that notifies of the successful completion of a transaction.", parent = io.electrum.vas.model.BasicAdvice.class)
 public class TenderAdvice extends BasicAdvice {
 
    protected List<Tender> tenders = new ArrayList<>();

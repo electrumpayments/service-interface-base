@@ -1,5 +1,7 @@
 package io.electrum.vas.model;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +22,7 @@ public class Amounts {
    protected LedgerAmount approvedAmount = null;
    protected LedgerAmount feeAmount = null;
    protected LedgerAmount balanceAmount = null;
+   protected HashMap<String, LedgerAmount> additionalAmounts = null;
 
    public Amounts requestAmount(LedgerAmount requestAmount) {
       this.requestAmount = requestAmount;
@@ -106,6 +109,28 @@ public class Amounts {
       this.balanceAmount = balanceAmount;
    }
 
+   public Amounts additionalAmounts(HashMap<String, LedgerAmount> additionalAmounts) {
+       this.additionalAmounts = additionalAmounts;
+       return this;
+   }
+
+   /**
+    * Any additional amounts that are involved in a transaction which don't appropriately fit into the other
+    * amount fields.
+    *
+    * @return additionalAmounts
+    **/
+   @ApiModelProperty(value = "Any additional amounts that are involved in a transaction which don't appropriately fit into the other amount fields.")
+   @JsonProperty("additionalAmounts")
+   @Valid
+   public HashMap<String, LedgerAmount> getAdditionalAmounts() {
+       return additionalAmounts;
+   }
+
+   public void setAdditionalAmounts(HashMap<String, LedgerAmount> additionalAmounts) {
+       this.additionalAmounts = additionalAmounts;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -117,12 +142,12 @@ public class Amounts {
       Amounts tender = (Amounts) o;
       return Objects.equals(requestAmount, tender.requestAmount)
             && Objects.equals(approvedAmount, tender.approvedAmount) && Objects.equals(feeAmount, tender.feeAmount)
-            && Objects.equals(balanceAmount, tender.balanceAmount);
+            && Objects.equals(balanceAmount, tender.balanceAmount) && Objects.equals( additionalAmounts, tender.additionalAmounts );
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(requestAmount, approvedAmount, feeAmount, balanceAmount);
+      return Objects.hash(requestAmount, approvedAmount, feeAmount, balanceAmount, additionalAmounts);
    }
 
    @Override
@@ -134,6 +159,7 @@ public class Amounts {
       sb.append("    approvedAmount: ").append(Utils.toIndentedString(approvedAmount)).append("\n");
       sb.append("    feeAmount: ").append(Utils.toIndentedString(feeAmount)).append("\n");
       sb.append("    balanceAmount: ").append(Utils.toIndentedString(balanceAmount)).append("\n");
+      sb.append("    additionalAmounts: ").append(Utils.toIndentedString(additionalAmounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }
