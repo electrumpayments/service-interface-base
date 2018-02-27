@@ -22,6 +22,35 @@ import io.swagger.annotations.ApiModelProperty;
 public class Tender {
 
    /**
+    * The type of account used
+    * 
+    * @deprecated This account type enumeration has been superseded by the more general account type enumeration in
+    *             {@link io.electrum.vas.model.AccountType} since v3.8.0. Future uses of this API should use this enumeration.
+    */
+   @Deprecated
+   public enum AccountType {
+      DEFAULT("DEFAULT"),
+      SAVINGS("SAVINGS"),
+      CHEQUE("CHEQUE"),
+      CREDIT("CREDIT"),
+      UNIVERSAL("UNIVERSAL"),
+      ELECTRONIC_PURSE("ELECTRONIC_PURSE"),
+      STORED_VALUE("STORED_VALUE");
+
+      private String value;
+
+      AccountType(String value) {
+         this.value = value;
+      }
+
+      @Override
+      @JsonValue
+      public String toString() {
+         return String.valueOf(value);
+      }
+   }
+
+   /**
     * The type of tender used
     */
    public enum TenderType {
