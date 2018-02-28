@@ -1,6 +1,8 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -11,10 +13,14 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @ApiModel(description = "Base model for all payment types", discriminator = "type", subTypes = {An32TokenPayment.class, LoyaltyCardPayment.class})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+// For the sake of correct deserialisation, we need to map from values of type to child model classes explicitly
+@JsonSubTypes({ @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
+      @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD") })
 public class PaymentMethod {
 
    public enum PaymentMethodType {
-      TOKEN("TOKEN"), LOYALTY_CARD("LOYALTY_CARD");
+      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD");
 
       private String value;
 
@@ -31,6 +37,10 @@ public class PaymentMethod {
 
    protected PaymentMethodType type = null;
 
+   protected String name;
+
+   protected LedgerAmount amount;
+
    @ApiModelProperty(value = "The specific method of payment used")
    @JsonProperty("name")
    public String getName() {
@@ -41,8 +51,6 @@ public class PaymentMethod {
       this.name = name;
    }
 
-   protected String name;
-
    @ApiModelProperty(required = true, value = "The general method of payment used")
    @JsonProperty("type")
    @NotNull
@@ -52,6 +60,18 @@ public class PaymentMethod {
 
    public void setType(PaymentMethodType type) {
       this.type = type;
+   }
+
+
+   @ApiModelProperty(required = true, value = "Ledger amount of the payment")
+   @JsonProperty("amount")
+   @NotNull
+   public LedgerAmount getAmount() {
+      return amount;
+   }
+
+   public void setAmount(LedgerAmount amount) {
+      this.amount = amount;
    }
 
    @Override
@@ -68,7 +88,8 @@ public class PaymentMethod {
          return false;
       }
       PaymentMethod paymentMethod = (PaymentMethod) o;
-      return Objects.equals(this.type, paymentMethod.type);
+      return Objects.equals(this.type, paymentMethod.type) && Objects.equals(this.name, paymentMethod.name)
+            && Objects.equals(this.amount, paymentMethod.amount);
    }
 
    @Override
@@ -77,6 +98,7 @@ public class PaymentMethod {
       sb.append("class PaymentMethod {\n");
       sb.append("    name: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("}");
       return sb.toString();
    }

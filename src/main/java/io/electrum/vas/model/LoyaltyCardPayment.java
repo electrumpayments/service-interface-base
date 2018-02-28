@@ -14,6 +14,12 @@ public class LoyaltyCardPayment extends PaymentMethod {
 
    private String cardNumber = null;
 
+   public LoyaltyCardPayment() {
+      // The method used to deserialise child models based on a discriminator leaves the discriminator field null
+      // So we set it explicitly in the default constructor
+      setType(PaymentMethodType.LOYALTY_CARD);
+   }
+
    @ApiModelProperty(required = true, value = "Primary account number of the loyalty programme card used to make a payment")
    @JsonProperty("cardNumber")
    @NotNull
@@ -40,8 +46,9 @@ public class LoyaltyCardPayment extends PaymentMethod {
          return false;
       }
       LoyaltyCardPayment loyaltyCardPayment = (LoyaltyCardPayment) o;
-      return Objects.equals(this.type, loyaltyCardPayment.type)
-            && Objects.equals(this.cardNumber, loyaltyCardPayment.cardNumber);
+      return Objects.equals(this.type, loyaltyCardPayment.type) && Objects.equals(this.name, loyaltyCardPayment.name)
+              && Objects.equals(this.cardNumber, loyaltyCardPayment.cardNumber)
+              && Objects.equals(this.amount, loyaltyCardPayment.amount);
    }
 
    @Override
@@ -50,6 +57,8 @@ public class LoyaltyCardPayment extends PaymentMethod {
       sb.append("class LoyaltyCardPayment {\n");
 
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append("\n");
       sb.append("}");
       return sb.toString();

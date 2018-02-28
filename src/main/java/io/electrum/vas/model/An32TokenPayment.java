@@ -14,6 +14,12 @@ public class An32TokenPayment extends PaymentMethod {
 
    private String token = null;
 
+   public An32TokenPayment() {
+      // The method used to deserialise child models based on a discriminator leaves the discriminator field null
+      // So we set it explicitly in the default constructor
+      setType(PaymentMethodType.AN_32_TOKEN);
+   }
+
    @ApiModelProperty(required = true, value = "32 character alphanumeric code which identifies a token")
    @JsonProperty("token")
    @NotNull
@@ -40,8 +46,8 @@ public class An32TokenPayment extends PaymentMethod {
          return false;
       }
       An32TokenPayment otherToken = (An32TokenPayment) o;
-      return Objects.equals(this.type, otherToken.type)
-            && Objects.equals(this.token, otherToken.token);
+      return Objects.equals(this.type, otherToken.type) && Objects.equals(this.name, otherToken.name)
+            && Objects.equals(this.token, otherToken.token) && Objects.equals(this.amount, otherToken.amount);
    }
 
    @Override
@@ -50,6 +56,8 @@ public class An32TokenPayment extends PaymentMethod {
       sb.append("class An32TokenPayment {\n");
 
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("    token: ").append(Utils.toIndentedString(token)).append("\n");
       sb.append("}");
       return sb.toString();

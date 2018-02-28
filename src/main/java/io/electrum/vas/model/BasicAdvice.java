@@ -16,9 +16,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * The data required in all value added service requests
+ * The data required in all advice messages
  **/
-@ApiModel(description = "The data required in all value added service requests", subTypes = {TenderAdvice.class, BasicReversal.class})
+@ApiModel(description = "The data required in all advice messages")
 public class BasicAdvice {
 
    protected String id;

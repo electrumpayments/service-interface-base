@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation,
  * or as a result of receiving a non-final response (or no response) to a request
  */
-@ApiModel(description = "An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation, or as a result of receiving a non-final response (or no response) to a request", parent = io.electrum.vas.model.BasicAdvice.class)
+@ApiModel(description = "An advice that notifies of the negative completion of a transaction. This can be either due to customer cancellation, or as a result of receiving a non-final response (or no response) to a request")
 public class BasicReversal extends BasicAdvice {
 
    public enum ReversalReason {
