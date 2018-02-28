@@ -47,7 +47,8 @@ public class LoyaltyCardPayment extends PaymentMethod {
       }
       LoyaltyCardPayment loyaltyCardPayment = (LoyaltyCardPayment) o;
       return Objects.equals(this.type, loyaltyCardPayment.type) && Objects.equals(this.name, loyaltyCardPayment.name)
-            && Objects.equals(this.cardNumber, loyaltyCardPayment.cardNumber);
+              && Objects.equals(this.cardNumber, loyaltyCardPayment.cardNumber)
+              && Objects.equals(this.amount, loyaltyCardPayment.amount);
    }
 
    @Override
@@ -58,6 +59,7 @@ public class LoyaltyCardPayment extends PaymentMethod {
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
       sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("}");
       return sb.toString();
    }

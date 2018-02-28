@@ -47,7 +47,7 @@ public class An32TokenPayment extends PaymentMethod {
       }
       An32TokenPayment otherToken = (An32TokenPayment) o;
       return Objects.equals(this.type, otherToken.type) && Objects.equals(this.name, otherToken.name)
-            && Objects.equals(this.token, otherToken.token);
+            && Objects.equals(this.token, otherToken.token) && Objects.equals(this.amount, otherToken.amount);
    }
 
    @Override
@@ -58,6 +58,7 @@ public class An32TokenPayment extends PaymentMethod {
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
       sb.append("    token: ").append(Utils.toIndentedString(token)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("}");
       return sb.toString();
    }

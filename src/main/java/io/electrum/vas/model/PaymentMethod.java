@@ -37,6 +37,10 @@ public class PaymentMethod {
 
    protected PaymentMethodType type = null;
 
+   protected String name;
+
+   protected LedgerAmount amount;
+
    @ApiModelProperty(value = "The specific method of payment used")
    @JsonProperty("name")
    public String getName() {
@@ -47,8 +51,6 @@ public class PaymentMethod {
       this.name = name;
    }
 
-   protected String name;
-
    @ApiModelProperty(required = true, value = "The general method of payment used")
    @JsonProperty("type")
    @NotNull
@@ -58,6 +60,18 @@ public class PaymentMethod {
 
    public void setType(PaymentMethodType type) {
       this.type = type;
+   }
+
+
+   @ApiModelProperty(required = true, value = "Ledger amount of the payment")
+   @JsonProperty("amount")
+   @NotNull
+   public LedgerAmount getAmount() {
+      return amount;
+   }
+
+   public void setAmount(LedgerAmount amount) {
+      this.amount = amount;
    }
 
    @Override
@@ -74,7 +88,8 @@ public class PaymentMethod {
          return false;
       }
       PaymentMethod paymentMethod = (PaymentMethod) o;
-      return Objects.equals(this.type, paymentMethod.type);
+      return Objects.equals(this.type, paymentMethod.type) && Objects.equals(this.name, paymentMethod.name)
+            && Objects.equals(this.amount, paymentMethod.amount);
    }
 
    @Override
@@ -83,6 +98,7 @@ public class PaymentMethod {
       sb.append("class PaymentMethod {\n");
       sb.append("    name: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("}");
       return sb.toString();
    }
