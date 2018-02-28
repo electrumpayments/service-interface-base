@@ -57,8 +57,8 @@ public class An32TokenPayment extends PaymentMethod {
 
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
-      sb.append("    token: ").append(Utils.toIndentedString(token)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    token: ").append(Utils.toIndentedString(token)).append("\n");
       sb.append("}");
       return sb.toString();
    }
