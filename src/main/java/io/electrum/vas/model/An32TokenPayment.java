@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
-@ApiModel(description = "Model for token-based payments", parent = PaymentMethod.class)
+@ApiModel(description = "Model for token-based payments. To differentiate this model from other payment method models, " +
+        "be sure to set the type field to AN_32_TOKEN.", parent = PaymentMethod.class)
 public class An32TokenPayment extends PaymentMethod {
 
    private String token = null;

@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
-@ApiModel(description = "Model for payments made using loyalty programme cards", parent = PaymentMethod.class)
+@ApiModel(description = "Model for payments made using loyalty programme cards. To differentiate this model from other " +
+        "payment method models, be sure to set the type field to LOYALTY_CARD.", parent = PaymentMethod.class)
 public class LoyaltyCardPayment extends PaymentMethod {
 
    private String cardNumber = null;
