@@ -19,7 +19,6 @@ public class EncryptedPin {
    private String pinBlock;
    private PinBlockFormat pinBlockFormat = PinBlockFormat.ISO_9564_FORMAT_0;
    private String accountNumber;
-   private String keyName;
    private Integer keyIndex;
    private String dukptKsn;
 
@@ -85,24 +84,6 @@ public class EncryptedPin {
    }
 
    /**
-    * Name of the key under which the PIN block is currently encrypted.
-    */
-   public EncryptedPin keyName(String keyName) {
-      this.keyName = keyName;
-      return this;
-   }
-
-   @JsonProperty("keyName")
-   @ApiModelProperty(value = "Name of the key under which the PIN block is currently encrypted.")
-   public String getKeyName() {
-      return keyName;
-   }
-
-   public void setKeyName(String keyName) {
-      this.keyName = keyName;
-   }
-
-   /**
     * Index of the key under which the PIN block is encrypted. Where keys are exchanged in TR-31 KeyBlock format,
     * this should be set to the key version number field of the key used for encryption. If this field is not populated,
     * the most recently exchanged key will be used. Note that omitting this field may require a higher level of
@@ -151,14 +132,12 @@ public class EncryptedPin {
          return false;
       final EncryptedPin that = (EncryptedPin) o;
       return Objects.equals(pinBlock, that.pinBlock) && pinBlockFormat == that.pinBlockFormat && Objects.equals(accountNumber,
-            that.accountNumber) && Objects.equals(keyName, that.keyName) && Objects.equals(
-            keyIndex,
-            that.keyIndex) && Objects.equals(dukptKsn, that.dukptKsn);
+            that.accountNumber) && Objects.equals(keyIndex, that.keyIndex) && Objects.equals(dukptKsn, that.dukptKsn);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(pinBlock, pinBlockFormat, accountNumber, keyName, keyIndex, dukptKsn);
+      return Objects.hash(pinBlock, pinBlockFormat, accountNumber, keyIndex, dukptKsn);
    }
 
    @Override
@@ -168,7 +147,6 @@ public class EncryptedPin {
       sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
       sb.append("    pinBlockFormat: ").append(Utils.toIndentedString(pinBlockFormat)).append("\n");
       sb.append("    accountNumber: ").append(Utils.toIndentedString(accountNumber)).append("\n");
-      sb.append("    keyName: ").append(Utils.toIndentedString(keyName)).append("\n");
       sb.append("    keyIndex: ").append(Utils.toIndentedString(keyIndex)).append("\n");
       sb.append("    dukptKsn: ").append(Utils.toIndentedString(dukptKsn)).append("\n");
       sb.append("}");
