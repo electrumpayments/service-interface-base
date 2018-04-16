@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * A PIN required to authorise a transaction.
@@ -17,7 +19,7 @@ public class EncryptedPin {
    private String accountNumber;
    private String keyName;
    private Integer keyIndex;
-   private DukptFields dukptFields;
+   private String dukptKsn;
 
    /**
     * Hexadecimal string representing the encrypted PIN to be used.
@@ -30,6 +32,7 @@ public class EncryptedPin {
    @JsonProperty("pinBlock")
    @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used.")
    @NotNull
+   @Pattern(regexp = "[a-fA-F0-9]{16}")
    public String getPinBlock() {
       return pinBlock;
    }
@@ -49,6 +52,7 @@ public class EncryptedPin {
    @JsonProperty("pinBlockFormat")
    @ApiModelProperty(value = "PIN block format that was used when encrypting the PIN. Defaults to ISO_9564_FORMAT_0.")
    @NotNull
+   @XmlElement(defaultValue = "ISO_9564_FORMAT_0")
    public PinBlockFormat getPinBlockFormat() {
       return pinBlockFormat;
    }
@@ -69,6 +73,7 @@ public class EncryptedPin {
    @JsonProperty("accountNumber")
    @ApiModelProperty(required = true, value = "12 digit account number used when encrypting the PIN. When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit.")
    @NotNull
+   @Pattern(regexp = "[0-9]{12}")
    public String getAccountNumber() {
       return accountNumber;
    }
@@ -96,7 +101,10 @@ public class EncryptedPin {
    }
 
    /**
-    * Index of the key under which the PIN block is currently encrypted.
+    * Index of the key under which the PIN block is encrypted. Where keys are exchanged in TR-31 KeyBlock format,
+    * this should be set to the key version number field of the key used for encryption. If this field is not populated,
+    * the most recently exchanged key will be used. Note that omitting this field may require a higher level of
+    * synchronization during automated key exchange in some environments.
     */
    public EncryptedPin keyIndex(Integer keyIndex) {
       this.keyIndex = keyIndex;
@@ -104,7 +112,7 @@ public class EncryptedPin {
    }
 
    @JsonProperty("keyIndex")
-   @ApiModelProperty(value = "Index of the key under which the PIN block is currently encrypted.")
+   @ApiModelProperty(value = "Index of the key under which the PIN block is encrypted. Where keys are exchanged in TR-31 KeyBlock format, this should be set to the key version number field of the key used for encryption. If this field is not populated, the most recently exchanged key will be used. Note that omitting this field may require a higher level of synchronization during automated key exchange in some environments.")
    public Integer getKeyIndex() {
       return keyIndex;
    }
@@ -114,87 +122,22 @@ public class EncryptedPin {
    }
 
    /**
-    * Fields required only for DUKPT (Derived unique key per transaction) PINs.
+    * 10-byte Key Serial Number (KSN) as a HEX string. Only populated when the DUKPT key scheme was used during
+    * PIN encryption. If an 8-byte KSN is used it should be left-padded to 10 bytes with 'F' characters.
     */
-   public EncryptedPin dukptFields(DukptFields dukptFields) {
-      this.dukptFields = dukptFields;
+   public EncryptedPin dukptKsn(String dukptKsn) {
+      this.dukptKsn = dukptKsn;
       return this;
    }
 
-   @JsonProperty("dukptFields")
-   @ApiModelProperty(value = "Fields required only for DUKPT (Derived unique key per transaction) PINs.")
-   public DukptFields getDukptFields() {
-      return dukptFields;
+   @JsonProperty("ksn")
+   @ApiModelProperty(value = "10-byte Key Serial Number (KSN) as a HEX string. Only populated when the DUKPT key scheme was used during PIN encryption. If an 8-byte KSN is used it should be left-padded to 10 bytes with 'F' characters.")
+   @Pattern(regexp = "[a-fA-F0-9]{20}")
+   public String getDukptKsn() {
+      return dukptKsn;
    }
 
-   public void setDukptFields(DukptFields dukptFields) {
-      this.dukptFields = dukptFields;
-   }
-
-   /**
-    * Additional fields required for DUKPT (Derived Unique Key Per Transaction) PINs
-    */
-   public static class DukptFields {
-
-      private String keySetId;
-      private String ksn;
-      private String terminalId;
-
-      /**
-       * Key set ID
-       */
-      public DukptFields keySetId(String keySetId) {
-         this.keySetId = keySetId;
-         return this;
-      }
-
-      @JsonProperty("keySetId")
-      @ApiModelProperty(required = true, value = "Key set ID.")
-      @NotNull
-      public String getKeySetId() {
-         return keySetId;
-      }
-
-      public void setKeySetId(String keySetId) {
-         this.keySetId = keySetId;
-      }
-
-      /**
-       * Key Serial Number (KSN)
-       */
-      public DukptFields ksn(String ksn) {
-         this.ksn = ksn;
-         return this;
-      }
-
-      @JsonProperty("ksn")
-      @ApiModelProperty(required = true, value = "Key Serial Number (KSN).")
-      @NotNull
-      public String getKsn() {
-         return ksn;
-      }
-
-      public void setKsn(String ksn) {
-         this.ksn = ksn;
-      }
-
-      /**
-       * Terminal ID
-       */
-      public DukptFields terminalId(String terminalId) {
-         this.terminalId = terminalId;
-         return this;
-      }
-
-      @JsonProperty("terminalId")
-      @ApiModelProperty(required = true, value = "Terminal ID.")
-      @NotNull
-      public String getTerminalId() {
-         return terminalId;
-      }
-
-      public void setTerminalId(String terminalId) {
-         this.terminalId = terminalId;
-      }
+   public void setDukptKsn(String dukptKsn) {
+      this.dukptKsn = dukptKsn;
    }
 }
