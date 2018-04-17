@@ -51,7 +51,6 @@ public class EncryptedPin {
 
    @JsonProperty("pinBlockFormat")
    @ApiModelProperty(value = "PIN block format that was used when encrypting the PIN. Defaults to ISO_9564_FORMAT_0.")
-   @NotNull
    @XmlElement(defaultValue = "ISO_9564_FORMAT_0")
    public PinBlockFormat getPinBlockFormat() {
       return pinBlockFormat;
