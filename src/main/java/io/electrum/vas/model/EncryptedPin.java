@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * A PIN required to authorise a transaction.
  **/
-@ApiModel(description = "A PIN required to authorise a transaction.")
+@ApiModel(description = "A PIN required to authorise a transaction. Please read the documentation for all required fields in the event that a PIN block is simply to be passed through to a third party, where the invoking client and said third party have previously agreed on all the parameters used when generating the PIN.")
 public class EncryptedPin {
 
    private String pinBlock;
@@ -63,6 +63,9 @@ public class EncryptedPin {
    /**
     * 12 digit account number used when encrypting the PIN.
     * When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit.
+    * If the ultimate goal is to pass only the pinBlock to a third party system, where the accountNumber used has been
+    * agreed upon between the invoking client and said third party, then this field may be set to twelve zeros
+    * ("000000000000").
     */
    public EncryptedPin accountNumber(String accountNumber) {
       this.accountNumber = accountNumber;
@@ -70,7 +73,7 @@ public class EncryptedPin {
    }
 
    @JsonProperty("accountNumber")
-   @ApiModelProperty(required = true, value = "12 digit account number used when encrypting the PIN. When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit.")
+   @ApiModelProperty(required = true, value = "12 digit account number used when encrypting the PIN. When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit. If the ultimate goal is to pass only the pinBlock to a third party system, where the accountNumber used has been agreed upon between the invoking client and said third party, then this field may be set to twelve zeros (\"000000000000\").")
    @NotNull
    @Pattern(regexp = "[0-9]{12}")
    public String getAccountNumber() {
