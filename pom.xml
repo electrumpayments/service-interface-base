@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>service-interface-base</artifactId>
-  <version>3.9.0</version>
+  <version>3.10.0</version>
   <packaging>jar</packaging>
   <name>Service Interface Base</name>
   <description>Service Interface Base</description>
@@ -33,8 +33,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <joda-time-version>2.9.4</joda-time-version>
-    <swagger-version>1.5.9</swagger-version>
+    <swagger-version>1.5.19</swagger-version>
     <hibernate-validator-version>5.2.2.Final</hibernate-validator-version>
+    <jackson-datatype-joda-version>2.9.5</jackson-datatype-joda-version>
   </properties>
 
   <dependencies>
@@ -57,6 +58,11 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>${hibernate-validator-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-joda</artifactId>
+      <version>${jackson-datatype-joda-version}</version>
     </dependency>
   </dependencies>
 
