@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
-public interface IVasMessage {
+public interface VasMessage {
     String getId();
     DateTime getTime();
     List<ThirdPartyIdentifier> getThirdPartyIdentifiers();

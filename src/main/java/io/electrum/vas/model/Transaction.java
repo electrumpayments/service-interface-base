@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * The data required in all value added service transactions.
  **/
 @ApiModel(description = "The data required in all value added service transactions.")
-public class Transaction implements IVasMessage{
+public class Transaction implements VasMessage {
 
    protected String id = null;
    protected DateTime time = null;

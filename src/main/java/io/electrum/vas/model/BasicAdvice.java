@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  * The data required in all advice messages
  **/
 @ApiModel(description = "The data required in all advice messages")
-public class BasicAdvice implements IVasMessage{
+public class BasicAdvice implements VasMessage {
 
    protected String id;
    protected String requestId;
