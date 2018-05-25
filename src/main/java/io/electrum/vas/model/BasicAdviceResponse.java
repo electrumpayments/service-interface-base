@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Basic advice response information.
- * @deprecated Rather use the @link [BasicAdvice} object for Advice responses
+ * @deprecated Rather use the {@link BasicAdvice} object for Advice responses
  **/
 @ApiModel(description = "Basic advice response information.")
 public class BasicAdviceResponse extends BasicAdvice {
