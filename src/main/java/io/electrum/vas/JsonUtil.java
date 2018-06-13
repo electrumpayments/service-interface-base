@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class JsonUtil {
       baseMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
       baseMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
       baseMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+      baseMapper.registerModule(new JodaModule());
       baseMapper.registerModule(new Jdk8Module());
       baseMapper.registerModule(new JavaTimeModule());
    }
