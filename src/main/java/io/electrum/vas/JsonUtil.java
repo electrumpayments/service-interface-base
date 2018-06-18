@@ -1,22 +1,24 @@
 package io.electrum.vas;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class to make serialising and deserializing json objects more efficient
  */
 public class JsonUtil {
-   private final static ObjectMapper baseMapper = new ObjectMapper().registerModule(new JodaModule());
+   private final static ObjectMapper baseMapper = new ObjectMapper();
    private final static Map<Class<?>, ObjectReader> readerCache = new HashMap<>();
    private final static Map<Class<?>, ObjectWriter> writerCache = new HashMap<>();
 
@@ -24,6 +26,9 @@ public class JsonUtil {
       baseMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
       baseMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
       baseMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+      baseMapper.registerModule(new JodaModule());
+      baseMapper.registerModule(new Jdk8Module());
+      baseMapper.registerModule(new JavaTimeModule());
    }
 
    @SuppressWarnings("unchecked")
@@ -41,7 +46,7 @@ public class JsonUtil {
    public static <T> T deserialize(byte[] data, Class<T> clazz) throws IOException {
       if (data == null) {
          return null;
-   }
+      }
 
       ObjectReader reader = getObjectReader(clazz);
 
@@ -78,7 +83,7 @@ public class JsonUtil {
       return writer;
    }
 
-   public static ObjectMapper getBaseMapper(){
+   public static ObjectMapper getBaseMapper() {
       return baseMapper;
    }
 }
