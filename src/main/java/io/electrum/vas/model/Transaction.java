@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
@@ -42,6 +44,7 @@ public class Transaction implements VasMessage {
    @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
+   @Pattern(regexp = "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[4][a-fA-F0-9]{3}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")
    public String getId() {
       return id;
    }
