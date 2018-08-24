@@ -1,6 +1,7 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.swagger.annotations.ApiModel;
 
 /*
@@ -29,7 +30,9 @@ public enum TranType {
    PAYMENT_FROM_ACCOUNT_TO_ACCOUNT("PAYMENT_FROM_ACCOUNT_TO_ACCOUNT"),
    PLACE_HOLD_ON_CARD("PLACE_HOLD_ON_CARD"),
    GENERAL_ADMIN("GENERAL_ADMIN"),
-   CHANGE_PIN("CHANGE_PIN");
+   CHANGE_PIN("CHANGE_PIN"),
+   CARD_HOLDER_INQUIRY("CARD_HOLDER_INQUIRY"),
+   POINTS_INQUIRY("POINTS_INQUIRY");
 
    private String value;
 
