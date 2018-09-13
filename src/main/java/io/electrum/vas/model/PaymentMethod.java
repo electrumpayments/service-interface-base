@@ -1,26 +1,29 @@
 package io.electrum.vas.model;
 
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotNull;
-
-import java.util.Objects;
-
-@ApiModel(description = "Base model for all payment types", discriminator = "type", subTypes = {An32TokenPayment.class, LoyaltyCardPayment.class})
+@ApiModel(description = "Base model for all payment types", discriminator = "type", subTypes = { An32TokenPayment.class,
+      LoyaltyCardPayment.class })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 // For the sake of correct deserialisation, we need to map from values of type to child model classes explicitly
 @JsonSubTypes({ @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
-      @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD") })
+      @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD"),
+      @JsonSubTypes.Type(value = CardPayment.class, name = "CARD") })
 public class PaymentMethod {
 
    public enum PaymentMethodType {
-      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD");
+      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD");
 
       private String value;
 
@@ -61,7 +64,6 @@ public class PaymentMethod {
    public void setType(PaymentMethodType type) {
       this.type = type;
    }
-
 
    @ApiModelProperty(required = true, value = "Ledger amount of the payment")
    @JsonProperty("amount")
