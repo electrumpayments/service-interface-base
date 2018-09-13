@@ -1,14 +1,19 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.sdk.masking2.DoNotPersist;
+import io.electrum.sdk.masking2.MaskAll;
+import io.electrum.sdk.masking2.Masked;
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * A PIN required to authorise a transaction.
@@ -31,6 +36,8 @@ public class EncryptedPin {
    @ApiModelProperty(required = true, value = "Hexadecimal string representing the encrypted PIN to be used.")
    @NotNull
    @Pattern(regexp = "[a-fA-F0-9]{16}")
+   @Masked
+   @DoNotPersist(replacementValue = "0000000000000000")
    public String getPinBlock() {
       return pinBlock;
    }
@@ -84,8 +91,8 @@ public class EncryptedPin {
       }
 
       /**
-       * 12 digit account number used when encrypting the PIN.
-       * When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit.
+       * 12 digit account number used when encrypting the PIN. When account number is a card number (PAN), this is the
+       * rightmost 12 digits excluding the check digit.
        */
       public EncryptionParameters accountNumber(String accountNumber) {
          this.accountNumber = accountNumber;
@@ -96,6 +103,8 @@ public class EncryptedPin {
       @ApiModelProperty(required = true, value = "12 digit account number used when encrypting the PIN. When account number is a card number (PAN), this is the rightmost 12 digits excluding the check digit.")
       @NotNull
       @Pattern(regexp = "[0-9]{12}")
+      @Masked
+      @DoNotPersist(replacementValue = "000000000000")
       public String getAccountNumber() {
          return accountNumber;
       }
@@ -106,9 +115,9 @@ public class EncryptedPin {
 
       /**
        * Index of the key under which the PIN block is encrypted. Where keys are exchanged in TR-31 KeyBlock format,
-       * this should be set to the key version number field of the key used for encryption. If this field is not populated,
-       * the most recently exchanged key will be used. Note that omitting this field may require a higher level of
-       * synchronization during automated key exchange in some environments.
+       * this should be set to the key version number field of the key used for encryption. If this field is not
+       * populated, the most recently exchanged key will be used. Note that omitting this field may require a higher
+       * level of synchronization during automated key exchange in some environments.
        */
       public EncryptionParameters keyIndex(Integer keyIndex) {
          this.keyIndex = keyIndex;
@@ -133,7 +142,7 @@ public class EncryptedPin {
             return false;
          final EncryptionParameters that = (EncryptionParameters) o;
          return pinBlockFormat == that.pinBlockFormat && Objects.equals(accountNumber, that.accountNumber)
-                && Objects.equals(keyIndex, that.keyIndex);
+               && Objects.equals(keyIndex, that.keyIndex);
       }
 
       @Override
@@ -146,7 +155,8 @@ public class EncryptedPin {
          final StringBuilder sb = new StringBuilder();
          sb.append("class EncryptionParameters {\n");
          sb.append("    pinBlockFormat: ").append(Utils.toIndentedString(pinBlockFormat)).append("\n");
-         sb.append("    accountNumber: ").append(Utils.toIndentedString(accountNumber)).append("\n");
+         sb.append("    accountNumber: ").append(Utils.toIndentedString(new MaskAll().mask(accountNumber))).append(
+               "\n");
          sb.append("    keyIndex: ").append(Utils.toIndentedString(keyIndex)).append("\n");
          sb.append("}");
          return sb.toString();
@@ -172,7 +182,7 @@ public class EncryptedPin {
    public String toString() {
       final StringBuilder sb = new StringBuilder();
       sb.append("class EncryptedPin {\n");
-      sb.append("    pinBlock: ").append(Utils.toIndentedString(pinBlock)).append("\n");
+      sb.append("    pinBlock: ").append(Utils.toIndentedString(new MaskAll().mask(pinBlock))).append("\n");
       sb.append("    encryptionParameters: ").append(Utils.toIndentedString(encryptionParameters)).append("\n");
       sb.append("}");
       return sb.toString();
