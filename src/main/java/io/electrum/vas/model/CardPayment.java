@@ -13,7 +13,6 @@ public class CardPayment extends PaymentMethod {
 
    private String pan = null;
    private String expiryDate = null;
-   private String clearPin = null;
    private PosInfo posInfo = null;
    private EncryptedPin encryptedPin = null;
 
@@ -48,7 +47,7 @@ public class CardPayment extends PaymentMethod {
     *
     * @return expiryDate
     **/
-   @ApiModelProperty(required = true, value = "The card expiry date, in YYMM format.")
+   @ApiModelProperty(value = "The card expiry date, in YYMM format.")
    @JsonProperty("expiryDate")
    @Pattern(regexp = "[0-9]{4}")
    public String getExpiryDate() {
@@ -57,31 +56,6 @@ public class CardPayment extends PaymentMethod {
 
    public void setExpiryDate(String expiryDate) {
       this.expiryDate = expiryDate;
-   }
-
-   public CardPayment clearPin(String clearPin) {
-      this.clearPin = clearPin;
-      return this;
-   }
-
-   /**
-    * The pin number associated with the card unencrypted.
-    *
-    * @return clearPin
-    **/
-   @ApiModelProperty(value = "The pin number associated with the card unencrypted.")
-   @JsonProperty("clearPin")
-   public String getClearPin() {
-      return clearPin;
-   }
-
-   public void setClearPin(String clearPin) {
-      this.clearPin = clearPin;
-   }
-
-   public CardPayment posInfo(PosInfo posInfo) {
-      this.posInfo = posInfo;
-      return this;
    }
 
    /**
