@@ -1,10 +1,13 @@
 package io.electrum.vas.model;
 
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -91,4 +94,40 @@ public class CardPayment extends PaymentMethod {
       this.encryptedPin = encryptedPin;
    }
 
+   @Override
+   public int hashCode() {
+      return Objects.hash(pan, expiryDate, posInfo, encryptedPin, name, type);
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) {
+         return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+         return false;
+      }
+      CardPayment cardPayment = (CardPayment) o;
+      return Objects.equals(this.type, cardPayment.type) && Objects.equals(this.name, cardPayment.name)
+            && Objects.equals(this.pan, cardPayment.pan) && Objects.equals(this.expiryDate, cardPayment.expiryDate)
+            && Objects.equals(this.posInfo, cardPayment.posInfo)
+            && Objects.equals(this.encryptedPin, cardPayment.encryptedPin);
+   }
+
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("class CardPayment {\n");
+
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    pan: ").append(Utils.toIndentedString(pan)).append("\n");
+      sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
+      sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
+      sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
+
+      sb.append("}");
+      return sb.toString();
+   }
 }
