@@ -80,7 +80,7 @@ public class CardPayment extends PaymentMethod {
    }
 
    /**
-    * The encrypted pin number associated with the card in HEX format.
+    * The encrypted PIN associated with this card in HEX format.
     *
     * @return encryptedPin
     **/
