@@ -7,6 +7,8 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.MaskAll;
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,6 +34,7 @@ public class CardPayment extends PaymentMethod {
    @JsonProperty("pan")
    @NotNull
    @Pattern(regexp = "[0-9]{1,19}")
+   @Masked
    public String getPan() {
       return pan;
    }
@@ -122,7 +125,7 @@ public class CardPayment extends PaymentMethod {
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
-      sb.append("    pan: ").append(Utils.toIndentedString(pan)).append("\n");
+      sb.append("    pan: ").append(Utils.toIndentedString(new MaskAll().mask(pan))).append("\n");
       sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
