@@ -132,7 +132,7 @@ public class Customer {
    }
 
    @ApiModelProperty(required = true, value = "This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South African number.")
-   @Pattern(regexp = "^\\+?[1-9]\\d{1,14}")
+   @Pattern(regexp = "^\\+?[1-9]\\d{0,14}")
    @JsonProperty("msisdn")
    @NotNull
    public String getMsisdn() {
