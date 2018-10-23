@@ -3,6 +3,8 @@ package io.electrum.vas.model;
 import java.util.Objects;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.joda.time.DateTime;
@@ -24,6 +26,7 @@ public class Customer {
    private String address = null;
    private DateTime dateOfBirth = null;
    private String status = null;
+   private String msisdn = null;
 
    /**
     * The customer's first name(s)
@@ -119,6 +122,27 @@ public class Customer {
       this.status = status;
    }
 
+   /**
+    * The customer's Mobile Subscriber Integrated Services Digital Network-Number (MSISDN). This must conform to the ITU E.164
+    * numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South African number.
+    **/
+   public Customer msisdn(String msisdn) {
+      this.msisdn = msisdn;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "This must conform to the ITU E.164 numbering plan (https://www.itu.int/rec/T-REC-E.164/en) e.g. 27821234567 for a South African number.")
+   @Pattern(regexp = "^\\+?[1-9]\\d{0,14}")
+   @JsonProperty("msisdn")
+   @NotNull
+   public String getMsisdn() {
+      return msisdn;
+   }
+
+   public void setMsisdn(String msisdn) {
+      this.msisdn = msisdn;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -130,12 +154,12 @@ public class Customer {
       Customer customer = (Customer) o;
       return Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName)
             && Objects.equals(address, customer.address) && Objects.equals(dateOfBirth, customer.dateOfBirth)
-            && Objects.equals(status, customer.status);
+            && Objects.equals(status, customer.status) && Objects.equals(msisdn, customer.msisdn);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(firstName, lastName, address, dateOfBirth, status);
+      return Objects.hash(firstName, lastName, address, dateOfBirth, status, msisdn);
    }
 
    @Override
@@ -148,6 +172,7 @@ public class Customer {
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(dateOfBirth)).append("\n");
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
+      sb.append("    msisdn: ").append(Utils.toIndentedString(msisdn)).append("\n");
       sb.append("}");
       return sb.toString();
    }
