@@ -272,14 +272,14 @@ public class Transaction implements VasMessage {
    }
 
    /**
-    * The System Trace Audit Number. This is to identify a transaction uniquely system wide.
+    * The System Trace Audit Number can be used to locate transactions across different systems.
     */
    public Transaction stan(String stan) {
       this.stan = stan;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The System Trace Audit Number. This is to identify a transaction uniquely system wide.")
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across different systems.")
    @JsonProperty("stan")
    public String getStan() {
       return stan;
@@ -290,14 +290,14 @@ public class Transaction implements VasMessage {
    }
 
    /**
-    * Retrieval Reference Number. This is a reference to the original source of the transaction.
+    * This is a reference set by the original source of the transaction.
     */
    public Transaction rrn(String rrn) {
       this.rrn = rrn;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "Retrieval Reference Number. This is a reference to the original source of the transaction.")
+   @ApiModelProperty(required = false, value = "This is a reference set by the original source of the transaction.")
    @JsonProperty("stan")
    public String getRrn() {
       return rrn;
