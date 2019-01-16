@@ -139,7 +139,7 @@ public class BasicAdvice implements VasMessage {
    }
 
    @ApiModelProperty(required = false, value = "This is a reference set by the original source of the transaction.")
-   @JsonProperty("stan")
+   @JsonProperty("rrn")
    public String getRrn() {
       return rrn;
    }
