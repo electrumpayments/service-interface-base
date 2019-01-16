@@ -25,6 +25,8 @@ public class BasicAdvice implements VasMessage {
    protected String requestId;
    protected DateTime time;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
+   protected String stan = null;
+   protected String rrn = null;
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
@@ -110,6 +112,42 @@ public class BasicAdvice implements VasMessage {
       this.thirdPartyIdentifiers = transactionIdentifiers;
    }
 
+   /**
+    * The System Trace Audit Number. This is to identify a transaction uniquely system wide.
+    */
+   public BasicAdvice stan(String stan) {
+      this.stan = stan;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number. This is to identify a transaction uniquely system wide.")
+   @JsonProperty("stan")
+   public String getStan() {
+      return stan;
+   }
+
+   public void setStan(String stan) {
+      this.stan = stan;
+   }
+
+   /**
+    * Retrieval Reference Number. This is a reference to the original source of the transaction.
+    */
+   public BasicAdvice rrn(String rrn) {
+      this.rrn = rrn;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "Retrieval Reference Number. This is a reference to the original source of the transaction.")
+   @JsonProperty("stan")
+   public String getRrn() {
+      return rrn;
+   }
+
+   public void setRrn(String rrn) {
+      this.rrn = rrn;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -136,6 +174,8 @@ public class BasicAdvice implements VasMessage {
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    stan: ").append(Utils.toIndentedString(stan));
+      sb.append("    rrn: ").append(Utils.toIndentedString(rrn));
       sb.append("}");
       return sb.toString();
    }

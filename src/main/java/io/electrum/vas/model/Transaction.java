@@ -3,10 +3,14 @@ package io.electrum.vas.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,6 +33,8 @@ public class Transaction implements VasMessage {
    protected TranType tranType = null;
    protected AccountType srcAccType = null;
    protected AccountType destAccType = null;
+   protected String stan = null;
+   protected String rrn = null;
 
    /**
     * The randomly generated UUID identifying this transaction, as defined for a variant 4 UUID in [RFC
@@ -265,6 +271,42 @@ public class Transaction implements VasMessage {
       this.destAccType = destAccType;
    }
 
+   /**
+    * The System Trace Audit Number. This is to identify a transaction uniquely system wide.
+    */
+   public Transaction stan(String stan) {
+      this.stan = stan;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number. This is to identify a transaction uniquely system wide.")
+   @JsonProperty("stan")
+   public String getStan() {
+      return stan;
+   }
+
+   public void setStan(String stan) {
+      this.stan = stan;
+   }
+
+   /**
+    * Retrieval Reference Number. This is a reference to the original source of the transaction.
+    */
+   public Transaction rrn(String rrn) {
+      this.rrn = rrn;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "Retrieval Reference Number. This is a reference to the original source of the transaction.")
+   @JsonProperty("stan")
+   public String getRrn() {
+      return rrn;
+   }
+
+   public void setRrn(String rrn) {
+      this.rrn = rrn;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -298,6 +340,8 @@ public class Transaction implements VasMessage {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    stan: ").append(Utils.toIndentedString(stan));
+      sb.append("    rrn: ").append(Utils.toIndentedString(rrn));
       sb.append("}");
       return sb.toString();
    }
