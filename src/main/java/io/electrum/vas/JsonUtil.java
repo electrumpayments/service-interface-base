@@ -1,5 +1,9 @@
 package io.electrum.vas;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,10 +13,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Class to make serialising and deserializing json objects more efficient
@@ -73,14 +73,28 @@ public class JsonUtil {
       return writer.writeValueAsString(jsonObj);
    }
 
+   public static String serialize(Object jsonObj) throws IOException {
+      if (jsonObj == null) {
+         return null;
+      }
+
+      ObjectWriter writer = getObjectWriter();
+
+      return writer.writeValueAsString(jsonObj);
+   }
+
    private static synchronized ObjectWriter getObjectWriter(Class<?> clazz) {
-      ObjectWriter writer = writerCache.get(clazz);
+      ObjectWriter writer = writerCache.get(clazz == null ? String.class : clazz);
       if (writer == null) {
-         writer = baseMapper.writer().forType(clazz);
-         writerCache.put(clazz, writer);
+         writer = clazz == null ? baseMapper.writer() : baseMapper.writer().forType(clazz);
+         writerCache.put(clazz == null ? String.class : clazz, writer);
       }
 
       return writer;
+   }
+
+   private static synchronized ObjectWriter getObjectWriter() {
+      return getObjectWriter(null);
    }
 
    public static ObjectMapper getBaseMapper() {
