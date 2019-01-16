@@ -113,7 +113,7 @@ public class BasicAdvice implements VasMessage {
    }
 
    /**
-    * The System Trace Audit Number. This is to identify a transaction uniquely system wide.
+    * The System Trace Audit Number can be used to locate transactions across different systems.
     */
    public BasicAdvice stan(String stan) {
       this.stan = stan;
