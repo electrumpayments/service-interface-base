@@ -28,10 +28,9 @@ public class ThirdPartyIdentifier {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The entity's institution's ID as assigned by Electrum.")
+   @ApiModelProperty(required = true, value = "The entity's institution ID.")
    @JsonProperty("institutionId")
    @NotNull
-   @Pattern(regexp = "[0-9]{1,11}")
    public String getInstitutionId() {
       return institutionId;
    }
