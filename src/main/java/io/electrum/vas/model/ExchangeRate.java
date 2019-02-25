@@ -1,5 +1,6 @@
 package io.electrum.vas.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
@@ -17,14 +18,14 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "An object describing the exchange rate from one currency to another.")
 public class ExchangeRate {
 
-   protected float rate;
+   protected BigDecimal rate;
    protected String fromCurrency = null;
    protected String toCurrency = null;
 
    /**
     * The exchange rate expressed as the ratio of fromCurrency : toCurrency.
     **/
-   public ExchangeRate rate(float rate) {
+   public ExchangeRate rate(BigDecimal rate) {
       this.rate = rate;
       return this;
    }
@@ -32,16 +33,18 @@ public class ExchangeRate {
    @ApiModelProperty(required = true, value = "The exchange rate expressed as the ratio of fromCurrency : toCurrency.")
    @JsonProperty("rate")
    @NotNull
-   public float getRate() {
+   public BigDecimal getRate() {
       return rate;
    }
 
-   public void setRate(float rate) {
+   public void setRate(BigDecimal rate) {
       this.rate = rate;
    }
 
    /**
-    * The currency which amounts are converted from. One unit of this currency multiplied by the {@link rate} is equal to one unit of the {@link toCurrency}. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.
+    * The currency which amounts are converted from. One unit of this currency multiplied by the {@link rate} is equal
+    * to one unit of the {@link toCurrency}. This currency is expressed as a three digit number as specified in ISO
+    * 4217, e.g. South African Rand is encoded as 710.
     **/
    public ExchangeRate fromCurrency(String fromCurrency) {
       this.fromCurrency = fromCurrency;
@@ -61,7 +64,9 @@ public class ExchangeRate {
    }
 
    /**
-    * The currency which amounts are converted to. One unit of this currency multiplied by the {@link rate} is equal to one unit of the {@link fromCurrency}. This currency is expressed as a three digit number as specified in ISO 4217, e.g. South African Rand is encoded as 710.
+    * The currency which amounts are converted to. One unit of this currency multiplied by the {@link rate} is equal to
+    * one unit of the {@link fromCurrency}. This currency is expressed as a three digit number as specified in ISO 4217,
+    * e.g. South African Rand is encoded as 710.
     **/
    public ExchangeRate toCurrency(String toCurrency) {
       this.toCurrency = toCurrency;
@@ -102,7 +107,6 @@ public class ExchangeRate {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class ExchangeRate {\n");
-
       sb.append("    rate: ").append(Utils.toIndentedString(rate)).append("\n");
       sb.append("    fromCurrency: ").append(Utils.toIndentedString(fromCurrency)).append("\n");
       sb.append("    toCurrency: ").append(Utils.toIndentedString(toCurrency)).append("\n");

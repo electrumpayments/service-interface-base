@@ -5,7 +5,7 @@ import java.util.Objects;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 
-@ApiModel(description = "A model to describe mobiel wallet accounts. Such accounts consist of just an account number. This account number is typically the customer's MSISDN.")
+@ApiModel(description = "A model to describe mobile wallet accounts. Such accounts consist of just an account number. This account number is typically the customer's MSISDN.")
 public class MobileWalletAccount extends Account {
 
    public MobileWalletAccount() {
