@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -52,6 +53,7 @@ public class Account {
    @ApiModelProperty(required = true, value = "The ID of this account e.g. service provider's customer's account number, a bank account number, an IBAN number or a mobile wallet's MSISDN.")
    @JsonProperty("accountId")
    @NotNull
+   @Masked
    public String getAccountId() {
       return accountId;
    }
