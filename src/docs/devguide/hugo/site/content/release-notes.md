@@ -1,5 +1,25 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.18.0
+Released 25 February 2019
+
+### New Features
+* Added new models:
+  - `ExchangeRate` to describe the exchange rate between two currencies.
+  - `Account` to describe more varied accounts in a consistent manner. This has the following sub-types defined:
+    - `BankAccount`
+    - `IbanAccount`
+    - `IfsAccount`
+    - `SwiftAccount`
+    - `MobileWalletAccount`
+* The limitations on the `id` field of the `Institution` model have been removed to make the field suitable for a wider range of applications. The values in this field need no longer be defined by Electrum and similar values as recognised at third parties may now be carried in this field. However, care should be taken during implementation to ensure that different parties agree on the values which will be present in these fields.
+
+## 3.17.0
+Released 16 January 2019
+
+### New Features
+* Added explicit fields for STAN and RRN values to `BasicAdvice` and `Transaction` models.
+
 ## 3.16.1
 Released 09 January 2019
 

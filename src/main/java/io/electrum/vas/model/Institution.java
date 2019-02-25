@@ -1,15 +1,16 @@
 package io.electrum.vas.model;
 
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.util.Objects;
 
 /**
  * Originating, acquiring, processing, or receiving institution details
@@ -21,17 +22,17 @@ public class Institution {
    private String name = null;
 
    /**
-    * The institution's id as assigned by Electrum
+    * The institution's ID. API implementations should take care to set this field as appropriate for the
+    * implementation.
     **/
    public Institution id(String id) {
       this.id = id;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The institution's id as assigned by Electrum")
+   @ApiModelProperty(required = true, value = "The institution's ID. API implementations should take care to set this field as appropriate for the implementation.")
    @JsonProperty("id")
    @NotNull
-   @Pattern(regexp = "[0-9]{1,11}")
    public String getId() {
       return id;
    }
