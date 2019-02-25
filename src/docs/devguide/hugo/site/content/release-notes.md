@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.18.0
-Released TBC February 2019
+Released 25 February 2019
 
 ### New Features
 * Added new models:
