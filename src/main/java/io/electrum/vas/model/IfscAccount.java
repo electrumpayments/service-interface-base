@@ -28,8 +28,8 @@ public class IfscAccount extends Account {
       return ifscCode;
    }
 
-   public void setIfscCode(String ifsCode) {
-      this.ifscCode = ifsCode;
+   public void setIfscCode(String ifscCode) {
+      this.ifscCode = ifscCode;
    }
 
    @Override
