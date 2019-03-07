@@ -2,11 +2,33 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
-import io.electrum.vas.Utils;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-public class ClearPin extends Pin {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.sdk.masking2.Masked;
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * A clear PIN required to authorise a transaction.
+ **/
+@ApiModel(description = "A clear PIN required to authorise a transaction.")
+public class PinClear extends Pin {
+
    private String pin = null;
 
+   public PinClear() {
+      this.setType(PinType.CLEAR_PIN);
+   }
+
+   @JsonProperty("pin")
+   @ApiModelProperty(required = true, value = "A clear PIN")
+   @NotNull
+   @Pattern(regexp = ".{0,20}")
+   @Masked
    public String getPin() {
       return pin;
    }
@@ -23,8 +45,8 @@ public class ClearPin extends Pin {
          return false;
       if (!super.equals(o))
          return false;
-      ClearPin clearPin = (ClearPin) o;
-      return Objects.equals(pin, clearPin.pin);
+      PinClear pinClear = (PinClear) o;
+      return Objects.equals(pin, pinClear.pin);
    }
 
    @Override
@@ -36,7 +58,7 @@ public class ClearPin extends Pin {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class ClearPin {\n");
+      sb.append("class PinClear {\n");
 
       sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append("\n");
       sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");

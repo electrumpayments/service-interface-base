@@ -5,11 +5,19 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "Base model for capturing either a clear PIN or encrypted PIN", discriminator = "type", subTypes = {
+      PinClear.class, PinEncrypted.class })
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonSubTypes({ @JsonSubTypes.Type(value = PinClear.class, name = "CLEAR_PIN"),
+      @JsonSubTypes.Type(value = PinEncrypted.class, name = "ENCRYPTED_PIN") })
 public abstract class Pin {
    public enum PinType {
       CLEAR_PIN("CLEAR_PIN"), ENCRYPTED_PIN("ENCRYPTED_PIN");
@@ -34,7 +42,7 @@ public abstract class Pin {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Whether the pin is communicated in the clear or encrypted.")
+   @ApiModelProperty(required = true, value = "Whether the PIN is communicated in the clear or encrypted.")
    @JsonProperty("type")
    @NotNull
    public PinType getType() {

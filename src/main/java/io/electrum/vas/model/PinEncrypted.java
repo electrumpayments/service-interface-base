@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  * A PIN required to authorise a transaction.
  **/
 @ApiModel(description = "A PIN required to authorise a transaction. EncryptionParameters should be provided where the service will be performing operations on the encrypted PIN, such as PIN translation. Only the PIN block need be provided where the service is expected to forward it to a third party, where the calling client and said third party have agreed upon encryption parameters beforehand.")
-public class EncryptedPin {
+public class PinEncrypted extends Pin {
 
    private String pinBlock;
    private EncryptionParameters encryptionParameters;
@@ -27,7 +27,7 @@ public class EncryptedPin {
    /**
     * Hexadecimal string representing the encrypted PIN to be used.
     */
-   public EncryptedPin pinBlock(String pinBlock) {
+   public PinEncrypted pinBlock(String pinBlock) {
       this.pinBlock = pinBlock;
       return this;
    }
@@ -50,7 +50,7 @@ public class EncryptedPin {
     * Parameters pertaining to the generation of the {@link #pinBlock}. Required if the service is to perform any
     * operations on the encrypted PIN, such as translation.
     */
-   public EncryptedPin encryptionParameters(EncryptionParameters encryptionParameters) {
+   public PinEncrypted encryptionParameters(EncryptionParameters encryptionParameters) {
       this.encryptionParameters = encryptionParameters;
       return this;
    }
@@ -169,7 +169,7 @@ public class EncryptedPin {
          return true;
       if (o == null || getClass() != o.getClass())
          return false;
-      final EncryptedPin that = (EncryptedPin) o;
+      final PinEncrypted that = (PinEncrypted) o;
       return Objects.equals(pinBlock, that.pinBlock) && Objects.equals(encryptionParameters, that.encryptionParameters);
    }
 
@@ -181,7 +181,8 @@ public class EncryptedPin {
    @Override
    public String toString() {
       final StringBuilder sb = new StringBuilder();
-      sb.append("class EncryptedPin {\n");
+      sb.append("class PinEncrypted {\n");
+      sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(new MaskAll().mask(pinBlock))).append("\n");
       sb.append("    encryptionParameters: ").append(Utils.toIndentedString(encryptionParameters)).append("\n");
       sb.append("}");
