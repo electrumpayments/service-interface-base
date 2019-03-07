@@ -20,6 +20,7 @@ public class CardPayment extends PaymentMethod {
    private String expiryDate = null;
    private PosInfo posInfo = null;
    private EncryptedPin encryptedPin = null;
+   private Pin pin = null;
 
    public CardPayment() {
       setType(PaymentMethodType.CARD);
@@ -95,6 +96,21 @@ public class CardPayment extends PaymentMethod {
 
    public void setEncryptedPin(EncryptedPin encryptedPin) {
       this.encryptedPin = encryptedPin;
+   }
+
+   /**
+    * The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.
+    *
+    * @return pin
+    */
+   @ApiModelProperty(value = "The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.")
+   @JsonProperty("pin")
+   public Pin getPin() {
+      return pin;
+   }
+
+   public void setPin(Pin pin) {
+      this.pin = pin;
    }
 
    @Override

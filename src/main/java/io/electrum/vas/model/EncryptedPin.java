@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  * A PIN required to authorise a transaction.
  **/
 @ApiModel(description = "A PIN required to authorise a transaction. EncryptionParameters should be provided where the service will be performing operations on the encrypted PIN, such as PIN translation. Only the PIN block need be provided where the service is expected to forward it to a third party, where the calling client and said third party have agreed upon encryption parameters beforehand.")
-public class EncryptedPin {
+public class EncryptedPin extends Pin {
 
    private String pinBlock;
    private EncryptionParameters encryptionParameters;
@@ -182,6 +182,7 @@ public class EncryptedPin {
    public String toString() {
       final StringBuilder sb = new StringBuilder();
       sb.append("class EncryptedPin {\n");
+      sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append("\n");
       sb.append("    pinBlock: ").append(Utils.toIndentedString(new MaskAll().mask(pinBlock))).append("\n");
       sb.append("    encryptionParameters: ").append(Utils.toIndentedString(encryptionParameters)).append("\n");
       sb.append("}");
