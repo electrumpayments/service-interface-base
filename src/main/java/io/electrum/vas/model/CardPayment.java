@@ -163,7 +163,7 @@ public class CardPayment extends PaymentMethod {
       return Objects.equals(this.type, cardPayment.type) && Objects.equals(this.name, cardPayment.name)
             && Objects.equals(this.pan, cardPayment.pan) && Objects.equals(this.expiryDate, cardPayment.expiryDate)
             && Objects.equals(this.posInfo, cardPayment.posInfo)
-            && Objects.equals(this.encryptedPin, cardPayment.encryptedPin);
+            && Objects.equals(this.encryptedPin, cardPayment.encryptedPin) && Objects.equals(this.pin, cardPayment.pin);
    }
 
    @Override
@@ -178,6 +178,7 @@ public class CardPayment extends PaymentMethod {
       sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
 
       sb.append("}");
       return sb.toString();
