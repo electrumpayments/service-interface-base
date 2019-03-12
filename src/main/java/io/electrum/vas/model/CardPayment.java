@@ -20,6 +20,7 @@ public class CardPayment extends PaymentMethod {
    private String pan = null;
    private String expiryDate = null;
    private PosInfo posInfo = null;
+   @Deprecated
    private EncryptedPin encryptedPin = null;
    private Pin pin = null;
 
@@ -79,6 +80,7 @@ public class CardPayment extends PaymentMethod {
       this.posInfo = posInfo;
    }
 
+   @Deprecated
    public CardPayment encryptedPin(EncryptedPin encryptedPin) {
       this.encryptedPin = encryptedPin;
       return this;
@@ -88,13 +90,16 @@ public class CardPayment extends PaymentMethod {
     * The encrypted PIN associated with this card in HEX format.
     *
     * @return encryptedPin
+    * @deprecated {@link CardPayment#getPin()} takes precedence
     **/
    @ApiModelProperty(value = "The encrypted pin number associated with the card in HEX format.")
    @JsonProperty("encryptedPin")
+   @Deprecated
    public EncryptedPin getEncryptedPin() {
       return encryptedPin;
    }
 
+   @Deprecated
    public void setEncryptedPin(EncryptedPin encryptedPin) {
       this.encryptedPin = encryptedPin;
    }
