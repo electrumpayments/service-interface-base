@@ -21,6 +21,11 @@ public class PinClear extends Pin {
 
    private String pin = null;
 
+   public PinClear pin(String pin) {
+      this.pin = pin;
+      return this;
+   }
+
    public PinClear() {
       this.setType(PinType.CLEAR_PIN);
    }
@@ -30,7 +35,7 @@ public class PinClear extends Pin {
    @NotNull
    @Pattern(regexp = ".{0,20}")
    @Masked
-   @DoNotPersist
+   @DoNotPersist(replacementValue = "****")
    public String getPin() {
       return pin;
    }
