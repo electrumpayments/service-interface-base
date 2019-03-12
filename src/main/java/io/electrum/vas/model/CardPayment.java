@@ -90,7 +90,8 @@ public class CardPayment extends PaymentMethod {
     * The encrypted PIN associated with this card in HEX format.
     *
     * @return encryptedPin
-    * @deprecated {@link CardPayment#getPin()} takes precedence
+    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#getPin() Pin}
+    *             instead.
     **/
    @ApiModelProperty(value = "The encrypted pin number associated with the card in HEX format.")
    @JsonProperty("encryptedPin")
