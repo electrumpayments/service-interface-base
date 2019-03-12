@@ -1,5 +1,13 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.19.0
+Released 12 March 2019
+* Added new models:
+    - `Pin` a base PIN model
+        - `PinClear` for PINs in the clear
+        - `PinEncrypted` for encrypted PIN blocks with the PIN block format, accountNumber and the key index
+* `Pin` was added to `CardPayment`, taking precedence over the existing `encyptedPin` field
+
 ## 3.18.0
 Released 25 February 2019
 
