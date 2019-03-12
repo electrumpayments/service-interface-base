@@ -20,6 +20,11 @@ public class CardPayment extends PaymentMethod {
    private String pan = null;
    private String expiryDate = null;
    private PosInfo posInfo = null;
+   /**
+    * encrytedPin
+    *
+    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#pin} instead.
+    */
    @Deprecated
    private EncryptedPin encryptedPin = null;
    private Pin pin = null;
@@ -80,6 +85,14 @@ public class CardPayment extends PaymentMethod {
       this.posInfo = posInfo;
    }
 
+   /**
+    * Sets the encryptedPin field and returns the CardPayment object.
+    *
+    * @param encryptedPin
+    * @return The CardPayment object with the EncryptedPin set
+    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#pin(Pin pin)}
+    *             instead.
+    */
    @Deprecated
    public CardPayment encryptedPin(EncryptedPin encryptedPin) {
       this.encryptedPin = encryptedPin;
@@ -90,7 +103,7 @@ public class CardPayment extends PaymentMethod {
     * The encrypted PIN associated with this card in HEX format.
     *
     * @return encryptedPin
-    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#getPin() Pin}
+    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#getPin()}
     *             instead.
     **/
    @ApiModelProperty(value = "The encrypted pin number associated with the card in HEX format.")
@@ -100,9 +113,21 @@ public class CardPayment extends PaymentMethod {
       return encryptedPin;
    }
 
+   /**
+    * Sets the encryptedPin field.
+    *
+    * @param encryptedPin
+    * @deprecated As of v3.19.0 due to the addition of the {@link Pin Pin} model, use {@link CardPayment#setPin(Pin)}
+    *             instead.
+    */
    @Deprecated
    public void setEncryptedPin(EncryptedPin encryptedPin) {
       this.encryptedPin = encryptedPin;
+   }
+
+   public CardPayment pin(Pin pin) {
+      this.pin = pin;
+      return this;
    }
 
    /**
