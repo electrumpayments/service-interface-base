@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Base model for capturing either a clear PIN or encrypted PIN", discriminator = "type", subTypes = {
       PinClear.class, PinEncrypted.class })
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({ @JsonSubTypes.Type(value = PinClear.class, name = "CLEAR_PIN"),
       @JsonSubTypes.Type(value = PinEncrypted.class, name = "ENCRYPTED_PIN") })
 public abstract class Pin {

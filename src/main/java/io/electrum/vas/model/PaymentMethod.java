@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Base model for all payment types", discriminator = "type", subTypes = { An32TokenPayment.class,
       LoyaltyCardPayment.class, CardPayment.class })
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 // For the sake of correct deserialisation, we need to map from values of type to child model classes explicitly
 @JsonSubTypes({ @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
       @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD"),

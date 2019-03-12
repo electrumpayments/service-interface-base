@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.DoNotPersist;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -29,6 +30,7 @@ public class PinClear extends Pin {
    @NotNull
    @Pattern(regexp = ".{0,20}")
    @Masked
+   @DoNotPersist
    public String getPin() {
       return pin;
    }
