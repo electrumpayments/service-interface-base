@@ -21,6 +21,11 @@ public class PinClear extends Pin {
 
    private String pin = null;
 
+   public PinClear pin(String pin) {
+      this.pin = pin;
+      return this;
+   }
+
    public PinClear() {
       this.setType(PinType.CLEAR_PIN);
    }
