@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.sdk.masking2.DoNotPersist;
+import io.electrum.sdk.masking2.MaskAll;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -68,7 +69,7 @@ public class PinClear extends Pin {
       sb.append("class PinClear {\n");
 
       sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append("\n");
-      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(new MaskAll().mask(pin))).append("\n");
       sb.append("}");
       return sb.toString();
    }
