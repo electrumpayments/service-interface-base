@@ -1,5 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.19.1
+Released 16 May 2019
+* Changed masking of `CardPayment.pan` field to partial masking instead of full masking.
+
 ## 3.19.0
 Released 12 March 2019
 * Added new models:

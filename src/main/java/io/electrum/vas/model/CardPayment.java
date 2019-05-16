@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.sdk.masking2.MaskAll;
+import io.electrum.sdk.masking2.MaskPan;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
@@ -42,7 +43,7 @@ public class CardPayment extends PaymentMethod {
    @JsonProperty("pan")
    @NotNull
    @Pattern(regexp = "[0-9]{1,19}")
-   @Masked
+   @Masked(MaskPan.class)
    public String getPan() {
       return pan;
    }
