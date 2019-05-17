@@ -2,7 +2,7 @@ This page describes changes to the Service Interface Base API implemented across
 
 ## 3.20.0
 Released 17 May 2019
-* Added new `Account.AccountType` value for CASH_PICKUP scenarios
+* Added new `Account.AccountType` value `CASH_PICKUP` for cash pickup scenarios.
 
 ## 3.19.1
 Released 16 May 2019
