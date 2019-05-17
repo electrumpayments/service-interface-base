@@ -23,11 +23,18 @@ import io.swagger.annotations.ApiModelProperty;
       @JsonSubTypes.Type(value = IbanAccount.class, name = "IBAN"),
       @JsonSubTypes.Type(value = IfscAccount.class, name = "IFSC"),
       @JsonSubTypes.Type(value = MobileWalletAccount.class, name = "MOBILE_WALLET"),
-      @JsonSubTypes.Type(value = SwiftAccount.class, name = "SWIFT") })
+      @JsonSubTypes.Type(value = SwiftAccount.class, name = "SWIFT"),
+      @JsonSubTypes.Type(value = Account.class, name = "CASH_PICKUP") })
 public class Account {
 
    public enum AccountType {
-      ACCOUNT("ACCOUNT"), BANK("BANK"), IBAN("IBAN"), SWIFT("SWIFT"), IFSC("IFSC"), MOBILE_WALLET("MOBILE_WALLET");
+      ACCOUNT("ACCOUNT"),
+      BANK("BANK"),
+      IBAN("IBAN"),
+      SWIFT("SWIFT"),
+      IFSC("IFSC"),
+      MOBILE_WALLET("MOBILE_WALLET"),
+      CASH_PICKUP("CASH_PICKUP");
 
       private String value;
 
