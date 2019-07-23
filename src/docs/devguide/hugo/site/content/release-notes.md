@@ -1,5 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.21.0
+Released TBC
+* Added new field `emailAddress` to `Customer` model.
+
 ## 3.20.0
 Released 17 May 2019
 * Added new `Account.AccountType` value `CASH_PICKUP` for cash pickup scenarios.
