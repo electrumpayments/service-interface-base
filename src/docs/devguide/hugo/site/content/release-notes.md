@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.21.0
-Released TBC
+Released 23 July 2019
 * Added new field `emailAddress` to `Customer` model.
 
 ## 3.20.0
