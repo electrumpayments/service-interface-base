@@ -41,7 +41,7 @@ public class BankAccount extends Account {
 
    @ApiModelProperty(value = "The region of the account for countries and cases where the routing code is not sufficient to "
          + "identify a bank account.")
-   @JsonProperty("routingCode")
+   @JsonProperty("region")
    public String getRegion() {
       return region;
    }
