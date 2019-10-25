@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.22.0 
-Released 24 October 2019
+Released 25 October 2019
 * Added new field `region` to `BankAccount` model for scenarios where the `routingCode` is not sufficient to uniquely identify a bank account.
 
 ## 3.21.0
