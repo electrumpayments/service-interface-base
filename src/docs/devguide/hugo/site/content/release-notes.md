@@ -1,10 +1,8 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.23.0
-Released xx November 2019
-* Added new `deserialiseJsonObjectFromFile(filename, clazz, preserveWhitespace)` method to `JsonUtil` class.  This assists in obtaining consistently deserialized/serialised Objects read from .json files.
-* Added new `readFileAsString(filename, preserveWhitespace)` method to `JsonUtil` class.  This assists in reading a file and producing a String representation of the file. Option to preserve/ignore white spaces.
-
+Released 21 November 2019
+* Added utility methods to JsonUtil class to assist in reading the contents of a file as a string and deserialising JSON objects from files.
 ## 3.22.0 
 Released 25 October 2019
 * Added new field `region` to `BankAccount` model for scenarios where the `routingCode` is not sufficient to uniquely identify a bank account.
