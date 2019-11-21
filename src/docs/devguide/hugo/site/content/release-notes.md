@@ -3,7 +3,7 @@ This page describes changes to the Service Interface Base API implemented across
 ## 3.23.0
 Released xx November 2019
 * Added new `deserialiseJsonObjectFromFile(filename, clazz, preserveWhitespace)` method to `JsonUtil` class.  This assists in obtaining consistently deserialized/serialised Objects read from .json files.
-* Added new `readFileAsString(filename, preserveWhitespace)` method to `JsonUtil` class.  This assists in reading a file and producing a String representation of the file. Option to preserve/ignore whiteSpaces.
+* Added new `readFileAsString(filename, preserveWhitespace)` method to `JsonUtil` class.  This assists in reading a file and producing a String representation of the file. Option to preserve/ignore white spaces.
 
 ## 3.22.0 
 Released 25 October 2019
