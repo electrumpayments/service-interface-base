@@ -17,8 +17,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * A customer who ultimately requests a transaction be performed.
+ *
+ * Deprecated for {@link PersonalDetails} mainly because there is an Address class. There is also more information
+ * in PersonalDetails and was being used extensively in other projects.
  **/
 @ApiModel(description = "A customer who ultimately requests a transaction be performed.")
+@Deprecated
 public class Customer {
 
    private String firstName = null;
