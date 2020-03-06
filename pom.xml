@@ -39,6 +39,7 @@
     <jackson-datatype-joda-version>2.9.5</jackson-datatype-joda-version>
     <jackson-datatype-jdk8-version>2.8.5</jackson-datatype-jdk8-version>
     <jackson-datatype-jsr310-version>2.8.5</jackson-datatype-jsr310-version>
+    <jaxb-version>2.2.11</jaxb-version>
   </properties>
 
   <dependencies>
@@ -82,6 +83,21 @@
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
       <version>${jackson-datatype-jsr310-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>${jaxb-version}</version>
     </dependency>
   </dependencies>
 
