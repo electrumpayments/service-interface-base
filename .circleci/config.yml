@@ -2,10 +2,10 @@ version: 2
 jobs:
   build-and-release:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: electrum-docker.jfrog.io/circleci-openjdk
+        auth:
+          username: circleci-reader
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
@@ -51,10 +51,10 @@ jobs:
           destination: release
   code-coverage-report:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: electrum-docker.jfrog.io/circleci-openjdk
+        auth:
+          username: circleci-reader
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - checkout
       - restore_cache:
@@ -70,10 +70,10 @@ jobs:
           destination: coverage
   build-with-latest-deps:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: electrum-docker.jfrog.io/circleci-openjdk
+        auth:
+          username: circleci-reader
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
@@ -116,6 +116,8 @@ workflows:
           context: java
       - code-coverage-report:
           context: java
+          requires:
+            - build-and-release
   nightly:
     jobs:
       - build-with-latest-deps:

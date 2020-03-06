@@ -3,6 +3,7 @@ This page describes changes to the Service Interface Base API implemented across
 ## 3.24.0
 Released TBA
 * Added `@Uuid` annotation which will validate that a `String` field, parameter or return of a method forms a valid `UUID`.
+* Updated to Java 11
 
 ## 3.23.0
 Released 25 November 2019
