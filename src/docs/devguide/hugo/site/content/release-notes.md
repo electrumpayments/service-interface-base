@@ -1,5 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.24.0
+Released TBA
+* Added `@Uuid` annotation which will validate that a `String` field, parameter or return of a method forms a valid `UUID`.
+
 ## 3.23.0
 Released 25 November 2019
 * Added utility methods to JsonUtil class to assist in reading the contents of a file as a string and deserialising JSON objects from files.
