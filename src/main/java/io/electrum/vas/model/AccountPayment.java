@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Optional;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,8 +13,8 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Model for account-to-account payments", parent = PaymentMethod.class)
 public class AccountPayment extends PaymentMethod {
 
-   private String accountId = null;
-   private String customerId = null;
+   private Optional<String> accountId = Optional.absent();
+   private Optional<String> customerId = Optional.absent();
 
    public AccountPayment() {
       setType(PaymentMethodType.ACCOUNT);
@@ -27,12 +28,12 @@ public class AccountPayment extends PaymentMethod {
    @ApiModelProperty(required = true, value = "AccountId to which this payment will be made.")
    @JsonProperty("accountId")
    @NotNull
-   public String getAccountId() {
+   public Optional<String> getAccountId() {
       return accountId;
    }
 
    public void setAccountId(String accountId) {
-      this.accountId = accountId;
+      this.accountId = Optional.of(accountId);
    }
 
    public AccountPayment accountId(String accountId) {
@@ -47,12 +48,12 @@ public class AccountPayment extends PaymentMethod {
     **/
    @ApiModelProperty(required = false, value = "CustomerId to which this payment will be made.")
    @JsonProperty("customerId")
-   public String getCustomerId() {
+   public Optional<String> getCustomerId() {
       return customerId;
    }
 
    public void setCustomerId(String customerId) {
-      this.customerId = customerId;
+      this.customerId = Optional.of(customerId);
    }
 
    public AccountPayment customerId(String customerId) {
@@ -78,8 +79,8 @@ public class AccountPayment extends PaymentMethod {
    @Override
    public String toString() {
       return "AccountPayment{" +
-              "accountId='" + accountId + '\'' +
-              ", customerId='" + customerId + '\'' +
+              "accountId='" + (accountId.isPresent() ? accountId.get() : "Unset") + '\'' +
+              ", customerId='" + (customerId.isPresent() ? customerId.get() : "Unset") + '\'' +
               "} " + super.toString();
    }
 }
