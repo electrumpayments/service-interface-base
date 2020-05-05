@@ -1,9 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.24.0
-Released 30 April 2020
+Released 05 May 2020
 * Added Account PaymentMethod.
-* Added Interfaces for HasAmounts & HasPaymentMethods Polymorphic Utility Reuse
+* Added Interfaces for HasAmounts & HasPaymentMethods. These can be used for creating shared utilities across API implementations.
 
 ## 3.23.0
 Released 25 November 2019
