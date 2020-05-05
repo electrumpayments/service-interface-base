@@ -24,9 +24,8 @@ public class AccountPayment extends PaymentMethod {
     *
     * @return accountId
     **/
-   @ApiModelProperty(required = true, value = "AccountId to which this payment will be made.")
+   @ApiModelProperty(required = false, value = "AccountId to which this payment will be made.")
    @JsonProperty("accountId")
-   @NotNull
    public String getAccountId() {
       return accountId;
    }
