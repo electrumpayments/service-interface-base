@@ -36,7 +36,7 @@ public class PinHashed extends Pin {
    @JsonProperty("hash")
    @ApiModelProperty(required = true, value = "A hashed PIN")
    @NotNull
-   @Pattern(regexp = "[0-9,A-F]{1,128}")
+   @Pattern(regexp = "[0-9,A-F]{1,512}")
    @Masked
    @DoNotPersist(replacementValue = "****")
    public String getHash() {
