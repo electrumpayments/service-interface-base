@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>service-interface-base</artifactId>
-  <version>3.23.0</version>
+  <version>3.24.0</version>
   <packaging>jar</packaging>
   <name>Service Interface Base</name>
   <description>Service Interface Base</description>
@@ -39,6 +40,7 @@
     <jackson-datatype-joda-version>2.9.5</jackson-datatype-joda-version>
     <jackson-datatype-jdk8-version>2.8.5</jackson-datatype-jdk8-version>
     <jackson-datatype-jsr310-version>2.8.5</jackson-datatype-jsr310-version>
+    <el-version>2.2.4</el-version>
   </properties>
 
   <dependencies>
@@ -82,6 +84,12 @@
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
       <version>${jackson-datatype-jsr310-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>${el-version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -137,7 +145,8 @@
               <info>
                 <title>Example Service Interface</title>
                 <version>${project.version}</version>
-                <description>This is an example of a VAS Service Interface. You can use this as a starting point for
+                <description>This is an example of a VAS Service
+                  Interface. You can use this as a starting point for
                   writing vas service interfaces.
                 </description>
                 <contact>
@@ -154,8 +163,11 @@
                 <securityDefinition>
                   <name>httpBasic</name>
                   <type>basic</type>
-                  <description>All requests require HTTP basic authentication, where user name equals the value used in
-                    sender.institution.id and password has been agreed with Electrum.
+                  <description>All requests require HTTP basic
+                    authentication, where user name equals the value
+                    used in
+                    sender.institution.id and password has been
+                    agreed with Electrum.
                   </description>
                 </securityDefinition>
               </securityDefinitions>
