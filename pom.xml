@@ -36,11 +36,12 @@
     <message-masking-sdk-version>2.1.0</message-masking-sdk-version>
     <joda-time-version>2.9.4</joda-time-version>
     <swagger-version>1.5.19</swagger-version>
-    <hibernate-validator-version>5.2.2.Final</hibernate-validator-version>
+    <hibernate-validator-version>5.4.3.Final</hibernate-validator-version>
     <jackson-datatype-joda-version>2.9.5</jackson-datatype-joda-version>
     <jackson-datatype-jdk8-version>2.8.5</jackson-datatype-jdk8-version>
     <jackson-datatype-jsr310-version>2.8.5</jackson-datatype-jsr310-version>
-    <el-version>2.2.4</el-version>
+    <el-version>3.0.0</el-version>
+    <jaxb-version>2.2.11</jaxb-version>
     <testng-version>7.0.0</testng-version>
     <jacoco.skip>true</jacoco.skip> <!-- skip code coverage unless maven is run with -Djacoco.skip=false -->
     <sonar.coverage.jacoco.xmlReportPaths>
@@ -91,8 +92,23 @@
       <version>${jackson-datatype-jsr310-version}</version>
     </dependency>
     <dependency>
-      <groupId>javax.el</groupId>
-      <artifactId>javax.el-api</artifactId>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.el</artifactId>
       <version>${el-version}</version>
       <scope>test</scope>
     </dependency>
@@ -109,10 +125,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.8.1</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <release>8</release>
         </configuration>
       </plugin>
       <plugin>
@@ -131,15 +146,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
+        <version>3.1.1</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <source>8</source>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>com.github.kongchen</groupId>
@@ -321,6 +332,16 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <!--Use testng.xml for test configuration -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
       </plugin>
     </plugins>
   </build>
