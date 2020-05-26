@@ -34,7 +34,7 @@ public class PinHashed extends Pin {
    }
 
    @JsonProperty("hash")
-   @ApiModelProperty(required = true, value = "A hashed PIN")
+   @ApiModelProperty(required = true, value = "A hashed PIN expressed as an ASCII string of hexadecimal values.")
    @NotNull
    @Pattern(regexp = "[0-9,A-F]{1,512}")
    @Masked
@@ -86,10 +86,10 @@ public class PinHashed extends Pin {
       StringBuilder sb = new StringBuilder();
       sb.append("class PinHashed {\n");
 
-      sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append("\n");
-      sb.append("    hash: ").append(Utils.toIndentedString(new MaskAll().mask(hash))).append("\n");
-      sb.append("    hashedPinParameters: ").append(Utils.toIndentedString(hashedPinParameters.toString())).append("\n");
-      sb.append("}");
+      sb.append("    type: ").append(Utils.toIndentedString(super.getType())).append('\n');
+      sb.append("    hash: ").append(Utils.toIndentedString(new MaskAll().mask(hash))).append('\n');
+      sb.append("    hashedPinParameters: ").append(Utils.toIndentedString(hashedPinParameters.toString())).append('\n');
+      sb.append('}');
       return sb.toString();
    }
 }

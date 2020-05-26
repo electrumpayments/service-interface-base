@@ -26,7 +26,7 @@ public class HashedPinParameters {
    }
 
    @JsonProperty("name")
-   @ApiModelProperty(required = true, value = "The name of the hashing algorithm. Implementers must agree on how algorithms are named with consideration given towards the following atttributes (with Electrum default options in square braces): letter case [UPPERCASE], use of spaces [replace_with_underscores] and use of special characters [allowed].")
+   @ApiModelProperty(required = true, value = "The name of the hashing algorithm. Implementers must agree on how algorithms are named with consideration given towards the following attributes (with Electrum default options in square braces): letter case [UPPERCASE] and use of spaces [replace_with_underscores].")
    @NotNull
    @Length(max = 20)
    public String getName() {
@@ -57,8 +57,8 @@ public class HashedPinParameters {
       StringBuilder sb = new StringBuilder();
       sb.append("class HashedPinParameters {\n");
 
-      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
-      sb.append("}");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
+      sb.append('}');
       return sb.toString();
    }
 
