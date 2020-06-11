@@ -1,19 +1,16 @@
 package io.electrum.vas.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.joda.time.DateTime;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The data required in all advice messages
@@ -27,6 +24,7 @@ public class BasicAdvice implements VasMessage {
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected String stan = null;
    protected String rrn = null;
+   protected Amounts amounts = null;
 
    /**
     * The randomly generated UUID identifying this advice, as defined for a variant 4 UUID in [RFC
@@ -148,6 +146,21 @@ public class BasicAdvice implements VasMessage {
       this.rrn = rrn;
    }
 
+   public BasicAdvice amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "These are amounts that are part of the transaction")
+   @JsonProperty("rrn")
+   public Amounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(Amounts amounts) {
+      this.amounts = amounts;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -176,6 +189,7 @@ public class BasicAdvice implements VasMessage {
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    stan: ").append(Utils.toIndentedString(stan));
       sb.append("    rrn: ").append(Utils.toIndentedString(rrn));
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }
