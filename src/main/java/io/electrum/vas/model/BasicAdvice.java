@@ -152,7 +152,7 @@ public class BasicAdvice implements VasMessage {
    }
 
    @ApiModelProperty(required = false, value = "These are amounts that are part of the transaction")
-   @JsonProperty("rrn")
+   @JsonProperty("amounts")
    public Amounts getAmounts() {
       return amounts;
    }
