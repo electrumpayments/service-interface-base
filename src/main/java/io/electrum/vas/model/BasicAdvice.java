@@ -151,7 +151,9 @@ public class BasicAdvice implements VasMessage {
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "These are amounts that are part of the transaction")
+   @ApiModelProperty(required = false, value = "These are amounts that are part of the advice message" +
+           " It doesnt make sense to populate requestAmount even if its possible. approvedAmount contains the final transaction amount(amount that was payed out), " +
+           "if approvedAmount is not set then it means that this is a full reversal(nothing was payed out).")
    @JsonProperty("amounts")
    public Amounts getAmounts() {
       return amounts;
