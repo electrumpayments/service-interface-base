@@ -12,7 +12,7 @@ public class TestBasicAdviceModel {
     private BasicAdvice basicAdvice = null;
 
     @Test
-    public void tests_serialization_deserialation() throws IOException, IllegalAccessException {
+    public void tests_serialization_basicAdvice_and_deserialization() throws IOException, IllegalAccessException {
         basicAdvice = new BasicAdvice();
         basicAdvice.setId(RandomStringUtils.random(16));
         basicAdvice.setRequestId(RandomStringUtils.random(32));
@@ -33,30 +33,5 @@ public class TestBasicAdviceModel {
         modelTests.testSerialiseDeserialiseObject(TestingConstants.getPartialReversalAdvice());
 
     }
-
-    public String serialize(Object object) throws IllegalAccessException {
-        if(object instanceof String || object.getClass().isPrimitive())
-        {
-            return "{"+object.getClass().getName();
-        }
-        StringBuilder serializedBasicAdvice = new StringBuilder();
-        serializedBasicAdvice.append("{");
-        Field[] declaredFields = object.getClass().getDeclaredFields();
-        for (Field field : declaredFields) {
-            if (field.get(object) != null) {
-                serializedBasicAdvice.append("\"").append(field.getName()).append("\":");
-                if(field.get(object) instanceof String)
-                    serializedBasicAdvice.append("\"").append(field.get(object)).append("\",");
-                else
-                    serializedBasicAdvice.append(field.get(object)).append(",");
-            }
-        }
-        serializedBasicAdvice.append("\"");
-        serializedBasicAdvice.append("}");
-
-        return serializedBasicAdvice.toString();
-    }
-
-
 
 }
