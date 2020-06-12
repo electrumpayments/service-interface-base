@@ -4,7 +4,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +21,12 @@ public class TestBasicAdviceModel {
         basicAdvice.setThirdPartyIdentifiers(thirdPartyIdentifiers);
         basicAdvice.setAmounts(TestingConstants.AMOUNTS_FULL_REVERSAL);
         NewModelTests modelTests = new NewModelTests();
-        modelTests.testSerialisedObject(TestingConstants.getFullReversalAdvice(),TestingConstants.getSerializedFullReversalBasicAdvice());
-        modelTests.testSerialisedObject(TestingConstants.getPartialReversalAdvice(),TestingConstants.getSerializedPartialReversalBasicAdvice());
-        modelTests.testDeserialisedObject(TestingConstants.getSerializedFullReversalBasicAdvice(),TestingConstants.getFullReversalAdvice());
-        modelTests.testDeserialisedObject(TestingConstants.getSerializedPartialReversalBasicAdvice(),TestingConstants.getPartialReversalAdvice());
-        modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedFullReversalBasicAdvice(),BasicAdvice.class);
-        modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedPartialReversalBasicAdvice(),BasicAdvice.class);
+        modelTests.testSerialisedObject(TestingConstants.getFullReversalAdvice(), TestingConstants.getSerializedFullReversalBasicAdvice());
+        modelTests.testSerialisedObject(TestingConstants.getPartialReversalAdvice(), TestingConstants.getSerializedPartialReversalBasicAdvice());
+        modelTests.testDeserialisedObject(TestingConstants.getSerializedFullReversalBasicAdvice(), TestingConstants.getFullReversalAdvice());
+        modelTests.testDeserialisedObject(TestingConstants.getSerializedPartialReversalBasicAdvice(), TestingConstants.getPartialReversalAdvice());
+        modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedFullReversalBasicAdvice(), BasicAdvice.class);
+        modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedPartialReversalBasicAdvice(), BasicAdvice.class);
         modelTests.testSerialiseDeserialiseObject(TestingConstants.getFullReversalAdvice());
         modelTests.testSerialiseDeserialiseObject(TestingConstants.getPartialReversalAdvice());
 
