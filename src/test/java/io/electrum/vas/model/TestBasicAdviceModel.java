@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestBasicAdviceModel {
-    private BasicAdvice basicAdvice = null;
 
     @Test
     public void tests_serialization_basicAdvice_and_deserialization() throws IOException, IllegalAccessException {
-        basicAdvice = new BasicAdvice();
+        BasicAdvice basicAdvice = new BasicAdvice();
         basicAdvice.setId(RandomStringUtils.random(16));
         basicAdvice.setRequestId(RandomStringUtils.random(32));
         basicAdvice.setRrn(RandomStringUtils.random(16));
