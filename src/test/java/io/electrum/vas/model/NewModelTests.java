@@ -40,7 +40,7 @@ public class NewModelTests {
       Assert.assertEquals(enumeration.ordinal(), expectedOrdinal);
    }
 
-   @Test(description = "Test we are set up to recirsively validate sub-fields.", dataProvider = "recursiveValidationOnSubFieldsDataProvider")
+   @Test(description = "Test we are set up to recursively validate sub-fields.", dataProvider = "recursiveValidationOnSubFieldsDataProvider")
    public void testRecursiveValidationOnSubFields(Object objectWithInvalidSubField, Object objectWithValidSubField)
          throws IOException {
       Validator validator = Validation.buildDefaultValidatorFactory().getValidator();

@@ -12,7 +12,7 @@ public class TestBasicAdviceModel {
     private BasicAdvice basicAdvice = null;
 
     @Test
-    public void setup() throws IOException, IllegalAccessException {
+    public void tests_serialization_deserialation() throws IOException, IllegalAccessException {
         basicAdvice = new BasicAdvice();
         basicAdvice.setId(RandomStringUtils.random(16));
         basicAdvice.setRequestId(RandomStringUtils.random(32));
@@ -23,6 +23,10 @@ public class TestBasicAdviceModel {
         basicAdvice.setThirdPartyIdentifiers(thirdPartyIdentifiers);
         basicAdvice.setAmounts(TestingConstants.AMOUNTS_FULL_REVERSAL);
         NewModelTests modelTests = new NewModelTests();
+        modelTests.testSerialisedObject(TestingConstants.getFullReversalAdvice(),TestingConstants.getSerializedFullReversalBasicAdvice());
+        modelTests.testSerialisedObject(TestingConstants.getPartialReversalAdvice(),TestingConstants.getSerializedPartialReversalBasicAdvice());
+        modelTests.testDeserialisedObject(TestingConstants.getSerializedFullReversalBasicAdvice(),TestingConstants.getFullReversalAdvice());
+        modelTests.testDeserialisedObject(TestingConstants.getSerializedPartialReversalBasicAdvice(),TestingConstants.getPartialReversalAdvice());
         modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedFullReversalBasicAdvice(),BasicAdvice.class);
         modelTests.testDeserialiseSerialiseObject(TestingConstants.getSerializedPartialReversalBasicAdvice(),BasicAdvice.class);
         modelTests.testSerialiseDeserialiseObject(TestingConstants.getFullReversalAdvice());
