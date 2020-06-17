@@ -1,15 +1,16 @@
 package io.electrum.vas.model;
 
-import java.io.IOException;
-
-import javax.validation.Validation;
-import javax.validation.Validator;
-
+import io.electrum.vas.JsonUtil;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import io.electrum.vas.JsonUtil;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class NewModelTests {
 
@@ -70,10 +71,18 @@ public class NewModelTests {
 
    @DataProvider(name = "serialiseDeserialiseObjectDataProvider")
    public Object[][] serialiseDeserialiseObjectDataProvider() {
-      return new Object[][] {
-       //@formatter:off
-       {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))}
-       //@formatter:on
+
+      Amounts amountsPartialReversal = new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT));
+      return new Object[][]{
+              //@formatter:off
+              {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
+              {new BasicAdvice().amounts(new Amounts()).id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
+                      .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+              {new BasicAdvice()
+                      .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))).requestId("requestId")
+                      .time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
+                      .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))}
+              //@formatter:on
       };
    }
 
