@@ -62,7 +62,7 @@ public class BasicReversal extends BasicAdvice {
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    reversalReason: ").append(Utils.toIndentedString(reversalReason)).append("\n");
+      sb.append("    reversalReason: ").append(Utils.toIndentedString(reversalReason)).append('\n');
       sb.append("}");
       return sb.toString();
    }
