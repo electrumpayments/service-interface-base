@@ -75,7 +75,7 @@ public class NewModelTests {
               {"{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}", new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", new BasicAdvice().id("123456ID").requestId("requestId1").time(DateTime.parse("07/06/2013 10:11:59", formatter)
-                      .toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
+                      .toDateTime()).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))
               )},
 
