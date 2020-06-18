@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.25.0
-Released 11 June 2020
+Released 18 June 2020
 * Added `amounts` field to the `BasicAdvice` model to support partial reversals and partial confirmations.
 
 ## 3.24.0
