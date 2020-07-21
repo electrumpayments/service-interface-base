@@ -1,5 +1,10 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.26.0
+Released 21 July 2020
+* Added Account PaymentMethod.
+* Added Interfaces for HasAmounts & HasPaymentMethods. These can be used for creating shared utilities across API implementations.
+
 ## 3.25.0
 Released 18 June 2020
 * Added `amounts` field to the `BasicAdvice` model to support partial reversals and partial confirmations.
