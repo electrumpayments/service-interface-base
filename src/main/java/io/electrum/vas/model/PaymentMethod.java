@@ -26,7 +26,7 @@ public class PaymentMethod {
    public enum PaymentMethodType {
       AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD"), ACCOUNT("ACCOUNT");
 
-      private String value;
+      private final String value;
 
       PaymentMethodType(String value) {
          this.value = value;

@@ -24,7 +24,7 @@ public class AccountPayment extends PaymentMethod {
     *
     * @return destAccountId
     **/
-   @ApiModelProperty(required = false, value = "Destination AccountId to which this payment will be made.")
+   @ApiModelProperty(value = "Destination AccountId to which this payment will be made.")
    @JsonProperty("destAccountId")
    public String getDestAccountId() {
       return destAccountId;
@@ -44,7 +44,7 @@ public class AccountPayment extends PaymentMethod {
     *
     * @return destCustomerId
     **/
-   @ApiModelProperty(required = false, value = "Destination CustomerId to which this payment will be made.")
+   @ApiModelProperty(value = "Destination CustomerId to which this payment will be made.")
    @JsonProperty("destCustomerId")
    public String getDestCustomerId() {
       return destCustomerId;
@@ -64,7 +64,7 @@ public class AccountPayment extends PaymentMethod {
     *
     * @return srcAccountId
     **/
-   @ApiModelProperty(required = false, value = "Source AccountId from which this payment will be made.")
+   @ApiModelProperty(value = "Source AccountId from which this payment will be made.")
    @JsonProperty("srcAccountId")
    public String getSrcAccountId() {
       return srcAccountId;
@@ -84,7 +84,7 @@ public class AccountPayment extends PaymentMethod {
     *
     * @return srcCustomerId
     **/
-   @ApiModelProperty(required = false, value = "Source CustomerId from which this payment will be made.")
+   @ApiModelProperty(value = "Source CustomerId from which this payment will be made.")
    @JsonProperty("srcCustomerId")
    public String getSrcCustomerId() {
       return srcCustomerId;
