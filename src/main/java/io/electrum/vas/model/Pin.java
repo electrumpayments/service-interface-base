@@ -17,10 +17,11 @@ import io.swagger.annotations.ApiModelProperty;
       PinClear.class, PinEncrypted.class })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({ @JsonSubTypes.Type(value = PinClear.class, name = "CLEAR_PIN"),
-      @JsonSubTypes.Type(value = PinEncrypted.class, name = "ENCRYPTED_PIN") })
+      @JsonSubTypes.Type(value = PinEncrypted.class, name = "ENCRYPTED_PIN"),
+      @JsonSubTypes.Type(value = PinHashed.class, name = "HASHED_PIN") })
 public abstract class Pin {
    public enum PinType {
-      CLEAR_PIN("CLEAR_PIN"), ENCRYPTED_PIN("ENCRYPTED_PIN");
+      CLEAR_PIN("CLEAR_PIN"), ENCRYPTED_PIN("ENCRYPTED_PIN"), HASHED_PIN("HASHED_PIN");
 
       private String value;
 
