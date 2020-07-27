@@ -70,7 +70,7 @@ public class RewardPayment extends PaymentMethod {
       sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
       sb.append("    rewardCode: ").append(Utils.toIndentedString(rewardCode)).append('\n');
-      sb.append("}");
+      sb.append('}');
       return sb.toString();
    }
 }
