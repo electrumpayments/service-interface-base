@@ -6,9 +6,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Objects;
 
-@ApiModel(description = "Model for payments made using a rewards programme", parent = PaymentMethod.class)
+@ApiModel(description = "Model for reward-based payments. "
+      + "This payment method should be used when the payment is offset using a reward programme", parent = PaymentMethod.class)
+/**
+ * @since v1.37.0
+ */
 public class RewardPayment extends PaymentMethod {
 
    private String rewardCode = null;
@@ -21,6 +27,7 @@ public class RewardPayment extends PaymentMethod {
 
    @ApiModelProperty(required = true, value = "A code used to recognise the reward programme")
    @JsonProperty("rewardCode")
+   @Size(min = 0, max = 40)
    @NotNull
    public String getRewardCode() {
       return rewardCode;
@@ -29,16 +36,15 @@ public class RewardPayment extends PaymentMethod {
    public void setRewardCode(String rewardCode) {
       this.rewardCode = rewardCode;
    }
-   
+
    public RewardPayment rewardCode(String rewardCode) {
       this.setRewardCode(rewardCode);
       return this;
    }
 
-
    @Override
    public int hashCode() {
-      return Objects.hash(rewardCode, name, type);
+      return Objects.hash(rewardCode, name, type, amount);
    }
 
    @Override
@@ -49,10 +55,10 @@ public class RewardPayment extends PaymentMethod {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      RewardPayment loyaltyCardPayment = (RewardPayment) o;
-      return Objects.equals(this.type, loyaltyCardPayment.type) && Objects.equals(this.name, loyaltyCardPayment.name)
-            && Objects.equals(this.rewardCode, loyaltyCardPayment.rewardCode)
-            && Objects.equals(this.amount, loyaltyCardPayment.amount);
+      RewardPayment rewardPayment = (RewardPayment) o;
+      return Objects.equals(this.type, rewardPayment.type) && Objects.equals(this.name, rewardPayment.name)
+            && Objects.equals(this.rewardCode, rewardPayment.rewardCode)
+            && Objects.equals(this.amount, rewardPayment.amount);
    }
 
    @Override
@@ -60,10 +66,10 @@ public class RewardPayment extends PaymentMethod {
       StringBuilder sb = new StringBuilder();
       sb.append("class RewardPayment {\n");
 
-      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
-      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
-      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
-      sb.append("    rewardCode: ").append(Utils.toIndentedString(rewardCode)).append("\n");
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append('\n');
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
+      sb.append("    rewardCode: ").append(Utils.toIndentedString(rewardCode)).append('\n');
       sb.append("}");
       return sb.toString();
    }
