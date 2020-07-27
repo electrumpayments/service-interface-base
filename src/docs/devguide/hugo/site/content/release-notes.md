@@ -1,5 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.27.0
+Released 28 July 2020
+* Added `RewardPayment` method.
+
 ## 3.26.0
 Released 21 July 2020
 * Added Account PaymentMethod.

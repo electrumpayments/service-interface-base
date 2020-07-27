@@ -20,11 +20,12 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonSubTypes({ @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
       @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD"),
       @JsonSubTypes.Type(value = AccountPayment.class, name = "ACCOUNT"),
-      @JsonSubTypes.Type(value = CardPayment.class, name = "CARD") })
+      @JsonSubTypes.Type(value = CardPayment.class, name = "CARD"),
+      @JsonSubTypes.Type(value = RewardPayment.class, name = "REWARD") })
 public class PaymentMethod {
 
    public enum PaymentMethodType {
-      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD"), ACCOUNT("ACCOUNT");
+      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD"), ACCOUNT("ACCOUNT"), REWARD("REWARD");
 
       private final String value;
 
