@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@ApiModel(description = "Model for payments made using a rewards programme or event", parent = PaymentMethod.class)
+@ApiModel(description = "Model for payments made using a rewards programme", parent = PaymentMethod.class)
 public class RewardPayment extends PaymentMethod {
 
    private String rewardCode = null;
@@ -19,7 +19,7 @@ public class RewardPayment extends PaymentMethod {
       setType(PaymentMethodType.REWARD);
    }
 
-   @ApiModelProperty(required = true, value = "A code used to recognise the reward programme or reward event")
+   @ApiModelProperty(required = true, value = "A code used to recognise the reward programme")
    @JsonProperty("rewardCode")
    @NotNull
    public String getRewardCode() {
@@ -29,6 +29,12 @@ public class RewardPayment extends PaymentMethod {
    public void setRewardCode(String rewardCode) {
       this.rewardCode = rewardCode;
    }
+   
+   public RewardPayment rewardCode(String rewardCode) {
+      this.setRewardCode(rewardCode);
+      return this;
+   }
+
 
    @Override
    public int hashCode() {

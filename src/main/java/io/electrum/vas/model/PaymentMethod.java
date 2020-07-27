@@ -55,6 +55,11 @@ public class PaymentMethod {
    public void setName(String name) {
       this.name = name;
    }
+   
+   public PaymentMethod name(String name) {
+      this.setName(name);
+      return this;
+   }
 
    @ApiModelProperty(required = true, value = "The general method of payment used")
    @JsonProperty("type")
@@ -66,6 +71,11 @@ public class PaymentMethod {
    public void setType(PaymentMethodType type) {
       this.type = type;
    }
+   
+   public PaymentMethod type(PaymentMethodType type) {
+      this.setType(type);
+      return this;
+   }
 
    @ApiModelProperty(required = true, value = "Ledger amount of the payment")
    @JsonProperty("amount")
@@ -76,6 +86,11 @@ public class PaymentMethod {
 
    public void setAmount(LedgerAmount amount) {
       this.amount = amount;
+   }
+   
+   public PaymentMethod amount(LedgerAmount amount) {
+      this.setAmount(amount);
+      return this;
    }
 
    @Override
