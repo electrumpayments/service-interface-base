@@ -121,8 +121,8 @@ public class TestResourceClasses {
                            .invoke(resourceClassInstance);
             } catch (NoSuchMethodException nsme) {
                throw new Exception(
-                     "There must be a method, called " + getResourceImplementationMethodName
-                           + "(), which returns an instance of the interfaceName interface",
+                     "The resource class does not meet condition 2 of this method (There must be a method, called " + getResourceImplementationMethodName
+                           + "(), which returns an instance of the interfaceName interface).",
                      nsme);
             }
             Object[] resourceMethodParameters = new Object[resourceMethod.getParameterCount()];
@@ -190,7 +190,7 @@ public class TestResourceClasses {
          Assert.assertTrue(e.getCause() instanceof NoSuchMethodException);
          Assert.assertEquals(
                e.getMessage(),
-               "The resource class does not meet condition 2 of this method (There must be a method, getResourceImplementation(), which returns an instance of the interfaceName interface).");
+               "The resource class does not meet condition 2 of this method (There must be a method, called getResourceImplementation(), which returns an instance of the interfaceName interface).");
       }
    }
 
