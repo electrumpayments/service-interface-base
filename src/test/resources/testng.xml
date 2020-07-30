@@ -9,6 +9,7 @@
     </groups>
     <packages>
       <package name="io.electrum.vas.model.*" />
+      <package name="io.electrum.vas.api.*" />
     </packages>
   </test>
 </suite>
