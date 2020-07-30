@@ -13,6 +13,31 @@ import io.electrum.vas.util.Utils;
 public class TestResourceClasses {
 
    /**
+    * Equivalent to calling
+    * {@link #ensureResourceOperationMethodBackwardsCompatibility(Class, String, Class, String, String)} with parameters
+    * {@code ensureResourceOperationMethodBackwardsCompatibility(resourceClass, operationMethodName, interfaceClass, interfaceMethodName, "getResourceImplementation")}
+    * 
+    * @param resourceClass
+    * @param operationMethodName
+    * @param interfaceClass
+    * @param interfaceMethodName
+    * @throws Exception
+    */
+   public static void ensureResourceOperationMethodBackwardsCompatibility(
+         Class<?> resourceClass,
+         String operationMethodName,
+         Class<?> interfaceClass,
+         String interfaceMethodName)
+         throws Exception {
+      ensureResourceOperationMethodBackwardsCompatibility(
+            resourceClass,
+            operationMethodName,
+            interfaceClass,
+            interfaceMethodName,
+            "getResourceImplementation");
+   }
+
+   /**
     * Ensures that methods in the resource classes which define operations will ultimately call back to the original
     * interface method
     * <p>
@@ -34,24 +59,37 @@ public class TestResourceClasses {
     * There are a few requirements of the {@code resourceClass}:
     * <ol>
     * <li>There must be a default constructor.</li>
-    * <li>There must be a method, {@code "getResourceImplementation()"}, which returns an instance of the
-    * {@code interfaceName} interface.</li>
-    * <li>The {@code "getResourceImplementation()"} method must return a spied instance of the {@code interfaceName}
-    * interface i.e. one created by calling {@link Mockito.spy(Object)} on an instance of the
+    * <li>There must be a method, called {@code getResourceImplementationMethodName} without parameters, which returns
+    * an instance of the {@code interfaceName} interface.</li>
+    * <li>The {@code getResourceImplementationMethodName} method must return a spied instance of the
+    * {@code interfaceName} interface i.e. one created by calling {@link Mockito.spy(Object)} on an instance of the
     * {@code interfaceName}.</li>
     * </ol>
     * 
     * @param resourceClass
+    *           The concrete implementation of the resource class. This class should not override any methods in the
+    *           abstract parent class. It should simply provide a spied instance of the {@code interfaceClass}
+    *           interface.
     * @param operationMethodName
+    *           The name of the method in the resource class which is invoked when an API operation is performed.
     * @param interfaceClass
+    *           The concrete implementation of the interface whose methods are to be invoked when an API operation is
+    *           performed.
     * @param interfaceMethodName
+    *           The name of the method in the ({@code interfaceClass}) interface which is invoked when the
+    *           aforementioned API operation is performed.
+    * @param getResourceImplementationMethodName
+    *           The name of the method in the {@code resourceClass} which provides an instance of the
+    *           {@code interfaceClass}. Note that this instance should be a {@link Mockito#spy} of an actual
+    *           {@code interfaceClass} object.
     * @throws Exception
     */
    public static void ensureResourceOperationMethodBackwardsCompatibility(
          Class<?> resourceClass,
          String operationMethodName,
          Class<?> interfaceClass,
-         String interfaceMethodName)
+         String interfaceMethodName,
+         String getResourceImplementationMethodName)
          throws Exception {
       // First identify the interface method which should be called when the resource class processes an operation
       Method targettedInterfaceMethod = Utils.findBaseMethod(interfaceClass, interfaceMethodName);
@@ -79,11 +117,12 @@ public class TestResourceClasses {
             try {
                spiedInterfaceImpl =
                      resourceClassInstance.getClass()
-                           .getDeclaredMethod("getResourceImplementation")
+                           .getDeclaredMethod(getResourceImplementationMethodName)
                            .invoke(resourceClassInstance);
             } catch (NoSuchMethodException nsme) {
                throw new Exception(
-                     "The resource class does not meet condition 2 of this method (There must be a method, getResourceImplementation(), which returns an instance of the interfaceName interface).",
+                     "There must be a method, called " + getResourceImplementationMethodName
+                           + "(), which returns an instance of the interfaceName interface",
                      nsme);
             }
             Object[] resourceMethodParameters = new Object[resourceMethod.getParameterCount()];
@@ -94,7 +133,9 @@ public class TestResourceClasses {
                targettedInterfaceMethod.invoke(Mockito.verify(spiedInterfaceImpl), interfaceMethodParameters);
             } catch (NotAMockException name) {
                throw new Exception(
-                     "The resource class does not meet condition 3 of this method (The getResourceImplementation() method must return a spied instance of the interfaceName interface i.e. one created by calling Mockito.spy(Object) on an instance of the interfaceName).",
+                     "The resource class does not meet condition 3 of this method (The "
+                           + getResourceImplementationMethodName
+                           + "() method must return a spied instance of the interfaceName interface i.e. one created by calling Mockito.spy(Object) on an instance of the interfaceName).",
                      name);
             }
          }
