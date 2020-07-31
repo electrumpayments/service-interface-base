@@ -60,10 +60,10 @@ public class TestResourceClasses {
     * <ol>
     * <li>There must be a default constructor.</li>
     * <li>There must be a method, called {@code getResourceImplementationMethodName} without parameters, which returns
-    * an instance of the {@code interfaceName} interface.</li>
+    * an instance of the {@code interfaceClass} interface.</li>
     * <li>The {@code getResourceImplementationMethodName} method must return a spied instance of the
-    * {@code interfaceName} interface i.e. one created by calling {@link Mockito.spy(Object)} on an instance of the
-    * {@code interfaceName}.</li>
+    * {@code interfaceClass} interface i.e. one created by calling {@link Mockito.spy(Object)} on an instance of the
+    * {@code interfaceClass}.</li>
     * </ol>
     * 
     * @param resourceClass
