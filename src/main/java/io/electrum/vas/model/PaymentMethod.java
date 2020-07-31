@@ -20,11 +20,12 @@ import io.swagger.annotations.ApiModelProperty;
 @JsonSubTypes({ @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
       @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD"),
       @JsonSubTypes.Type(value = AccountPayment.class, name = "ACCOUNT"),
-      @JsonSubTypes.Type(value = CardPayment.class, name = "CARD") })
+      @JsonSubTypes.Type(value = CardPayment.class, name = "CARD"),
+      @JsonSubTypes.Type(value = RewardPayment.class, name = "REWARD") })
 public class PaymentMethod {
 
    public enum PaymentMethodType {
-      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD"), ACCOUNT("ACCOUNT");
+      AN_32_TOKEN("AN_32_TOKEN"), LOYALTY_CARD("LOYALTY_CARD"), CARD("CARD"), ACCOUNT("ACCOUNT"), REWARD("REWARD");
 
       private final String value;
 
@@ -54,6 +55,11 @@ public class PaymentMethod {
    public void setName(String name) {
       this.name = name;
    }
+   
+   public PaymentMethod name(String name) {
+      this.setName(name);
+      return this;
+   }
 
    @ApiModelProperty(required = true, value = "The general method of payment used")
    @JsonProperty("type")
@@ -65,6 +71,11 @@ public class PaymentMethod {
    public void setType(PaymentMethodType type) {
       this.type = type;
    }
+   
+   public PaymentMethod type(PaymentMethodType type) {
+      this.setType(type);
+      return this;
+   }
 
    @ApiModelProperty(required = true, value = "Ledger amount of the payment")
    @JsonProperty("amount")
@@ -75,6 +86,11 @@ public class PaymentMethod {
 
    public void setAmount(LedgerAmount amount) {
       this.amount = amount;
+   }
+   
+   public PaymentMethod amount(LedgerAmount amount) {
+      this.setAmount(amount);
+      return this;
    }
 
    @Override

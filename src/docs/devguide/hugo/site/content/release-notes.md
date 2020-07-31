@@ -1,5 +1,10 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.27.0
+Released 31 July 2020
+* Added `RewardPayment` method.
+* Provided testing utilities to aid API development in the Java implementation provided by Electrum.
+
 ## 3.26.0
 Released 21 July 2020
 * Added Account PaymentMethod.

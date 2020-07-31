@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>service-interface-base</artifactId>
-  <version>3.26.0</version>
+  <version>3.27.0</version>
   <packaging>jar</packaging>
   <name>Service Interface Base</name>
   <description>Service Interface Base</description>
@@ -43,6 +43,7 @@
     <el-version>3.0.0</el-version>
     <jaxb-version>2.2.11</jaxb-version>
     <testng-version>7.0.0</testng-version>
+    <mockito-core-version>2.25.0</mockito-core-version>
     <jacoco.skip>true</jacoco.skip> <!-- skip code coverage unless maven is run with -Djacoco.skip=false -->
     <sonar.coverage.jacoco.xmlReportPaths>
       ${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml
@@ -112,6 +113,12 @@
       <version>${el-version}</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito-core-version}</version>
+        <scope>test</scope>
+      </dependency>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -342,6 +349,25 @@
             <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
