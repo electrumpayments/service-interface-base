@@ -23,6 +23,7 @@ public class Originator {
    private Institution institution = null;
    private String terminalId = null;
    private Merchant merchant = null;
+   private String operatorId = null;
 
    /**
     * The institution originating the request, as issued by Electrum
@@ -83,6 +84,27 @@ public class Originator {
 
    public void setMerchant(Merchant merchant) {
       this.merchant = merchant;
+   }
+
+   /**
+    * The ID that uniquely identifies the person operating the terminal specified by the terminalId field.
+    * @since 3.28.0
+    */
+   public Originator operatorId(String operatorId) {
+      this.operatorId = operatorId;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The ID that uniquely identifies the person operating the terminal specified by the terminalId field.")
+   @JsonProperty("merchant")
+   @Length(max = 30)
+   @Valid
+   public String getOperatorId() {
+      return operatorId;
+   }
+
+   public void setOperatorId(String operatorId) {
+      this.operatorId = operatorId;
    }
 
    @Override
