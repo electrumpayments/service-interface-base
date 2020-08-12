@@ -96,7 +96,7 @@ public class Originator {
    }
 
    @ApiModelProperty(required = false, value = "The ID that uniquely identifies the person operating the terminal specified by the terminalId field.")
-   @JsonProperty("merchant")
+   @JsonProperty("operatorId")
    @Length(max = 30)
    @Valid
    public String getOperatorId() {
