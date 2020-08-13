@@ -117,12 +117,12 @@ public class Originator {
       }
       Originator originator = (Originator) o;
       return Objects.equals(institution, originator.institution) && Objects.equals(terminalId, originator.terminalId)
-            && Objects.equals(merchant, originator.merchant);
+            && Objects.equals(merchant, originator.merchant) && Objects.equals(operatorId, originator.operatorId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(institution, terminalId, merchant);
+      return Objects.hash(institution, terminalId, merchant, operatorId);
    }
 
    @Override
@@ -132,6 +132,7 @@ public class Originator {
       sb.append("    institution: ").append(Utils.toIndentedString(institution)).append("\n");
       sb.append("    terminalId: ").append(Utils.toIndentedString(terminalId)).append("\n");
       sb.append("    merchant: ").append(Utils.toIndentedString(merchant)).append("\n");
+      sb.append("    operatorId: ").append(Utils.toIndentedString(operatorId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
