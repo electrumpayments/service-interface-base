@@ -9,10 +9,12 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Set;
 
 public class NewModelTests {
 
@@ -50,6 +52,14 @@ public class NewModelTests {
       // should fail because a sub-field should fail validation
       Assert.assertFalse(validator.validate(objectWithInvalidSubField).isEmpty());
       // should pass because sub-fields are valid
+      Set<ConstraintViolation<Object>> set = validator.validate(objectWithValidSubField);
+
+      if (!set.isEmpty()) {
+         for (ConstraintViolation s : set) {
+            System.out.println(String.format("Field '%s' violates the contraints since '%s'",
+                    s.getPropertyPath().toString(), s.getMessage()));
+         }
+      }
       Assert.assertTrue(validator.validate(objectWithValidSubField).isEmpty());
    }
 
@@ -135,6 +145,7 @@ public class NewModelTests {
       DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
       return new Object[][] {
             //@formatter:off
+              // {invalid example, valid example}
               {new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters()), new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters().name("MyAlg"))},
               {new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(null).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
@@ -142,7 +153,19 @@ public class NewModelTests {
                       new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                               .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(10000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
                               .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
-              {new Transaction().id("123456ID").originator(new Originator()), new Transaction().id("123456ID").originator(new Originator().operatorId("operatorId"))}
+              // validates that the `operatorId` field is not null and of length max 30
+              {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
+                      .institution(new Institution().id("institution id").name("institution name"))
+                      .merchant(new Merchant().merchantId("123451234512345")
+                      .merchantType("1234")
+                      .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA"))),
+                      new Originator().terminalId("terminal").operatorId("String less than thirty")
+                              .institution(new Institution().id("institution id").name("institution name"))
+                              .merchant(new Merchant().merchantId("123451234512345")
+                              .merchantType("1234")
+                              .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
+              }
+
               //@formatter:on
       };
    }
