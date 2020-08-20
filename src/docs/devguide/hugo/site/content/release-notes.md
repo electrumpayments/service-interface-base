@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.28.0
-Released 13 August 2020
+Released 20 August 2020
 * Added `operatorId` field to the `Originator` model.
 
 ## 3.27.0

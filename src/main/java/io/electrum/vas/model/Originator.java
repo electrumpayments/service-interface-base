@@ -128,10 +128,10 @@ public class Originator {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class Originator {\n");
-      sb.append("    institution: ").append(Utils.toIndentedString(institution)).append("\n");
-      sb.append("    terminalId: ").append(Utils.toIndentedString(terminalId)).append("\n");
-      sb.append("    merchant: ").append(Utils.toIndentedString(merchant)).append("\n");
-      sb.append("    operatorId: ").append(Utils.toIndentedString(operatorId)).append("\n");
+      sb.append("    institution: ").append(Utils.toIndentedString(institution)).append('\n');
+      sb.append("    terminalId: ").append(Utils.toIndentedString(terminalId)).append('\n');
+      sb.append("    merchant: ").append(Utils.toIndentedString(merchant)).append('\n');
+      sb.append("    operatorId: ").append(Utils.toIndentedString(operatorId)).append('\n');
       sb.append("}");
       return sb.toString();
    }
