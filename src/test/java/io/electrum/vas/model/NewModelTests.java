@@ -153,7 +153,7 @@ public class NewModelTests {
                       new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                               .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(10000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
                               .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
-              // validates that the `operatorId` field is not null and of length max 30
+              // validates that the `operatorId` field has length max 30
               {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
                       .institution(new Institution().id("institution id").name("institution name"))
                       .merchant(new Merchant().merchantId("123451234512345")
@@ -164,8 +164,19 @@ public class NewModelTests {
                               .merchant(new Merchant().merchantId("123451234512345")
                               .merchantType("1234")
                               .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
+              },
+              // validates that the `operatorId` field is optional i.e. can be null and thus is not set
+              {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
+                      .institution(new Institution().id("institution id").name("institution name"))
+                      .merchant(new Merchant().merchantId("123451234512345")
+                      .merchantType("1234")
+                      .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA"))),
+                      new Originator().terminalId("terminal")
+                              .institution(new Institution().id("institution id").name("institution name"))
+                              .merchant(new Merchant().merchantId("123451234512345")
+                              .merchantType("1234")
+                              .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
               }
-
               //@formatter:on
       };
    }
