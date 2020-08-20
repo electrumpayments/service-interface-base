@@ -9,10 +9,12 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Set;
 
 public class NewModelTests {
 
@@ -50,6 +52,14 @@ public class NewModelTests {
       // should fail because a sub-field should fail validation
       Assert.assertFalse(validator.validate(objectWithInvalidSubField).isEmpty());
       // should pass because sub-fields are valid
+      Set<ConstraintViolation<Object>> set = validator.validate(objectWithValidSubField);
+
+      if (!set.isEmpty()) {
+         for (ConstraintViolation s : set) {
+            System.out.println(String.format("Field '%s' violates the contraints since '%s'",
+                    s.getPropertyPath().toString(), s.getMessage()));
+         }
+      }
       Assert.assertTrue(validator.validate(objectWithValidSubField).isEmpty());
    }
 
@@ -64,7 +74,8 @@ public class NewModelTests {
                       "{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                               "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}"},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null),
-                    "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"}
+                    "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"},
+              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"}
               //@formatter:on
       };
    }
@@ -80,10 +91,10 @@ public class NewModelTests {
                       .toDateTime()).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))
               )},
-              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", 
+              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}",
                  new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)
-              }
-
+              },
+              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")}
               //@formatter:on
       };
    }
@@ -99,7 +110,8 @@ public class NewModelTests {
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))).requestId("requestId")
                       .time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
                       .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
-              {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)}
+              {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)},
+              {new Originator().operatorId("someOperatorID")}
               //@formatter:on
       };
    }
@@ -113,7 +125,8 @@ public class NewModelTests {
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}", BasicAdvice.class},
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
-              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class}
+              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
+              {"{\"operatorId\":\"someOperatorID\"}", Originator.class}
               //@formatter:on
       };
    }
@@ -132,13 +145,38 @@ public class NewModelTests {
       DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
       return new Object[][] {
             //@formatter:off
+              // {invalid example, valid example}
               {new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters()), new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters().name("MyAlg"))},
               {new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(null).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
                       .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
                       new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                               .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(10000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
-                              .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))}
+                              .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+              // validates that the `operatorId` field has length max 30
+              {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
+                      .institution(new Institution().id("institution id").name("institution name"))
+                      .merchant(new Merchant().merchantId("123451234512345")
+                      .merchantType("1234")
+                      .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA"))),
+                      new Originator().terminalId("terminal").operatorId("String less than thirty")
+                              .institution(new Institution().id("institution id").name("institution name"))
+                              .merchant(new Merchant().merchantId("123451234512345")
+                              .merchantType("1234")
+                              .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
+              },
+              // validates that the `operatorId` field is optional i.e. can be null and thus is not set
+              {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
+                      .institution(new Institution().id("institution id").name("institution name"))
+                      .merchant(new Merchant().merchantId("123451234512345")
+                      .merchantType("1234")
+                      .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA"))),
+                      new Originator().terminalId("terminal")
+                              .institution(new Institution().id("institution id").name("institution name"))
+                              .merchant(new Merchant().merchantId("123451234512345")
+                              .merchantType("1234")
+                              .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
+              }
               //@formatter:on
       };
    }
