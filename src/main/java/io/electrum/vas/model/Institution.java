@@ -42,14 +42,14 @@ public class Institution {
    }
 
    /**
-    * The institutions's name
+    * The institution's name
     **/
    public Institution name(String name) {
       this.name = name;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The institutions's name")
+   @ApiModelProperty(required = true, value = "The institution's name")
    @JsonProperty("name")
    @NotNull
    @Length(max = 40)
