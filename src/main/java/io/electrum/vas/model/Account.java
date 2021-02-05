@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Base model for all account types", discriminator = "type", subTypes = { BankAccount.class,
       IbanAccount.class, IfscAccount.class, MobileWalletAccount.class, SwiftAccount.class })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
-// For the sake of correct deserialisation, we need to map from values of type to child model classes explicitly
+// For the sake of correct deserialization, we need to map from values of type to child model classes explicitly
 @JsonSubTypes({ @JsonSubTypes.Type(value = Account.class, name = "ACCOUNT"),
       @JsonSubTypes.Type(value = BankAccount.class, name = "BANK"),
       @JsonSubTypes.Type(value = IbanAccount.class, name = "IBAN"),
@@ -30,11 +30,11 @@ public class Account {
    public enum AccountType {
       ACCOUNT("ACCOUNT"),
       BANK("BANK"),
+      CASH_PICKUP("CASH_PICKUP"),
       IBAN("IBAN"),
-      SWIFT("SWIFT"),
       IFSC("IFSC"),
       MOBILE_WALLET("MOBILE_WALLET"),
-      CASH_PICKUP("CASH_PICKUP");
+      SWIFT("SWIFT");
 
       private String value;
 
