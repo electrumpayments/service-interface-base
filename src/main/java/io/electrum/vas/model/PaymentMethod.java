@@ -16,24 +16,23 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Base model for all payment types", discriminator = "type", subTypes = { An32TokenPayment.class,
       LoyaltyCardPayment.class, CardPayment.class, AccountPayment.class })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
-// For the sake of correct deserialization, we need to map from values of type to child model classes explicitly
+// For the sake of correct deserialisation, we need to map from values of type to child model classes explicitly
 @JsonSubTypes({
         @JsonSubTypes.Type(value = AccountPayment.class, name = "ACCOUNT"),
         @JsonSubTypes.Type(value = An32TokenPayment.class, name = "AN_32_TOKEN"),
         @JsonSubTypes.Type(value = LoyaltyCardPayment.class, name = "LOYALTY_CARD"),
         @JsonSubTypes.Type(value = CardPayment.class, name = "CARD"),
         @JsonSubTypes.Type(value = RewardPayment.class, name = "REWARD"),
-        @JsonSubTypes.Type(value = MobileWalletPayment.class, name = "MOBILE_WALLET")})
+        @JsonSubTypes.Type(value = WalletPayment.class, name = "WALLET")})
 public class PaymentMethod {
 
    public enum PaymentMethodType {
-      ACCOUNT("ACCOUNT"),
       AN_32_TOKEN("AN_32_TOKEN"),
-      CARD("CARD"),
       LOYALTY_CARD("LOYALTY_CARD"),
+      CARD("CARD"),
+      ACCOUNT("ACCOUNT"),
       REWARD("REWARD"),
-      MOBILE_WALLET("MOBILE_WALLET");
-
+      WALLET("WALLET");
 
       private final String value;
 

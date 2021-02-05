@@ -94,8 +94,8 @@ public class NewModelTests {
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}",
                  new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)
               },
-              {"{\"type\":\"MOBILE_WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\",\"walletProviderId\":\"MTN-MOMO\"}",
-                      new MobileWalletPayment().walletId("0712345678").walletProviderId("MTN-MOMO").amount(new LedgerAmount().amount(456L).currency("710"))
+              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}",
+                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))
               },
               {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")}
               //@formatter:on
@@ -129,7 +129,7 @@ public class NewModelTests {
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
-              {"{\"type\":\"MOBILE_WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\",\"walletProviderId\":\"MTN-MOMO\"}", MobileWalletPayment.class},
+              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
               {"{\"operatorId\":\"someOperatorID\"}", Originator.class}
               //@formatter:on
       };
