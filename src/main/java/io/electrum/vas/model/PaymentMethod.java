@@ -191,7 +191,7 @@ public class PaymentMethod {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class PaymentMethod {\n");
-      sb.append("    name: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
       sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
       sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append("\n");

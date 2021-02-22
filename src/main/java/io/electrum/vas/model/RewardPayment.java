@@ -1,14 +1,15 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Model for reward-based payments. "
       + "This payment method should be used when the payment is offset using a reward programme", parent = PaymentMethod.class)
@@ -43,32 +44,33 @@ public class RewardPayment extends PaymentMethod {
    }
 
    @Override
-   public int hashCode() {
-      return Objects.hash(rewardCode, name, type, amount);
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      RewardPayment that = (RewardPayment) o;
+      return Objects.equals(rewardCode, that.rewardCode);
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      RewardPayment rewardPayment = (RewardPayment) o;
-      return Objects.equals(this.type, rewardPayment.type) && Objects.equals(this.name, rewardPayment.name)
-            && Objects.equals(this.rewardCode, rewardPayment.rewardCode)
-            && Objects.equals(this.amount, rewardPayment.amount);
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), rewardCode);
    }
 
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class RewardPayment {\n");
-
-      sb.append("    type: ").append(Utils.toIndentedString(type)).append('\n');
-      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
-      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
       sb.append("    rewardCode: ").append(Utils.toIndentedString(rewardCode)).append('\n');
       sb.append('}');
       return sb.toString();

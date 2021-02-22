@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -101,16 +102,15 @@ public class AccountPayment extends PaymentMethod {
 
    @Override
    public boolean equals(Object o) {
-      //@formatter:off
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      if (!super.equals(o)) return false;
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
       AccountPayment that = (AccountPayment) o;
-      return Objects.equals(srcAccountId, that.srcAccountId) &&
-              Objects.equals(srcCustomerId, that.srcCustomerId) &&
-              Objects.equals(destAccountId, that.destAccountId) &&
-              Objects.equals(destCustomerId, that.destCustomerId);
-      //@formatter:on
+      return Objects.equals(srcAccountId, that.srcAccountId) && Objects.equals(srcCustomerId, that.srcCustomerId)
+            && Objects.equals(destAccountId, that.destAccountId) && Objects.equals(destCustomerId, that.destCustomerId);
    }
 
    @Override
@@ -120,16 +120,19 @@ public class AccountPayment extends PaymentMethod {
 
    @Override
    public String toString() {
-      //@formatter:off
-      return "AccountPayment{" +
-              "srcAccountId='" + srcAccountId + '\'' +
-              ", srcCustomerId='" + srcCustomerId + '\'' +
-              ", destAccountId='" + destAccountId + '\'' +
-              ", destCustomerId='" + destCustomerId + '\'' +
-              ", type=" + type +
-              ", name='" + name + '\'' +
-              ", amount=" + amount +
-              '}';
-      //@formatter:on
+      StringBuilder sb = new StringBuilder();
+      sb.append("class AccountPayment {\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
+      sb.append("    srcAccountId: ").append(Utils.toIndentedString(srcAccountId)).append("\n");
+      sb.append("    srcCustomerId: ").append(Utils.toIndentedString(srcCustomerId)).append("\n");
+      sb.append("    destAccountId: ").append(Utils.toIndentedString(destAccountId)).append("\n");
+      sb.append("    destCustomerId: ").append(Utils.toIndentedString(destCustomerId)).append("\n");      sb.append("}");
+      return sb.toString();
    }
 }

@@ -33,32 +33,30 @@ public class LoyaltyCardPayment extends PaymentMethod {
    }
 
    @Override
-   public int hashCode() {
-      return Objects.hash(cardNumber, name, type);
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      if (!super.equals(o)) return false;
+      LoyaltyCardPayment that = (LoyaltyCardPayment) o;
+      return Objects.equals(cardNumber, that.cardNumber);
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      LoyaltyCardPayment loyaltyCardPayment = (LoyaltyCardPayment) o;
-      return Objects.equals(this.type, loyaltyCardPayment.type) && Objects.equals(this.name, loyaltyCardPayment.name)
-              && Objects.equals(this.cardNumber, loyaltyCardPayment.cardNumber)
-              && Objects.equals(this.amount, loyaltyCardPayment.amount);
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), cardNumber);
    }
 
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class LoyaltyCardPayment {\n");
-
-      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
       sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append("\n");
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
       sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append("\n");
       sb.append("}");
       return sb.toString();
