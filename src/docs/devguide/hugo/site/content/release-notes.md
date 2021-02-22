@@ -12,7 +12,6 @@ Released 22 February 2021
 * Updated the `jackson-datatype-jdk8` dependency from version `2.8.5` to version `2.11.2`.
 * Updated the `jackson-datatype-jsr310` dependency from `2.8.5` to `2.11.2`.
 * Updated the `maven-javadoc-plugin` from version `3.1.1` to version `3.2.0`.
-* Updated the `swagger-maven-plugin` from version `3.1.3` to `3.1.8`.
 
 ## 3.28.0
 Released 20 August 2020
