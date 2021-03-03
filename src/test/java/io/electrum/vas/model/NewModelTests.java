@@ -76,6 +76,8 @@ public class NewModelTests {
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null),
                     "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"},
               {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"},
+              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710")),
+                      "{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}"},
               {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
                       .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
                       .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN)),
@@ -127,6 +129,7 @@ public class NewModelTests {
                       .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)},
               {new Originator().operatorId("someOperatorID")},
+              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
               {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
                       .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
                       .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
@@ -199,6 +202,8 @@ public class NewModelTests {
                               .merchantType("1234")
                               .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
               },
+              {new WalletPayment().walletId(null).amount(new LedgerAmount().amount(456L).currency(null)),
+                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
               {new CardPayment().amount(new LedgerAmount().amount(456L).currency("wrong")).name("Card Payment")
                       .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
                       .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted()),
