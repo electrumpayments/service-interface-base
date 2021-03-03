@@ -32,6 +32,10 @@ public class CardPayment extends PaymentMethod {
       setType(PaymentMethodType.CARD);
    }
 
+   public CardPayment pan(String pan) {
+      this.pan = pan;
+      return this;
+   }
    /**
     * Primary account number that uniquely identifies this card.
     *
@@ -69,6 +73,11 @@ public class CardPayment extends PaymentMethod {
 
    public void setExpiryDate(String expiryDate) {
       this.expiryDate = expiryDate;
+   }
+
+   public CardPayment posInfo(PosInfo posInfo) {
+      this.posInfo = posInfo;
+      return this;
    }
 
    /**
