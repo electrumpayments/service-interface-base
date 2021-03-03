@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -95,6 +96,7 @@ public class PaymentMethod {
 
    @ApiModelProperty(value = "Ledger amount of the payment")
    @JsonProperty("amount")
+   @Valid
    public LedgerAmount getAmount() {
       return amount;
    }
@@ -110,6 +112,7 @@ public class PaymentMethod {
 
    @ApiModelProperty(value = "The institution which is responsible for managing this payment method (e.g. the card issuer, the wallet provider, the token provider etc.)")
    @JsonProperty("issuer")
+   @Valid
    public Institution getIssuer() {
       return issuer;
    }
@@ -125,6 +128,7 @@ public class PaymentMethod {
 
    @ApiModelProperty(value = "The PIN associated with this payment method. Various PIN formats are supported (clear, encrypted, hashed etc.)")
    @JsonProperty("pin")
+   @Valid
    public Pin getPin() {
       return pin;
    }
