@@ -75,7 +75,13 @@ public class NewModelTests {
                               "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}"},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null),
                     "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"},
-              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"}
+              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"},
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
+                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN)),
+                      "{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                              "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
+                              "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}"}
               //@formatter:on
       };
    }
@@ -97,7 +103,13 @@ public class NewModelTests {
               {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}",
                       new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))
               },
-              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")}
+              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")},
+              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
+                      "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}",
+                      new CardPayment().amount(new LedgerAmount().amount(456L).currency("710"))
+                      .name("Card Payment").issuer(new Institution().id("1234InsId").name("Institution"))
+                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
               //@formatter:on
       };
    }
@@ -114,7 +126,10 @@ public class NewModelTests {
                       .time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
                       .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)},
-              {new Originator().operatorId("someOperatorID")}
+              {new Originator().operatorId("someOperatorID")},
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
+                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
               //@formatter:on
       };
    }
@@ -130,7 +145,10 @@ public class NewModelTests {
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
               {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
-              {"{\"operatorId\":\"someOperatorID\"}", Originator.class}
+              {"{\"operatorId\":\"someOperatorID\"}", Originator.class},
+              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"},\"proxy\":\"12345\"," +
+                      "\"proxyType\":\"UNKNOWN\"}", CardPayment.class}
               //@formatter:on
       };
    }
@@ -180,7 +198,13 @@ public class NewModelTests {
                               .merchant(new Merchant().merchantId("123451234512345")
                               .merchantType("1234")
                               .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
-              }
+              },
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("wrong")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
+                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted()),
+                      new CardPayment().pan("1234567891234567891").amount(new LedgerAmount().amount(456L).currency(
+                              "710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy(null).proxyType(ProxyType.UNKNOWN)}
               //@formatter:on
       };
    }
