@@ -58,7 +58,7 @@ public class LoyaltyCardPayment extends PaymentMethod {
       sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
       sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
       sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append("\n");
-      sb.append("}");
+      sb.append('}');
       return sb.toString();
    }
 }

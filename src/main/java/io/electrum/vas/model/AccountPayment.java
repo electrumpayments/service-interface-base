@@ -132,7 +132,8 @@ public class AccountPayment extends PaymentMethod {
       sb.append("    srcAccountId: ").append(Utils.toIndentedString(srcAccountId)).append("\n");
       sb.append("    srcCustomerId: ").append(Utils.toIndentedString(srcCustomerId)).append("\n");
       sb.append("    destAccountId: ").append(Utils.toIndentedString(destAccountId)).append("\n");
-      sb.append("    destCustomerId: ").append(Utils.toIndentedString(destCustomerId)).append("\n");      sb.append("}");
+      sb.append("    destCustomerId: ").append(Utils.toIndentedString(destCustomerId)).append("\n");
+      sb.append('}');
       return sb.toString();
    }
 }

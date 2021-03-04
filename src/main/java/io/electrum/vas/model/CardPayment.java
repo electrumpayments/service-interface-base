@@ -2,6 +2,7 @@ package io.electrum.vas.model;
 
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -133,6 +134,27 @@ public class CardPayment extends PaymentMethod {
       this.encryptedPin = encryptedPin;
    }
 
+   public CardPayment pin(Pin pin) {
+      this.pin = pin;
+      return this;
+   }
+
+   /**
+    * The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.
+    *
+    * @return pin
+    */
+   @ApiModelProperty(value = "The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.")
+   @JsonProperty("pin")
+   @Valid
+   public Pin getPin() {
+      return pin;
+   }
+
+   public void setPin(Pin pin) {
+      this.pin = pin;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -166,7 +188,7 @@ public class CardPayment extends PaymentMethod {
       sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
-      sb.append("}");
+      sb.append('}');
       return sb.toString();
    }
 }

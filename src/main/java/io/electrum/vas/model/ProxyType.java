@@ -1,6 +1,7 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ProxyType {
     MSISDN("MSISDN"), EMAIL("EMAIL"), UNKNOWN("UNKNOWN");
@@ -26,6 +27,7 @@ public enum ProxyType {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return String.valueOf(value);
     }

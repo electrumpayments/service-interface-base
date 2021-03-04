@@ -102,10 +102,10 @@ public class NewModelTests {
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}",
                  new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)
               },
+              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")},
               {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}",
                       new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))
               },
-              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")},
               {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
                       "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
                       "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}",
@@ -147,8 +147,8 @@ public class NewModelTests {
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
-              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
               {"{\"operatorId\":\"someOperatorID\"}", Originator.class},
+              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
               {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
                       "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"},\"proxy\":\"12345\"," +
                       "\"proxyType\":\"UNKNOWN\"}", CardPayment.class}

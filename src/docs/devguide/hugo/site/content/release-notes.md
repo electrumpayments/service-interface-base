@@ -3,6 +3,7 @@ This page describes changes to the Service Interface Base API implemented across
 Released xx March 2021
 * Added `WalletPayment` method.
 * Added `amount`, `proxy`, `proxyType`, `issuer` and `pin` fields to the `PaymentMethod` model.
+* Changed format of toString for `AccountPayment` model.
 
 ## 3.28.0
 Released 20 August 2020

@@ -63,7 +63,7 @@ public class An32TokenPayment extends PaymentMethod {
       sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
       sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
       sb.append("    token: ").append(Utils.toIndentedString(token)).append("\n");
-      sb.append("}");
+      sb.append('}');
       return sb.toString();
    }
 }

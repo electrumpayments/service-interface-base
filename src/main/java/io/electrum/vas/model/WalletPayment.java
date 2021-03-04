@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -28,6 +29,7 @@ public class WalletPayment extends PaymentMethod {
     @ApiModelProperty(required = true, value = "The unique identifier of the wallet account making the payment.")
     @JsonProperty("walletId")
     @NotNull
+    @Masked
     public String getWalletId() {
         return walletId;
     }
@@ -58,7 +60,7 @@ public class WalletPayment extends PaymentMethod {
         sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
         sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
         sb.append("    walletId: ").append(Utils.toIndentedString(walletId)).append("\n");
-        sb.append("}");
+        sb.append('}');
         return sb.toString();
     }
 }

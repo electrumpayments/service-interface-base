@@ -142,7 +142,8 @@ public class PaymentMethod {
       return this;
    }
 
-   @ApiModelProperty(value = "An alternative identifier for the customer's source of funds.")
+   @ApiModelProperty(value = "An alternative identifier for the customer's source of funds. Acts as a stand in for " +
+           "the customer identifier. E.g. a customer's MSISDN or email address")
    @JsonProperty("proxy")
    @Size(min = 0, max = 40)
    @Masked
@@ -202,7 +203,7 @@ public class PaymentMethod {
       sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
       sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
       sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
-      sb.append("}");
+      sb.append('}');
       return sb.toString();
    }
 }
