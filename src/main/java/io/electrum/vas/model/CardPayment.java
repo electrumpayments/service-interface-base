@@ -146,7 +146,6 @@ public class CardPayment extends PaymentMethod {
     */
    @ApiModelProperty(value = "The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.")
    @JsonProperty("pin")
-   @Valid
    public Pin getPin() {
       return pin;
    }
