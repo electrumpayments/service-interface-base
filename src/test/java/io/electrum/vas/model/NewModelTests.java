@@ -14,6 +14,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 
 public class NewModelTests {
@@ -41,13 +42,12 @@ public class NewModelTests {
    }
 
    @Test(description = "Test we keep the ordinal value of an enum constant.", dataProvider = "ordinalDataProvider")
-   public void testOrdinal(Enum<?> enumeration, int expectedOrdinal) throws IOException {
+   public void testOrdinal(Enum<?> enumeration, int expectedOrdinal) {
       Assert.assertEquals(enumeration.ordinal(), expectedOrdinal);
    }
 
    @Test(description = "Test we are set up to recursively validate sub-fields.", dataProvider = "recursiveValidationOnSubFieldsDataProvider")
-   public void testRecursiveValidationOnSubFields(Object objectWithInvalidSubField, Object objectWithValidSubField)
-         throws IOException {
+   public void testRecursiveValidationOnSubFields(Object objectWithInvalidSubField, Object objectWithValidSubField) {
       Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
       // should fail because a sub-field should fail validation
       Assert.assertFalse(validator.validate(objectWithInvalidSubField).isEmpty());
@@ -55,9 +55,9 @@ public class NewModelTests {
       Set<ConstraintViolation<Object>> set = validator.validate(objectWithValidSubField);
 
       if (!set.isEmpty()) {
-         for (ConstraintViolation s : set) {
-            System.out.println(String.format("Field '%s' violates the contraints since '%s'",
-                    s.getPropertyPath().toString(), s.getMessage()));
+         for (ConstraintViolation<?> s : set) {
+            System.out.printf("Field '%s' violates the contraints since '%s'%n",
+                    s.getPropertyPath().toString(), s.getMessage());
          }
       }
       Assert.assertTrue(validator.validate(objectWithValidSubField).isEmpty());
@@ -70,12 +70,20 @@ public class NewModelTests {
             //@formatter:off
               {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256")), "{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}"},
               {new BasicAdvice().amounts(new Amounts()).id("123456ID").requestId("requestId1").time(DateTime.parse("07/06/2013 08:11:59.000Z", formatter)
-                      .toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
+                      .toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
                       "{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                               "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}"},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null),
                     "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"},
-              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"}
+              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"},
+              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710")),
+                      "{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}"},
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
+                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN)),
+                      "{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                              "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
+                              "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}"}
               //@formatter:on
       };
    }
@@ -88,13 +96,22 @@ public class NewModelTests {
               {"{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}", new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", new BasicAdvice().id("123456ID").requestId("requestId1").time(DateTime.parse("07/06/2013 10:11:59.000Z", formatter)
-                      .toDateTime()).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
+                      .toDateTime()).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))
               )},
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}",
                  new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)
               },
-              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")}
+              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")},
+              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}",
+                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))
+              },
+              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
+                      "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}",
+                      new CardPayment().amount(new LedgerAmount().amount(456L).currency("710"))
+                      .name("Card Payment").issuer(new Institution().id("1234InsId").name("Institution"))
+                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
               //@formatter:on
       };
    }
@@ -105,13 +122,17 @@ public class NewModelTests {
             //@formatter:off
               {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
               {new BasicAdvice().amounts(new Amounts()).id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
-                      .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+                      .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
               {new BasicAdvice()
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))).requestId("requestId")
                       .time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
-                      .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+                      .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
               {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)},
-              {new Originator().operatorId("someOperatorID")}
+              {new Originator().operatorId("someOperatorID")},
+              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
+                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
               //@formatter:on
       };
    }
@@ -126,7 +147,11 @@ public class NewModelTests {
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
               {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
-              {"{\"operatorId\":\"someOperatorID\"}", Originator.class}
+              {"{\"operatorId\":\"someOperatorID\"}", Originator.class},
+              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
+              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
+                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"},\"proxy\":\"12345\"," +
+                      "\"proxyType\":\"UNKNOWN\"}", CardPayment.class}
               //@formatter:on
       };
    }
@@ -149,10 +174,10 @@ public class NewModelTests {
               {new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters()), new PinHashed().hash("A").hashedPinParameters(new HashedPinParameters().name("MyAlg"))},
               {new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(null).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
-                      .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
+                      .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
                       new BasicAdvice().id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC))
                               .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(10000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)))
-                              .transactionIdentifiers(Arrays.asList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+                              .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
               // validates that the `operatorId` field has length max 30
               {new Originator().terminalId("terminal").operatorId("String with more than thirty chars")
                       .institution(new Institution().id("institution id").name("institution name"))
@@ -176,7 +201,15 @@ public class NewModelTests {
                               .merchant(new Merchant().merchantId("123451234512345")
                               .merchantType("1234")
                               .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
-              }
+              },
+              {new WalletPayment().walletId(null).amount(new LedgerAmount().amount(456L).currency(null)),
+                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
+              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("wrong")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
+                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted()),
+                      new CardPayment().pan("1234567891234567891").amount(new LedgerAmount().amount(456L).currency(
+                              "710")).name("Card Payment")
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy(null).proxyType(ProxyType.UNKNOWN)}
               //@formatter:on
       };
    }

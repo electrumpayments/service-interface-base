@@ -28,12 +28,15 @@ public class CardPayment extends PaymentMethod {
     */
    @Deprecated
    private EncryptedPin encryptedPin = null;
-   private Pin pin = null;
 
    public CardPayment() {
       setType(PaymentMethodType.CARD);
    }
 
+   public CardPayment pan(String pan) {
+      this.pan = pan;
+      return this;
+   }
    /**
     * Primary account number that uniquely identifies this card.
     *
@@ -71,6 +74,11 @@ public class CardPayment extends PaymentMethod {
 
    public void setExpiryDate(String expiryDate) {
       this.expiryDate = expiryDate;
+   }
+
+   public CardPayment posInfo(PosInfo posInfo) {
+      this.posInfo = posInfo;
+      return this;
    }
 
    /**
@@ -138,7 +146,6 @@ public class CardPayment extends PaymentMethod {
     */
    @ApiModelProperty(value = "The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.")
    @JsonProperty("pin")
-   @Valid
    public Pin getPin() {
       return pin;
    }
@@ -148,40 +155,39 @@ public class CardPayment extends PaymentMethod {
    }
 
    @Override
-   public int hashCode() {
-      return Objects.hash(pan, expiryDate, posInfo, encryptedPin, name, type);
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      CardPayment that = (CardPayment) o;
+      return Objects.equals(pan, that.pan) && Objects.equals(expiryDate, that.expiryDate)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(encryptedPin, that.encryptedPin);
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) {
-         return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-         return false;
-      }
-      CardPayment cardPayment = (CardPayment) o;
-      return Objects.equals(this.type, cardPayment.type) && Objects.equals(this.name, cardPayment.name)
-            && Objects.equals(this.pan, cardPayment.pan) && Objects.equals(this.expiryDate, cardPayment.expiryDate)
-            && Objects.equals(this.posInfo, cardPayment.posInfo)
-            && Objects.equals(this.encryptedPin, cardPayment.encryptedPin) && Objects.equals(this.pin, cardPayment.pin);
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), pan, expiryDate, posInfo, encryptedPin);
    }
 
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class CardPayment {\n");
-
-      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
-      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
-      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
-      sb.append("    pan: ").append(Utils.toIndentedString(new MaskAll().mask(pan))).append("\n");
-      sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
-      sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
-      sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
-      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
-
-      sb.append("}");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append('\n');
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append('\n');
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append('\n');
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append('\n');
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append('\n');
+      sb.append("    pan: ").append(Utils.toIndentedString(new MaskAll().mask(pan))).append('\n');
+      sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append('\n');
+      sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append('\n');
+      sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append('\n');
+      sb.append('}');
       return sb.toString();
    }
 }

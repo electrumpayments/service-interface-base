@@ -1,4 +1,20 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
+## 3.29.0
+Released 05 March 2021
+* Added `WalletPayment` method.
+* Added `amount`, `proxy`, `proxyType`, `issuer` and `pin` fields to the `PaymentMethod` model.
+* Changes to the Java implementation of the base API:
+  * Changed the format of `toString` output for `AccountPayment` model to match the general format of `toString` for other models.
+  * The service interface base was updated to compile on Java 11.
+  * Updated the `jaxb-core` dependency from version `2.2.11` to version `2.3.0`.
+    * Removes warnings brought about when compiling on Java 9 or higher.
+  * Updated the `jaxb-api` and jaxb-impl dependency from version `2.2.11` to version `2.3.1`.
+    * Removes warnings brought about when compiling on Java 9 or higher.
+  * Updated the `joda-time` dependency from version `2.9.4` to version `2.10.5`.
+  * Updated the `jackson-datatype-joda` dependency from version `2.9.5` to version `2.10.0`.
+  * Updated the `jackson-datatype-jdk8` dependency from version `2.8.5` to version `2.11.2`.
+  * Updated the `jackson-datatype-jsr310` dependency from `2.8.5` to `2.11.2`.
+  * Updated the `maven-javadoc-plugin` from version `3.1.1` to version `3.2.0`.
 
 ## 3.28.0
 Released 20 August 2020
