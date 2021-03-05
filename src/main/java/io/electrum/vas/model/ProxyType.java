@@ -25,10 +25,4 @@ public enum ProxyType {
         }
         return null;
     }
-
-    @Override
-    @JsonValue
-    public String toString() {
-        return String.valueOf(value);
-    }
 }

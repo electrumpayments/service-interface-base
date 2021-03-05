@@ -50,14 +50,14 @@ public class LoyaltyCardPayment extends PaymentMethod {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class LoyaltyCardPayment {\n");
-      sb.append("    name: ").append(Utils.toIndentedString(name)).append("\n");
-      sb.append("    type: ").append(Utils.toIndentedString(type)).append("\n");
-      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append("\n");
-      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append("\n");
-      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append("\n");
-      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append("\n");
-      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append("\n");
-      sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append("\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append('\n');
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append('\n');
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append('\n');
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append('\n');
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append('\n');
+      sb.append("    cardNumber: ").append(Utils.toIndentedString(cardNumber)).append('\n');
       sb.append('}');
       return sb.toString();
    }
