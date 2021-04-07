@@ -28,6 +28,7 @@ public class Customer {
    private String status = null;
    private String msisdn = null;
    private String emailAddress = null;
+   private Address addressDetails = null;
 
    /**
     * The customer's first name(s)
@@ -69,21 +70,81 @@ public class Customer {
 
    /**
     * The customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link io.electrum.vas.model.Customer#addressDetails(Address)} instead
+    *
     **/
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public Customer address(String address) {
       this.address = address;
       return this;
    }
 
+   /**
+    * Get the customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link Customer#getAddressDetails()} instead
+    *
+    **/
    @ApiModelProperty(value = "The customer's address")
    @JsonProperty("address")
    @Length(max = 80)
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public String getAddress() {
       return address;
    }
 
+   /**
+    * Set the customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link io.electrum.vas.model.Customer#setAddressDetails(Address)} instead
+    *
+    **/
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public void setAddress(String address) {
       this.address = address;
+   }
+
+   /**
+    * The customer's address details
+    *
+    * @since 3.30.0
+    *
+    * @return addressDetails
+    **/
+   public Customer addressDetails(Address addressDetails) {
+      this.addressDetails = addressDetails;
+      return this;
+   }
+
+   /**
+    * @since v3.30.0
+    *
+    * @return addressDetails instance
+    */
+   @JsonProperty("addressDetails")
+   @ApiModelProperty(value = "")
+   @Valid
+   public Address getAddressDetails() {
+      return addressDetails;
+   }
+
+   /**
+    * @since v3.30.0
+    *
+    * @param address
+    */
+   public void setAddressDetails(Address address) {
+      this.addressDetails = addressDetails;
    }
 
    /**
