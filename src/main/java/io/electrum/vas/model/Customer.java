@@ -29,6 +29,7 @@ public class Customer {
    private String msisdn = null;
    private String emailAddress = null;
    private Address addressDetails = null;
+   private String profileId = null;
 
    /**
     * The customer's first name(s)
@@ -223,6 +224,25 @@ public class Customer {
       this.emailAddress = emailAddress;
    }
 
+   /**
+    * TODO:
+    */
+   public Customer profileId(String profileId) {
+      this.profileId = profileId;
+      return this;
+   }
+
+   @ApiModelProperty(value = /*TODO*/"")
+   @Email
+   @JsonProperty("profileId")
+   public String getProfileId() {
+      return profileId;
+   }
+
+   public void setProfileId(String profileId) {
+      this.profileId = profileId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -235,12 +255,12 @@ public class Customer {
       return Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName)
             && Objects.equals(address, customer.address) && Objects.equals(dateOfBirth, customer.dateOfBirth)
             && Objects.equals(status, customer.status) && Objects.equals(msisdn, customer.msisdn)
-            && Objects.equals(emailAddress, customer.emailAddress);
+            && Objects.equals(emailAddress, customer.emailAddress) && Objects.equals(profileId, customer.profileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(firstName, lastName, address, dateOfBirth, status, msisdn, emailAddress);
+      return Objects.hash(firstName, lastName, address, dateOfBirth, status, msisdn, emailAddress, profileId);
    }
 
    @Override
@@ -255,6 +275,7 @@ public class Customer {
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
       sb.append("    msisdn: ").append(Utils.toIndentedString(msisdn)).append("\n");
       sb.append("    emailAddress: ").append(Utils.toIndentedString(emailAddress)).append("\n");
+      sb.append("    profileId: ").append(Utils.toIndentedString(profileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }
