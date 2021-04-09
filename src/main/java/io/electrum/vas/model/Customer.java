@@ -116,7 +116,7 @@ public class Customer {
    }
 
    /**
-    * The customer's address details
+    * The customer's address details.
     *
     * @since 3.30.0
     *
@@ -133,7 +133,7 @@ public class Customer {
     * @return addressDetails instance
     */
    @JsonProperty("addressDetails")
-   @ApiModelProperty(value = "")
+   @ApiModelProperty(value = "The customer's address details.")
    @Valid
    public Address getAddressDetails() {
       return addressDetails;
@@ -142,9 +142,9 @@ public class Customer {
    /**
     * @since v3.30.0
     *
-    * @param address
+    * @param addressDetails
     */
-   public void setAddressDetails(Address address) {
+   public void setAddressDetails(Address addressDetails) {
       this.addressDetails = addressDetails;
    }
 
@@ -225,15 +225,14 @@ public class Customer {
    }
 
    /**
-    * TODO:
+    * The customer's profile ID. Used to uniquely identify a customer.
     */
    public Customer profileId(String profileId) {
       this.profileId = profileId;
       return this;
    }
 
-   @ApiModelProperty(value = /*TODO*/"")
-   @Email
+   @ApiModelProperty(required = false, value = "The customer's profile ID. Used to uniquely identify a customer.")
    @JsonProperty("profileId")
    public String getProfileId() {
       return profileId;
@@ -253,14 +252,16 @@ public class Customer {
       }
       Customer customer = (Customer) o;
       return Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName)
-            && Objects.equals(address, customer.address) && Objects.equals(dateOfBirth, customer.dateOfBirth)
-            && Objects.equals(status, customer.status) && Objects.equals(msisdn, customer.msisdn)
-            && Objects.equals(emailAddress, customer.emailAddress) && Objects.equals(profileId, customer.profileId);
+            && Objects.equals(address, customer.address) && Objects.equals(addressDetails, customer.addressDetails)
+            && Objects.equals(dateOfBirth, customer.dateOfBirth) && Objects.equals(status, customer.status)
+            && Objects.equals(msisdn, customer.msisdn) && Objects.equals(emailAddress, customer.emailAddress)
+            && Objects.equals(profileId, customer.profileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(firstName, lastName, address, dateOfBirth, status, msisdn, emailAddress, profileId);
+      return Objects
+            .hash(firstName, lastName, address, addressDetails, dateOfBirth, status, msisdn, emailAddress, profileId);
    }
 
    @Override
@@ -271,6 +272,7 @@ public class Customer {
       sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
       sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
+      sb.append("    addressDetails: ").append(Utils.toIndentedString(addressDetails)).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(dateOfBirth)).append("\n");
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
       sb.append("    msisdn: ").append(Utils.toIndentedString(msisdn)).append("\n");
