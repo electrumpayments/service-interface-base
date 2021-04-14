@@ -3,6 +3,8 @@ package io.electrum.vas.model;
 import java.util.Objects;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -50,6 +52,7 @@ public class Address {
     **/
    @JsonProperty("addressLine1")
    @ApiModelProperty(value = "First line of street address.")
+   @Size(max = 50)
    @Masked
    public String getAddressLine1() {
       return addressLine1;
@@ -71,6 +74,7 @@ public class Address {
     **/
    @JsonProperty("addressLine2")
    @ApiModelProperty(value = "Second line of street address (if required).")
+   @Size(max = 50)
    @Masked
    public String getAddressLine2() {
       return addressLine2;
@@ -92,6 +96,7 @@ public class Address {
     **/
    @JsonProperty("city")
    @ApiModelProperty(value = "")
+   @Size(max = 50)
    @Masked
    public String getCity() {
       return city;
@@ -113,6 +118,7 @@ public class Address {
     **/
    @JsonProperty("province")
    @ApiModelProperty(value = "")
+   @Size(max = 50)
    @Masked
    public String getProvince() {
       return province;
@@ -157,6 +163,7 @@ public class Address {
     **/
    @JsonProperty("postCode")
    @ApiModelProperty(value = "")
+   @Size(max = 10)
    @Masked
    public String getPostCode() {
       return postCode;
