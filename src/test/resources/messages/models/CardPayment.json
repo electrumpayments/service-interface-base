@@ -1,0 +1,17 @@
+{
+  "type":"CARD",
+  "name":"Card Payment",
+  "amount":{
+    "amount":456,
+    "currency":"710"
+  },
+  "issuer":{
+    "id":"1234InsId",
+    "name":"Institution"
+  },
+  "pin":{
+    "type":"ENCRYPTED_PIN"
+  },
+  "proxy":"12345",
+  "proxyType":"UNKNOWN"
+}

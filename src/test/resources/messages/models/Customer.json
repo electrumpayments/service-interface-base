@@ -1,0 +1,18 @@
+{
+  "firstName":"Patrick",
+  "lastName":"Colborne",
+  "address":"41 Sheila Street, Edenvale, Gauteng, 1609",
+  "dateOfBirth":"1995-07-28T00:00:00.000Z",
+  "status":"active",
+  "msisdn":"27762463297",
+  "emailAddress":"pcolborne@gmail.com",
+  "addressDetails":{
+    "addressLine1":"41 Sheila Street",
+    "addressLine2":"Edenvale",
+    "city":"Johannesburg",
+    "province":"Gauteng",
+    "country":"ZA",
+    "postCode":"1609"
+  },
+  "profileId":"188a66d6-166f-4010-9a8e-ea4d3bb22a09"
+}

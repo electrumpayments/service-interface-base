@@ -1,0 +1,7 @@
+{
+  "type":"HASHED_PIN",
+  "hash":"ABCD",
+  "hashedPinParameters":{
+    "name":"SHA-256"
+  }
+}

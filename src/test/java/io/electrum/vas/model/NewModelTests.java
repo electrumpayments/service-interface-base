@@ -1,23 +1,112 @@
 package io.electrum.vas.model;
 
-import io.electrum.vas.JsonUtil;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
+import io.electrum.vas.JsonUtil;
 
 public class NewModelTests {
+
+   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss.SSSZ");
+   private Customer customer;
+   private Address address;
+   private Originator originator;
+   private BasicAdvice basicAdvice;
+   private PinHashed pinHashed;
+   private PaymentMethod rewardPayment;
+   private PaymentMethod walletPayment;
+   private PaymentMethod cardPayment;
+   
+   @BeforeMethod
+   protected void createPayloads() {
+      customer = new Customer()
+            .firstName("Patrick")
+            .lastName("Colborne")
+            .address("41 Sheila Street, Edenvale, Gauteng, 1609")
+            .dateOfBirth(new DateTime(1995, 7, 28, 0, 0, DateTimeZone.UTC))
+            .status("active")
+            .msisdn("27762463297")
+            .emailAddress("pcolborne@gmail.com")
+            .addressDetails(new Address()
+                  .addressLine1("41 Sheila Street")
+                  .addressLine2("Edenvale")
+                  .city("Johannesburg")
+                  .province("Gauteng")
+                  .country("ZA")
+                  .postCode("1609"))
+            .profileId("188a66d6-166f-4010-9a8e-ea4d3bb22a09");
+
+      address = new Address()
+            .addressLine1("41 Sheila Street")
+            .addressLine2("Edenvale")
+            .city("Johannesburg")
+            .province("Gauteng")
+            .country("ZA")
+            .postCode("1609");
+
+      originator = new Originator()
+            .operatorId("someOperatorID");
+
+      basicAdvice = new BasicAdvice()
+            .id("123456ID")
+            .requestId("requestId1")
+            .time(DateTime.parse("07/06/2013 10:11:59.000Z", DATE_TIME_FORMATTER).toDateTime())
+            .rrn("12345rrn")
+            .stan("12345stan")
+            .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier()
+                  .institutionId("1234InsId")
+                  .transactionIdentifier("1234transId")))
+            .amounts(new Amounts()
+                  .approvedAmount(new LedgerAmount()
+                        .amount(9000L)
+                        .currency("710")
+                        .ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT)));
+
+      pinHashed = new PinHashed()
+            .hash("ABCD")
+            .hashedPinParameters(new HashedPinParameters()
+                  .name("SHA-256"));
+      
+      rewardPayment = new RewardPayment()
+            .rewardCode("EasterPromotions2021")
+            .amount(new LedgerAmount()
+                  .amount(456L)
+                  .currency("710"))
+            .name(null);
+
+      walletPayment = new WalletPayment()
+            .walletId("0712345678")
+            .amount(new LedgerAmount()
+                  .amount(456L)
+                  .currency("710"));
+
+      cardPayment = new CardPayment()
+            .amount(new LedgerAmount()
+                  .amount(456L)
+                  .currency("710"))
+            .name("Card Payment")
+            .issuer(new Institution()
+                  .id("1234InsId")
+                  .name("Institution"))
+            .proxy("12345")
+            .proxyType(ProxyType.UNKNOWN)
+            .pin(new PinEncrypted()
+                  .type(Pin.PinType.ENCRYPTED_PIN));
+   }
 
    @Test(description = "Test we can serialise a model to the expected value.", dataProvider = "serialisedObjectDataProvider")
    public void testSerialisedObject(Object objectToSerialise, String expectedValue) throws IOException {
@@ -64,54 +153,31 @@ public class NewModelTests {
    }
 
    @DataProvider(name = "serialisedObjectDataProvider")
-   public Object[][] serialisedObjectDataProvider() {
-      DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss.SSSZ");
+   public Object[][] serialisedObjectDataProvider() throws Exception {
       return new Object[][] {
             //@formatter:off
-              {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256")), "{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}"},
-              {new BasicAdvice().amounts(new Amounts()).id("123456ID").requestId("requestId1").time(DateTime.parse("07/06/2013 08:11:59.000Z", formatter)
-                      .toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId"))),
-                      "{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
-                              "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}"},
-              {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null),
-                    "{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}"},
-              {new Originator().operatorId("someOperatorID"), "{\"operatorId\":\"someOperatorID\"}"},
-              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710")),
-                      "{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}"},
-              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
-                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
-                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN)),
-                      "{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
-                              "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
-                              "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}"}
+              {pinHashed, JsonUtil.readFileAsString(PayloadFileLocations.PIN_HASHED, false)},
+              {basicAdvice, JsonUtil.readFileAsString(PayloadFileLocations.BASIC_ADVICE, false)},
+              {rewardPayment, JsonUtil.readFileAsString(PayloadFileLocations.REWARD_PAYMENT, false)},
+              {originator, JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false)},
+              {walletPayment, JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false)},
+              {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)}
               //@formatter:on
       };
    }
 
    @DataProvider(name = "deserialisedObjectDataProvider")
-   public Object[][] deserialisedObjectDataProvider() {
-      DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss.SSSZ");
+   public Object[][] deserialisedObjectDataProvider() throws Exception {
       return new Object[][] {
             //@formatter:off
-              {"{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}", new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
-              {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
-                      "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", new BasicAdvice().id("123456ID").requestId("requestId1").time(DateTime.parse("07/06/2013 10:11:59.000Z", formatter)
-                      .toDateTime()).rrn("12345rrn").stan("12345stan").transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))
-                      .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))
-              )},
-              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}",
-                 new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)
-              },
-              {"{\"operatorId\":\"someOperatorID\"}", new Originator().operatorId("someOperatorID")},
-              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}",
-                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))
-              },
-              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
-                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"}," +
-                      "\"pin\":{\"type\":\"ENCRYPTED_PIN\"},\"proxy\":\"12345\",\"proxyType\":\"UNKNOWN\"}",
-                      new CardPayment().amount(new LedgerAmount().amount(456L).currency("710"))
-                      .name("Card Payment").issuer(new Institution().id("1234InsId").name("Institution"))
-                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
+              {JsonUtil.readFileAsString(PayloadFileLocations.PIN_HASHED, false), pinHashed},
+              {JsonUtil.readFileAsString(PayloadFileLocations.BASIC_ADVICE, false), basicAdvice},
+              {JsonUtil.readFileAsString(PayloadFileLocations.REWARD_PAYMENT, false), rewardPayment},
+              {JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false), originator},
+              {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), walletPayment},
+              {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), cardPayment},
+              {JsonUtil.readFileAsString(PayloadFileLocations.CUSTOMER, false), customer},
+              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), address}
               //@formatter:on
       };
    }
@@ -120,38 +186,32 @@ public class NewModelTests {
    public Object[][] serialiseDeserialiseObjectDataProvider() {
       return new Object[][] {
             //@formatter:off
-              {new PinHashed().hash("ABCD").hashedPinParameters(new HashedPinParameters().name("SHA-256"))},
-              {new BasicAdvice().amounts(new Amounts()).id("123456ID").requestId("requestId").time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
-                      .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
+              {pinHashed},
+              {basicAdvice},
               {new BasicAdvice()
                       .amounts(new Amounts().approvedAmount(new LedgerAmount().amount(9000L).currency("710").ledgerIndicator(LedgerAmount.LedgerIndicator.DEBIT))).requestId("requestId")
                       .time(DateTime.now().toDateTime(DateTimeZone.UTC)).rrn("12345rrn").stan("12345stan")
                       .transactionIdentifiers(Collections.singletonList(new ThirdPartyIdentifier().institutionId("1234InsId").transactionIdentifier("1234transId")))},
-              {new RewardPayment().rewardCode("EasterPromotions2021").amount(new LedgerAmount().amount(456L).currency("710")).name(null)},
-              {new Originator().operatorId("someOperatorID")},
-              {new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
-              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
-                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy("12345").proxyType(ProxyType.UNKNOWN)
-                      .pin(new PinEncrypted().type(Pin.PinType.ENCRYPTED_PIN))}
+              {rewardPayment},
+              {originator},
+              {walletPayment},
+              {cardPayment}
               //@formatter:on
       };
    }
 
    @DataProvider(name = "deserialiseSerialiseObjectDataProvider")
-   public Object[][] deserialiseSerialiseObjectDataProvider() {
+   public Object[][] deserialiseSerialiseObjectDataProvider() throws Exception {
       return new Object[][] {
             //@formatter:off
-              {"{\"type\":\"HASHED_PIN\",\"hash\":\"ABCD\",\"hashedPinParameters\":{\"name\":\"SHA-256\"}}", PinHashed.class},
-              {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
-                      "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{}}", BasicAdvice.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.PIN_HASHED, false), PinHashed.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.BASIC_ADVICE, false), BasicAdvice.class},
               {"{\"id\":\"123456ID\",\"requestId\":\"requestId1\",\"time\":\"2013-06-07T08:11:59.000Z\",\"thirdPartyIdentifiers\":[{\"institutionId\":\"1234InsId\",\"transactionIdentifier\":\"1234transId\"}]," +
                       "\"stan\":\"12345stan\",\"rrn\":\"12345rrn\",\"amounts\":{\"approvedAmount\":{\"amount\":9000,\"currency\":\"710\",\"ledgerIndicator\":\"DEBIT\"}}}", BasicAdvice.class},
-              {"{\"type\":\"REWARD\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"rewardCode\":\"EasterPromotions2021\"}", RewardPayment.class},
-              {"{\"operatorId\":\"someOperatorID\"}", Originator.class},
-              {"{\"type\":\"WALLET\",\"amount\":{\"amount\":456,\"currency\":\"710\"},\"walletId\":\"0712345678\"}", WalletPayment.class},
-              {"{\"type\":\"CARD\",\"name\":\"Card Payment\",\"amount\":{\"amount\":456,\"currency\":\"710\"}," +
-                      "\"issuer\":{\"id\":\"1234InsId\",\"name\":\"Institution\"},\"proxy\":\"12345\"," +
-                      "\"proxyType\":\"UNKNOWN\"}", CardPayment.class}
+              {JsonUtil.readFileAsString(PayloadFileLocations.REWARD_PAYMENT, false), RewardPayment.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false), Originator.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), WalletPayment.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), CardPayment.class}
               //@formatter:on
       };
    }
