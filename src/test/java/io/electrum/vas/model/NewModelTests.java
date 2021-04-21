@@ -161,7 +161,8 @@ public class NewModelTests {
               {rewardPayment, JsonUtil.readFileAsString(PayloadFileLocations.REWARD_PAYMENT, false)},
               {originator, JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false)},
               {walletPayment, JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false)},
-              {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)}
+              {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)},
+              {address, JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false)}
               //@formatter:on
       };
    }
@@ -195,7 +196,8 @@ public class NewModelTests {
               {rewardPayment},
               {originator},
               {walletPayment},
-              {cardPayment}
+              {cardPayment},
+              {address}
               //@formatter:on
       };
    }
@@ -211,7 +213,8 @@ public class NewModelTests {
               {JsonUtil.readFileAsString(PayloadFileLocations.REWARD_PAYMENT, false), RewardPayment.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false), Originator.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), WalletPayment.class},
-              {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), CardPayment.class}
+              {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), CardPayment.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), Address.class}
               //@formatter:on
       };
    }
@@ -269,7 +272,14 @@ public class NewModelTests {
                       .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted()),
                       new CardPayment().pan("1234567891234567891").amount(new LedgerAmount().amount(456L).currency(
                               "710")).name("Card Payment")
-                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy(null).proxyType(ProxyType.UNKNOWN)}
+                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy(null).proxyType(ProxyType.UNKNOWN)},
+              {new Address()
+                    .addressLine1("41 Sheila Street")
+                    .addressLine2("Edenvale")
+                    .city("Johannesburg")
+                    .province("Gauteng")
+                    .country("South Africa")
+                    .postCode("1609"), address}
               //@formatter:on
       };
    }
