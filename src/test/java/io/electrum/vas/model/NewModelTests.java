@@ -43,7 +43,7 @@ public class NewModelTests {
                   .addressLine1("41 Sheila Street")
                   .addressLine2("Edenvale")
                   .city("Johannesburg")
-                  .region("Gauteng")
+                  .region("GP")
                   .country("ZA")
                   .postalCode("1609"))
             .profileId("188a66d6-166f-4010-9a8e-ea4d3bb22a09");
@@ -52,7 +52,7 @@ public class NewModelTests {
             .addressLine1("41 Sheila Street")
             .addressLine2("Edenvale")
             .city("Johannesburg")
-            .region("Gauteng")
+            .region("GP")
             .country("ZA")
             .postalCode("1609");
 
@@ -276,7 +276,7 @@ public class NewModelTests {
                     .addressLine2("Edenvale")
                     .city("Johannesburg")
                     .region("Gauteng")
-                    .country("South Africa")
+                    .country("ZA")
                     .postalCode("1609"), address}
               //@formatter:on
       };
