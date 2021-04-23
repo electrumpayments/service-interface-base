@@ -281,5 +281,4 @@ public class NewModelTests {
               //@formatter:on
       };
    }
-
 }
