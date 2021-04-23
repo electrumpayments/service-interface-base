@@ -10,9 +10,9 @@
     "addressLine1":"41 Sheila Street",
     "addressLine2":"Edenvale",
     "city":"Johannesburg",
-    "province":"Gauteng",
+    "region":"GP",
     "country":"ZA",
-    "postCode":"1609"
+    "postalCode":"1609"
   },
   "profileId":"188a66d6-166f-4010-9a8e-ea4d3bb22a09"
 }

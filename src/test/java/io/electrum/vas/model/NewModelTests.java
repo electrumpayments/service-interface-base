@@ -1,13 +1,6 @@
 package io.electrum.vas.model;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-
+import io.electrum.vas.JsonUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -17,7 +10,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import io.electrum.vas.JsonUtil;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
 
 public class NewModelTests {
 
@@ -45,18 +43,18 @@ public class NewModelTests {
                   .addressLine1("41 Sheila Street")
                   .addressLine2("Edenvale")
                   .city("Johannesburg")
-                  .province("Gauteng")
+                  .region("Gauteng")
                   .country("ZA")
-                  .postCode("1609"))
+                  .postalCode("1609"))
             .profileId("188a66d6-166f-4010-9a8e-ea4d3bb22a09");
 
       address = new Address()
             .addressLine1("41 Sheila Street")
             .addressLine2("Edenvale")
             .city("Johannesburg")
-            .province("Gauteng")
+            .region("Gauteng")
             .country("ZA")
-            .postCode("1609");
+            .postalCode("1609");
 
       originator = new Originator()
             .operatorId("someOperatorID");
@@ -277,9 +275,9 @@ public class NewModelTests {
                     .addressLine1("41 Sheila Street")
                     .addressLine2("Edenvale")
                     .city("Johannesburg")
-                    .province("Gauteng")
+                    .region("Gauteng")
                     .country("South Africa")
-                    .postCode("1609"), address}
+                    .postalCode("1609"), address}
               //@formatter:on
       };
    }
