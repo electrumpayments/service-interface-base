@@ -28,6 +28,8 @@ public class Customer {
    private String status = null;
    private String msisdn = null;
    private String emailAddress = null;
+   private Address addressDetails = null;
+   private String profileId = null;
 
    /**
     * The customer's first name(s)
@@ -69,21 +71,81 @@ public class Customer {
 
    /**
     * The customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link io.electrum.vas.model.Customer#addressDetails(Address)} instead
+    *
     **/
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public Customer address(String address) {
       this.address = address;
       return this;
    }
 
+   /**
+    * Get the customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link Customer#getAddressDetails()} instead
+    *
+    **/
    @ApiModelProperty(value = "The customer's address")
    @JsonProperty("address")
    @Length(max = 80)
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public String getAddress() {
       return address;
    }
 
+   /**
+    * Set the customer's address
+    *
+    * @deprecated The {@link io.electrum.vas.model.Customer#address} member variable of type {@link String} has been
+    *             replaced with a more detailed member variable of type {@link Address} called
+    *             {@link io.electrum.vas.model.Customer#addressDetails}.
+    *             <p> Use {@link io.electrum.vas.model.Customer#setAddressDetails(Address)} instead
+    *
+    **/
+   @Deprecated(/*since = "3.30.0", forRemoval = true*/)
    public void setAddress(String address) {
       this.address = address;
+   }
+
+   /**
+    * The customer's address details.
+    *
+    * @since 3.30.0
+    *
+    * @return addressDetails
+    **/
+   public Customer addressDetails(Address addressDetails) {
+      this.addressDetails = addressDetails;
+      return this;
+   }
+
+   /**
+    * @since v3.30.0
+    *
+    * @return addressDetails instance
+    */
+   @JsonProperty("addressDetails")
+   @ApiModelProperty(value = "The customer's address details.")
+   @Valid
+   public Address getAddressDetails() {
+      return addressDetails;
+   }
+
+   /**
+    * @since v3.30.0
+    *
+    * @param addressDetails
+    */
+   public void setAddressDetails(Address addressDetails) {
+      this.addressDetails = addressDetails;
    }
 
    /**
@@ -162,6 +224,24 @@ public class Customer {
       this.emailAddress = emailAddress;
    }
 
+   /**
+    * The customer's profile ID. Used to uniquely identify a customer.
+    */
+   public Customer profileId(String profileId) {
+      this.profileId = profileId;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The customer's profile ID. Used to uniquely identify a customer.")
+   @JsonProperty("profileId")
+   public String getProfileId() {
+      return profileId;
+   }
+
+   public void setProfileId(String profileId) {
+      this.profileId = profileId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -172,14 +252,16 @@ public class Customer {
       }
       Customer customer = (Customer) o;
       return Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName)
-            && Objects.equals(address, customer.address) && Objects.equals(dateOfBirth, customer.dateOfBirth)
-            && Objects.equals(status, customer.status) && Objects.equals(msisdn, customer.msisdn)
-            && Objects.equals(emailAddress, customer.emailAddress);
+            && Objects.equals(address, customer.address) && Objects.equals(addressDetails, customer.addressDetails)
+            && Objects.equals(dateOfBirth, customer.dateOfBirth) && Objects.equals(status, customer.status)
+            && Objects.equals(msisdn, customer.msisdn) && Objects.equals(emailAddress, customer.emailAddress)
+            && Objects.equals(profileId, customer.profileId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(firstName, lastName, address, dateOfBirth, status, msisdn, emailAddress);
+      return Objects
+            .hash(firstName, lastName, address, addressDetails, dateOfBirth, status, msisdn, emailAddress, profileId);
    }
 
    @Override
@@ -190,10 +272,12 @@ public class Customer {
       sb.append("    firstName: ").append(Utils.toIndentedString(firstName)).append("\n");
       sb.append("    lastName: ").append(Utils.toIndentedString(lastName)).append("\n");
       sb.append("    address: ").append(Utils.toIndentedString(address)).append("\n");
+      sb.append("    addressDetails: ").append(Utils.toIndentedString(addressDetails)).append("\n");
       sb.append("    dateOfBirth: ").append(Utils.toIndentedString(dateOfBirth)).append("\n");
       sb.append("    status: ").append(Utils.toIndentedString(status)).append("\n");
       sb.append("    msisdn: ").append(Utils.toIndentedString(msisdn)).append("\n");
       sb.append("    emailAddress: ").append(Utils.toIndentedString(emailAddress)).append("\n");
+      sb.append("    profileId: ").append(Utils.toIndentedString(profileId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

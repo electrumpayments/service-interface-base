@@ -1,0 +1,8 @@
+{
+  "type":"REWARD",
+  "amount":{
+    "amount":456,
+    "currency":"710"
+  },
+  "rewardCode":"EasterPromotions2021"
+}

@@ -1,0 +1,8 @@
+{
+  "type":"WALLET",
+  "amount":{
+    "amount":456,
+    "currency":"710"
+  },
+  "walletId":"0712345678"
+}
