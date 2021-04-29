@@ -17,6 +17,6 @@
 ## Version 3.30.0 - 29 April 2021
 ### New Features
 * Added new `Address` model object that contains a detailed breakdown of an address.
-* Added new member variable called `addressDetails` to the `Customer` model object.
+* Added new member variables called `addressDetails` and `profileId` to the `Customer` model object.
 * Deprecated the existing `address` member variable as it will be replaced by the new `addressDetails` member variable.
 * Refactored the tests a bit so that they are easier to read and add to.
