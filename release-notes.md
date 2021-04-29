@@ -14,7 +14,7 @@
     - Try and avoid special characters as far as possible
 -->
 
-## Version 3.30.0 - 07 April 2021
+## Version 3.30.0 - 29 April 2021
 ### New Features
 * Added new `Address` model object that contains a detailed breakdown of an address.
 * Added new member variable called `addressDetails` to the `Customer` model object.
