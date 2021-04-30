@@ -47,7 +47,7 @@ public class Address {
     **/
    @JsonProperty("addressLine1")
    @ApiModelProperty(value = "First line of street address.")
-   @Pattern(regexp="^.{1,250}")
+   @Pattern(regexp="^.{1,100}")
    @Masked
    public String getAddressLine1() {
       return addressLine1;
@@ -69,7 +69,7 @@ public class Address {
     **/
    @JsonProperty("addressLine2")
    @ApiModelProperty(value = "Second line of street address (if required).")
-   @Pattern(regexp="^.{1,250}")
+   @Pattern(regexp="^.{1,100}")
    @Masked
    public String getAddressLine2() {
       return addressLine2;
