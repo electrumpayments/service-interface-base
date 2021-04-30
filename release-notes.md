@@ -14,8 +14,17 @@
     - Try and avoid special characters as far as possible
 -->
 
+## Version 3.30.1 - 30 April 2021
+
+## Bug Fixes
+
+* Validation constraints on `addressLine1` and `addressLine2` of the `Address` model object were incorrect. They were
+  changed from a limit of 250 characters to a limit of 100 characters.
+
 ## Version 3.30.0 - 29 April 2021
+
 ### New Features
+
 * Added new `Address` model object that contains a detailed breakdown of an address.
 * Added new member variables called `addressDetails` and `profileId` to the `Customer` model object.
 * Deprecated the existing `address` member variable as it will be replaced by the new `addressDetails` member variable.
