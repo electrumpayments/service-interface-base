@@ -1,19 +1,16 @@
 package io.electrum.vas.model;
 
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.sdk.masking2.MaskAll;
 import io.electrum.sdk.masking2.MaskPan;
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 @ApiModel(description = "Model for card-based payments", parent = PaymentMethod.class)
 public class CardPayment extends PaymentMethod {
@@ -134,6 +131,7 @@ public class CardPayment extends PaymentMethod {
       this.encryptedPin = encryptedPin;
    }
 
+   @Override
    public CardPayment pin(Pin pin) {
       this.pin = pin;
       return this;
@@ -146,10 +144,12 @@ public class CardPayment extends PaymentMethod {
     */
    @ApiModelProperty(value = "The PIN associated with this card as either a clear PIN or an encrypted PIN in HEX format.")
    @JsonProperty("pin")
+   @Override
    public Pin getPin() {
       return pin;
    }
 
+   @Override
    public void setPin(Pin pin) {
       this.pin = pin;
    }
