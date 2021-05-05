@@ -9,9 +9,6 @@
     "id":"1234InsId",
     "name":"Institution"
   },
-  "pin":{
-    "type":"ENCRYPTED_PIN"
-  },
   "proxy":"12345",
   "proxyType":"UNKNOWN",
   "tranId":"bc228730-ab68-45e2-b91c-bc7d53640edb",

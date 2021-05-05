@@ -117,9 +117,7 @@ public class NewModelTests {
                   .id("1234InsId")
                   .name("Institution"))
             .proxy("12345")
-            .proxyType(ProxyType.UNKNOWN)
-            .pin(new PinEncrypted()
-                  .type(Pin.PinType.ENCRYPTED_PIN));
+            .proxyType(ProxyType.UNKNOWN);
    }
 
    @Test(description = "Test we can serialise a model to the expected value.", dataProvider = "serialisedObjectDataProvider")
@@ -302,8 +300,7 @@ public class NewModelTests {
                   .amount(new LedgerAmount().amount(456L).currency("wrong")).name("QR Payment")
                   .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
                   .proxy("12345")
-                  .proxyType(ProxyType.UNKNOWN)
-                  .pin(new PinEncrypted()),
+                  .proxyType(ProxyType.UNKNOWN),
                new QrPayment().tranId("e0aef114-f719-41c1-889e-4d18464254a0")
                    .partnerPaymentToken("4cc290e1-4018-4b28-9779-eba9fcb8004c")
                   .amount(new LedgerAmount().amount(456L).currency("710")).name("QR Payment")

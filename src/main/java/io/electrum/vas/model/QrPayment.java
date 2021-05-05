@@ -1,13 +1,11 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.sdk.masking2.Masked;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 /**
  * @since v1.31.0
@@ -27,7 +25,6 @@ public class QrPayment extends PaymentMethod {
    @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction.")
    @JsonProperty("tranId")
    @NotNull
-   @Masked
    public String getTranId() {
       return tranId;
    }
@@ -50,7 +47,6 @@ public class QrPayment extends PaymentMethod {
 
    @ApiModelProperty(required = false, value = "A payment token received from the Partner.")
    @JsonProperty("partnerPaymentToken")
-   @Masked
    public String getPartnerPaymentToken() {
       return partnerPaymentToken;
    }
@@ -88,16 +84,17 @@ public class QrPayment extends PaymentMethod {
 
    @Override
    public String toString() {
-      return new StringJoiner(", ", QrPayment.class.getSimpleName() + "[", "]")
-            .add("type=" + type)
-            .add("name='" + name + "'")
-            .add("amount=" + amount)
-            .add("issuer=" + issuer)
-            .add("pin=" + pin)
-            .add("proxy='" + proxy + "'")
-            .add("proxyType=" + proxyType)
-            .add("tranId='" + tranId + "'")
-            .add("partnerPaymentToken='" + partnerPaymentToken + "'")
-            .toString();
+      final StringBuilder sb = new StringBuilder("QrPayment{");
+      sb.append("type=").append(type);
+      sb.append(", name='").append(name).append('\'');
+      sb.append(", amount=").append(amount);
+      sb.append(", issuer=").append(issuer);
+      sb.append(", pin=").append(pin);
+      sb.append(", proxy='").append(proxy).append('\'');
+      sb.append(", proxyType=").append(proxyType);
+      sb.append(", tranId='").append(tranId).append('\'');
+      sb.append(", partnerPaymentToken='").append(partnerPaymentToken).append('\'');
+      sb.append('}');
+      return sb.toString();
    }
 }
