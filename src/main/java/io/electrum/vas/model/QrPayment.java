@@ -22,7 +22,7 @@ public class QrPayment extends PaymentMethod {
       setType(PaymentMethodType.QR);
    }
 
-   @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction.")
+   @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction. The tranId is embedded in sub-Tag 00 of the Electrum MAIT.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
