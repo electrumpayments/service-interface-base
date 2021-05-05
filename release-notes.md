@@ -14,9 +14,15 @@
     - Try and avoid special characters as far as possible
 -->
 
+## Version 3.31.0 - 5 May 2021
+
+### Features
+
+* New `PaymentMethod` child called `QrPayment` which can be used when making a QR-based payment.
+
 ## Version 3.30.1 - 30 April 2021
 
-## Bug Fixes
+### Bug Fixes
 
 * Validation constraints on `addressLine1` and `addressLine2` of the `Address` model object were incorrect. They were
   changed from a limit of 250 characters to a limit of 100 characters.

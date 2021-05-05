@@ -1,15 +1,13 @@
 package io.electrum.vas.model;
 
-import java.util.Objects;
-
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @ApiModel(description = "Model for mobile wallet payments", parent = PaymentMethod.class)
 public class WalletPayment extends PaymentMethod {
@@ -24,7 +22,6 @@ public class WalletPayment extends PaymentMethod {
         this.walletId = walletId;
         return this;
     }
-
 
     @ApiModelProperty(required = true, value = "The unique identifier of the wallet account making the payment.")
     @JsonProperty("walletId")
