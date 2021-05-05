@@ -1,13 +1,15 @@
 package io.electrum.vas.model;
 
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 @ApiModel(description = "Model for mobile wallet payments", parent = PaymentMethod.class)
 public class WalletPayment extends PaymentMethod {
