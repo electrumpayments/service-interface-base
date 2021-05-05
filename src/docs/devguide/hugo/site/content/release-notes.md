@@ -2,7 +2,7 @@ This page describes changes to the Service Interface Base API implemented across
 
 ## Version 3.31.0
 Released 5 May 2021
-* New `PaymentMethod` child called `QrPayment` which can be used when making a QR-based payment.
+* Added a new `PaymentMethod` child called `QrPayment` which can be used when making a QR-based payment.
 
 ## Version 3.30.1
 Released 30 April 2021
