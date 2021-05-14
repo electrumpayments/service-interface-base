@@ -1,7 +1,8 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
-## Version 3.31.0
-Released 5 May 2021
+## 3.31.0
+Released 14 May 2021
+* Added a `channelId` field to the `Originator` class.
 * Added a new `PaymentMethod` child called `QrPayment` which can be used when making a QR-based payment.
 
 ## Version 3.30.1
