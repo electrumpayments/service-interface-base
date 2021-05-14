@@ -1,6 +1,7 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
- * @since v1.31.0
+ * @since v3.31.0
  */
 @ApiModel(description = "Model for QR-based payments. "
       + "This payment method should be used when a QR code is presented for payment.", parent = PaymentMethod.class)
@@ -82,18 +83,18 @@ public class QrPayment extends PaymentMethod {
       return Objects.hash(super.hashCode(), tranId, partnerPaymentToken);
    }
 
-   @Override
    public String toString() {
-      final StringBuilder sb = new StringBuilder("QrPayment{");
-      sb.append("type=").append(type);
-      sb.append(", name='").append(name).append('\'');
-      sb.append(", amount=").append(amount);
-      sb.append(", issuer=").append(issuer);
-      sb.append(", pin=").append(pin);
-      sb.append(", proxy='").append(proxy).append('\'');
-      sb.append(", proxyType=").append(proxyType);
-      sb.append(", tranId='").append(tranId).append('\'');
-      sb.append(", partnerPaymentToken='").append(partnerPaymentToken).append('\'');
+      StringBuilder sb = new StringBuilder();
+      sb.append("class QrPayment {\n");
+      sb.append("    name: ").append(Utils.toIndentedString(name)).append('\n');
+      sb.append("    type: ").append(Utils.toIndentedString(type)).append('\n');
+      sb.append("    amount: ").append(Utils.toIndentedString(amount)).append('\n');
+      sb.append("    issuer: ").append(Utils.toIndentedString(issuer)).append('\n');
+      sb.append("    pin: ").append(Utils.toIndentedString(pin)).append('\n');
+      sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append('\n');
+      sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append('\n');
+      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append('\n');
+      sb.append("    partnerPaymentToken: ").append(Utils.toIndentedString(partnerPaymentToken)).append('\n');
       sb.append('}');
       return sb.toString();
    }
