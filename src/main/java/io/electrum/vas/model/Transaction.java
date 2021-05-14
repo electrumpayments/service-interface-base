@@ -1,19 +1,16 @@
 package io.electrum.vas.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.joda.time.DateTime;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The data required in all value added service transactions.
