@@ -1,17 +1,13 @@
 package io.electrum.vas.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Length;
-
 import java.util.Objects;
 
 /**
@@ -24,6 +20,7 @@ public class Originator {
    private String terminalId = null;
    private Merchant merchant = null;
    private String operatorId = null;
+   private String channelId = null;
 
    /**
     * The institution originating the request, as issued by Electrum
@@ -106,6 +103,27 @@ public class Originator {
       this.operatorId = operatorId;
    }
 
+
+   /**
+    * The ID that uniquely identifies the channel that this transaction was received through.
+    * @since 3.31.0
+    */
+   public Originator channelId(String channelId) {
+      this.channelId = channelId;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The ID that uniquely identifies the channel that this transaction was received through.")
+   @JsonProperty("channelId")
+   @Length(max = 30)
+   public String getChannelId() {
+      return channelId;
+   }
+
+   public void setChannelId(String channelId) {
+      this.channelId = channelId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -116,12 +134,13 @@ public class Originator {
       }
       Originator originator = (Originator) o;
       return Objects.equals(institution, originator.institution) && Objects.equals(terminalId, originator.terminalId)
-            && Objects.equals(merchant, originator.merchant) && Objects.equals(operatorId, originator.operatorId);
+            && Objects.equals(merchant, originator.merchant) && Objects.equals(operatorId, originator.operatorId)
+            && Objects.equals(channelId, originator.channelId);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(institution, terminalId, merchant, operatorId);
+      return Objects.hash(institution, terminalId, merchant, operatorId, channelId);
    }
 
    @Override
@@ -132,6 +151,7 @@ public class Originator {
       sb.append("    terminalId: ").append(Utils.toIndentedString(terminalId)).append('\n');
       sb.append("    merchant: ").append(Utils.toIndentedString(merchant)).append('\n');
       sb.append("    operatorId: ").append(Utils.toIndentedString(operatorId)).append('\n');
+      sb.append("    channelId: ").append(Utils.toIndentedString(channelId)).append('\n');
       sb.append("}");
       return sb.toString();
    }

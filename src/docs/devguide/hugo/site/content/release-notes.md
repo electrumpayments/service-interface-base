@@ -1,4 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
+
+## 3.31.0
+Released 14 May 2021
+* Added a `channelId` field to the `Originator` class.
+
 ## 3.29.0
 Released 05 March 2021
 * Added `WalletPayment` method.
