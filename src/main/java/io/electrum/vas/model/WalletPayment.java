@@ -25,7 +25,6 @@ public class WalletPayment extends PaymentMethod {
         return this;
     }
 
-    
     @ApiModelProperty(required = true, value = "The unique identifier of the wallet account making the payment.")
     @JsonProperty("walletId")
     @NotNull
