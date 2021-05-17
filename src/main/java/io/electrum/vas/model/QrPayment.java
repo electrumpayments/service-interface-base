@@ -83,6 +83,7 @@ public class QrPayment extends PaymentMethod {
       return Objects.hash(super.hashCode(), tranId, partnerPaymentToken);
    }
 
+   @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class QrPayment {\n");
