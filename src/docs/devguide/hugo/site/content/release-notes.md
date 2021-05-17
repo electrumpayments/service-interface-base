@@ -10,9 +10,7 @@ Released 30 April 2021
 * Validation constraints on `addressLine1` and `addressLine2` of the `Address` model object were incorrect. They were
   changed from a limit of 250 characters to a limit of 100 characters.
 
-## Version 3.30.0
-
-### Deprecated
+## Version 3.30.0 (Deprecated - see v3.31.1)
 Released 29 April 2021
 * Added new `Address` model object that contains a detailed breakdown of an address.
 * Added new member variables called `addressDetails` and `profileId` to the `Customer` model object.
@@ -20,7 +18,7 @@ Released 29 April 2021
 * Refactored the tests a bit so that they are easier to read and add to.
 
 ## 3.29.0
-Released 14 March 2021
+Released 17 March 2021
 * Added `WalletPayment` method.
 * Added `amount`, `proxy`, `proxyType`, `issuer` and `pin` fields to the `PaymentMethod` model.
 * Changes to the Java implementation of the base API:
