@@ -113,7 +113,7 @@ public class Originator {
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The ID that uniquely identifies the channel that this transaction was received through.")
+   @ApiModelProperty(required = false, value = "The ID that uniquely identifies the originator's channel that this transaction was received through.")
    @JsonProperty("channelId")
    @Length(max = 30)
    public String getChannelId() {
