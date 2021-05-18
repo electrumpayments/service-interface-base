@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
 ## 3.31.0
-Released 14 May 2021
+Released 18 May 2021
 * Added a `channelId` field to the `Originator` class.
 * Added a new `PaymentMethod` child called `QrPayment` which can be used when making a QR-based payment.
 
@@ -18,7 +18,7 @@ Released 29 April 2021
 * Refactored the tests a bit so that they are easier to read and add to.
 
 ## 3.29.0
-Released 17 March 2021
+Released 14 March 2021
 * Added `WalletPayment` method.
 * Added `amount`, `proxy`, `proxyType`, `issuer` and `pin` fields to the `PaymentMethod` model.
 * Changes to the Java implementation of the base API:
