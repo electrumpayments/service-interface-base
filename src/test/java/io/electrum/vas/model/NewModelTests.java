@@ -28,6 +28,7 @@ public class NewModelTests {
    private PaymentMethod rewardPayment;
    private PaymentMethod walletPayment;
    private PaymentMethod cardPayment;
+   private PaymentMethod qrPayment;
    
    @BeforeMethod
    protected void createPayloads() {
@@ -104,6 +105,19 @@ public class NewModelTests {
             .proxyType(ProxyType.UNKNOWN)
             .pin(new PinEncrypted()
                   .type(Pin.PinType.ENCRYPTED_PIN));
+
+      qrPayment = new QrPayment()
+            .tranId("bc228730-ab68-45e2-b91c-bc7d53640edb")
+            .partnerPaymentToken("71b36fcc-4a2e-47d4-b716-815b6dfef1f1")
+            .amount(new LedgerAmount()
+            .amount(456L)
+            .currency("710"))
+            .name("QR Payment")
+            .issuer(new Institution()
+                  .id("1234InsId")
+                  .name("Institution"))
+            .proxy("12345")
+            .proxyType(ProxyType.UNKNOWN);
    }
 
    @Test(description = "Test we can serialise a model to the expected value.", dataProvider = "serialisedObjectDataProvider")
@@ -160,6 +174,7 @@ public class NewModelTests {
               {originator, JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false)},
               {walletPayment, JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false)},
               {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)},
+              {qrPayment, JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false)},
               {address, JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false)}
               //@formatter:on
       };
@@ -175,6 +190,7 @@ public class NewModelTests {
               {JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false), originator},
               {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), walletPayment},
               {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), cardPayment},
+              {JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false), qrPayment},
               {JsonUtil.readFileAsString(PayloadFileLocations.CUSTOMER, false), customer},
               {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), address}
               //@formatter:on
@@ -195,6 +211,7 @@ public class NewModelTests {
               {originator},
               {walletPayment},
               {cardPayment},
+              {qrPayment},
               {address}
               //@formatter:on
       };
@@ -212,6 +229,7 @@ public class NewModelTests {
               {JsonUtil.readFileAsString(PayloadFileLocations.ORIGINATOR, false), Originator.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), WalletPayment.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), CardPayment.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false), QrPayment.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), Address.class}
               //@formatter:on
       };
@@ -265,19 +283,44 @@ public class NewModelTests {
               },
               {new WalletPayment().walletId(null).amount(new LedgerAmount().amount(456L).currency(null)),
                       new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
-              {new CardPayment().amount(new LedgerAmount().amount(456L).currency("wrong")).name("Card Payment")
-                      .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
-                      .proxy("12345").proxyType(ProxyType.UNKNOWN).pin(new PinEncrypted()),
-                      new CardPayment().pan("1234567891234567891").amount(new LedgerAmount().amount(456L).currency(
-                              "710")).name("Card Payment")
-                      .issuer(new Institution().id("1234InsId").name("Institution")).proxy(null).proxyType(ProxyType.UNKNOWN)},
+              {new CardPayment()
+                    .amount(new LedgerAmount().amount(456L).currency("wrong"))
+                    .name("Card Payment")
+                    .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
+                    .proxy("12345")
+                    .proxyType(ProxyType.UNKNOWN)
+                    .pin(new PinEncrypted()),
+               new CardPayment()
+                     .pan("1234567891234567891")
+                     .amount(new LedgerAmount().amount(456L).currency("710")).name("Card Payment")
+                     .issuer(new Institution().id("1234InsId").name("Institution"))
+                     .proxy(null)
+                     .proxyType(ProxyType.UNKNOWN)},
+              {new QrPayment()
+                  .amount(new LedgerAmount().amount(456L).currency("wrong")).name("QR Payment")
+                  .issuer(new Institution().id("1234InsId").name("ThisInstitutionNameIsTooLong12345678912345"))
+                  .proxy("12345")
+                  .proxyType(ProxyType.UNKNOWN),
+               new QrPayment().tranId("e0aef114-f719-41c1-889e-4d18464254a0")
+                   .partnerPaymentToken("4cc290e1-4018-4b28-9779-eba9fcb8004c")
+                  .amount(new LedgerAmount().amount(456L).currency("710")).name("QR Payment")
+                  .issuer(new Institution().id("1234InsId").name("Institution"))
+                  .proxy(null)
+                  .proxyType(ProxyType.UNKNOWN)},
               {new Address()
                     .addressLine1("41 Sheila Street")
                     .addressLine2("Edenvale")
                     .city("Johannesburg")
                     .region("Gauteng")
                     .country("ZA")
-                    .postalCode("1609"), address}
+                    .postalCode("1609"),
+               new Address()
+                    .addressLine1("41 Sheila Street")
+                    .addressLine2("Edenvale")
+                    .city("Johannesburg")
+                    .region("GP")
+                    .country("ZA")
+                    .postalCode("1609")}
               //@formatter:on
       };
    }

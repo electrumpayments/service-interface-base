@@ -1,0 +1,16 @@
+{
+  "type":"QR",
+  "name":"QR Payment",
+  "amount":{
+    "amount":456,
+    "currency":"710"
+  },
+  "issuer":{
+    "id":"1234InsId",
+    "name":"Institution"
+  },
+  "proxy":"12345",
+  "proxyType":"UNKNOWN",
+  "tranId":"bc228730-ab68-45e2-b91c-bc7d53640edb",
+  "partnerPaymentToken":"71b36fcc-4a2e-47d4-b716-815b6dfef1f1"
+}
