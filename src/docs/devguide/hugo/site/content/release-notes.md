@@ -10,7 +10,7 @@ Released 30 April 2021
 * Validation constraints on `addressLine1` and `addressLine2` of the `Address` model object were incorrect. They were
   changed from a limit of 250 characters to a limit of 100 characters.
 
-## Version 3.30.0 (Deprecated - see v3.31.1)
+## Version 3.30.0 (Deprecated - see v3.30.1)
 Released 29 April 2021
 * Added new `Address` model object that contains a detailed breakdown of an address.
 * Added new member variables called `addressDetails` and `profileId` to the `Customer` model object.
