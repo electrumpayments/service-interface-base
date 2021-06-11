@@ -1,5 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 
+## 3.31.1
+Released 11 June 2021
+* Changed `jaxb` and `jackson` dependencies to share a version in order to instill consistency.
+
 ## 3.31.0
 Released 18 May 2021
 * Added a `channelId` field to the `Originator` class.
