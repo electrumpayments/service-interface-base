@@ -91,7 +91,7 @@ public class NewModelTests {
 
       walletPayment =
             new WalletPayment().walletId("0712345678")
-                  .walletPocket((new WalletPocket()).pocketId("12345").pocketName("Cash Pocket"))
+                  .walletPocket(new WalletPocket().pocketId("12345").pocketName("Cash Pocket"))
                   .amount(new LedgerAmount().amount(456L).currency("710"));
 
       cardPayment = new CardPayment()

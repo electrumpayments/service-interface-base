@@ -1,11 +1,17 @@
 package io.electrum.vas.model;
 
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * A subsection of a wallet used when a {@link WalletPayment} is made up of more than 1 part.
+ */
 public class WalletPocket {
    private String pocketName;
 
@@ -54,5 +60,30 @@ public class WalletPocket {
 
    public void setPocketId(String pocketId) {
       this.pocketId = pocketId;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      WalletPocket that = (WalletPocket) o;
+      return Objects.equals(pocketName, that.pocketName) && Objects.equals(pocketId, that.pocketId);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(pocketName, pocketId);
+   }
+
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("class WalletPocket {\n");
+      sb.append("    pocketId: ").append(Utils.toIndentedString(pocketId)).append('\n');
+      sb.append("    pocketName: ").append(Utils.toIndentedString(pocketName)).append('\n');
+      sb.append('}');
+      return sb.toString();
    }
 }

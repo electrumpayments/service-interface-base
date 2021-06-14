@@ -36,7 +36,9 @@ public class WalletPayment extends PaymentMethod {
    }
 
    /**
-    * The pocket associated with this wallet from which payments can be made
+    * The pocket associated with this wallet from which the payment is to be made. Used to determine where to make a
+    * payment from when a wallet is split into different sections. When not provided, payment will be directly from the
+    * wallet and not a subsection of the wallet.
     * 
     * @param walletPocket
     *           The wallet pocket
@@ -47,7 +49,9 @@ public class WalletPayment extends PaymentMethod {
       return this;
    }
 
-   @ApiModelProperty(value = "The pocket associated with this wallet from which payments can be made")
+   @ApiModelProperty(value = "The pocket associated with this wallet from which the payment is to be made. Used to "
+         + "determine where to make a payment from when a wallet is split into different sections. When not provided,"
+         + " payment will be directly from the wallet and not a subsection of the wallet.")
    @JsonProperty("walletPocket")
    public WalletPocket getWalletPocket() {
       return walletPocket;
@@ -66,12 +70,12 @@ public class WalletPayment extends PaymentMethod {
       if (!super.equals(o))
          return false;
       WalletPayment that = (WalletPayment) o;
-      return Objects.equals(walletId, that.walletId);
+      return Objects.equals(walletId, that.walletId) && Objects.equals(walletPocket, that.walletPocket);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), walletId);
+      return Objects.hash(super.hashCode(), walletId, walletPocket);
    }
 
    @Override
@@ -86,6 +90,7 @@ public class WalletPayment extends PaymentMethod {
       sb.append("    proxy: ").append(Utils.toIndentedString(proxy)).append('\n');
       sb.append("    proxyType: ").append(Utils.toIndentedString(proxyType)).append('\n');
       sb.append("    walletId: ").append(Utils.toIndentedString(walletId)).append('\n');
+      sb.append("    walletPocket: ").append(Utils.toIndentedString(walletPocket)).append('\n');
       sb.append('}');
       return sb.toString();
    }
