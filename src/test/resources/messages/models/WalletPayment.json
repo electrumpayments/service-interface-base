@@ -4,5 +4,9 @@
     "amount":456,
     "currency":"710"
   },
-  "walletId":"0712345678"
+  "walletId":"0712345678",
+  "walletPocket":{
+    "pocketName":"Cash Pocket",
+    "pocketId":"12345"
+  }
 }

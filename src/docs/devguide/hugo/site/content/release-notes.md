@@ -1,4 +1,9 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
+## 3.32.0
+Released 14 June 2021
+* Added a new `WalletPocket` model to store a name and id of a wallet pocket if it has one.
+* Added a `WalletPocket` field to `WalletPayment` to describe the pocket from which the payment should be made from 
+  (if the payment can be made from more than 1 pocket).
 
 ## 3.31.0
 Released 18 May 2021
