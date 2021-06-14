@@ -1,6 +1,13 @@
 package io.electrum.vas.model;
 
-import io.electrum.vas.JsonUtil;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -10,12 +17,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Set;
+import io.electrum.vas.JsonUtil;
 
 public class NewModelTests {
 
@@ -87,11 +89,10 @@ public class NewModelTests {
                   .currency("710"))
             .name(null);
 
-      walletPayment = new WalletPayment()
-            .walletId("0712345678")
-            .amount(new LedgerAmount()
-                  .amount(456L)
-                  .currency("710"));
+      walletPayment =
+            new WalletPayment().walletId("0712345678")
+                  .walletPocket(new WalletPocket().pocketId("12345").pocketName("Cash Pocket"))
+                  .amount(new LedgerAmount().amount(456L).currency("710"));
 
       cardPayment = new CardPayment()
             .amount(new LedgerAmount()
@@ -281,8 +282,12 @@ public class NewModelTests {
                               .merchantType("1234")
                               .merchantName(new MerchantName().city("cpt").name("name").country("ZA").region("ZA")))
               },
-              {new WalletPayment().walletId(null).amount(new LedgerAmount().amount(456L).currency(null)),
-                      new WalletPayment().walletId("0712345678").amount(new LedgerAmount().amount(456L).currency("710"))},
+              {new WalletPayment().walletId(null).walletPocket(new WalletPocket())
+                      .amount(new LedgerAmount().amount(456L).currency(null)),
+                      new WalletPayment().walletId("0712345678")
+                              .walletPocket(new WalletPocket().pocketName("Cash Pocket"))
+                              .amount(new LedgerAmount().amount(456L).currency(
+                              "710"))},
               {new CardPayment()
                     .amount(new LedgerAmount().amount(456L).currency("wrong"))
                     .name("Card Payment")
@@ -320,7 +325,8 @@ public class NewModelTests {
                     .city("Johannesburg")
                     .region("GP")
                     .country("ZA")
-                    .postalCode("1609")}
+                    .postalCode("1609")},
+              {new WalletPocket().pocketId("12345"), new WalletPocket().pocketId("12345").pocketName("Cash Pocket")}
               //@formatter:on
       };
    }
