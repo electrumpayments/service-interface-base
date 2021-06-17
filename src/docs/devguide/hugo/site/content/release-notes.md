@@ -1,7 +1,7 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
-## 3.32.0-RC1
-Released __ June 2021
-* Added Interface for HasTenders. This can be used for creating shared utilities across API implementations.
+## 3.33.0
+Released 17 June 2021
+* Added Interface for `HasTenders`. This can be used for creating shared utilities across API implementations.
 
 ## 3.32.0
 Released 14 June 2021
