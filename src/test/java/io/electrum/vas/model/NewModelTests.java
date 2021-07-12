@@ -31,7 +31,8 @@ public class NewModelTests {
    private PaymentMethod walletPayment;
    private PaymentMethod cardPayment;
    private PaymentMethod qrPayment;
-   
+   private PaymentMethod loyaltyCardPayment;
+
    @BeforeMethod
    protected void createPayloads() {
       customer = new Customer()
@@ -119,6 +120,14 @@ public class NewModelTests {
                   .name("Institution"))
             .proxy("12345")
             .proxyType(ProxyType.UNKNOWN);
+
+      loyaltyCardPayment =
+            new LoyaltyCardPayment().cardNumber("1111222233334444")
+                  .amount(new LedgerAmount().amount(100L).currency("710"))
+                  .name("Loyalty Card Payment")
+                  .issuer(new Institution().id("1234InsId").name("Institution"))
+                  .proxy("12345")
+                  .proxyType(ProxyType.UNKNOWN);
    }
 
    @Test(description = "Test we can serialise a model to the expected value.", dataProvider = "serialisedObjectDataProvider")
@@ -176,7 +185,8 @@ public class NewModelTests {
               {walletPayment, JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false)},
               {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)},
               {qrPayment, JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false)},
-              {address, JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false)}
+              {address, JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false)},
+              {loyaltyCardPayment, JsonUtil.readFileAsString(PayloadFileLocations.LOYALTY_CARD_PAYMENT, false)},
               //@formatter:on
       };
    }
@@ -193,7 +203,8 @@ public class NewModelTests {
               {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), cardPayment},
               {JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false), qrPayment},
               {JsonUtil.readFileAsString(PayloadFileLocations.CUSTOMER, false), customer},
-              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), address}
+              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), address},
+              {JsonUtil.readFileAsString(PayloadFileLocations.LOYALTY_CARD_PAYMENT, false), loyaltyCardPayment}
               //@formatter:on
       };
    }
@@ -213,7 +224,8 @@ public class NewModelTests {
               {walletPayment},
               {cardPayment},
               {qrPayment},
-              {address}
+              {address},
+              {loyaltyCardPayment}
               //@formatter:on
       };
    }
@@ -231,7 +243,8 @@ public class NewModelTests {
               {JsonUtil.readFileAsString(PayloadFileLocations.WALLET_PAYMENT, false), WalletPayment.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false), CardPayment.class},
               {JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false), QrPayment.class},
-              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), Address.class}
+              {JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false), Address.class},
+              {JsonUtil.readFileAsString(PayloadFileLocations.LOYALTY_CARD_PAYMENT, false), LoyaltyCardPayment.class}
               //@formatter:on
       };
    }
@@ -326,7 +339,8 @@ public class NewModelTests {
                     .region("GP")
                     .country("ZA")
                     .postalCode("1609")},
-              {new WalletPocket().pocketId("12345"), new WalletPocket().pocketId("12345").pocketName("Cash Pocket")}
+              {new WalletPocket().pocketId("12345"), new WalletPocket().pocketId("12345").pocketName("Cash Pocket")},
+              {new LoyaltyCardPayment().cardNumber("abfecc"), loyaltyCardPayment}
               //@formatter:on
       };
    }

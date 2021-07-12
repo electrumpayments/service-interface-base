@@ -13,4 +13,7 @@ public class PayloadFileLocations {
    public static final String QR_PAYMENT = "models/QrPayment.json";
    public static final String CUSTOMER = "models/Customer.json";
    public static final String ADDRESS = "models/Address.json";
+   public static final String LOYALTY_CARD_PAYMENT = "models/LoyaltyCardPayment.json";
+   public static final String LOYALTY_CARD_PAYMENT_MASKED = "models/LoyaltyCardPaymentMasked.json";
+
 }
