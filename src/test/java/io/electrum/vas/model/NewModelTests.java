@@ -186,7 +186,7 @@ public class NewModelTests {
               {cardPayment, JsonUtil.readFileAsString(PayloadFileLocations.CARD_PAYMENT, false)},
               {qrPayment, JsonUtil.readFileAsString(PayloadFileLocations.QR_PAYMENT, false)},
               {address, JsonUtil.readFileAsString(PayloadFileLocations.ADDRESS, false)},
-              {loyaltyCardPayment, JsonUtil.readFileAsString(PayloadFileLocations.LOYALTY_CARD_PAYMENT, false)},
+              {loyaltyCardPayment, JsonUtil.readFileAsString(PayloadFileLocations.LOYALTY_CARD_PAYMENT, false)}
               //@formatter:on
       };
    }

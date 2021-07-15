@@ -1,6 +1,6 @@
 This page describes changes to the Service Interface Base API implemented across different releases of the interface.
 ## 3.34.0
-Released xx July 2021
+Released 15 July 2021
 * Added masking to `LoyaltyCardPayment` card numbers so they are now masked using `MaskPan` annotation.
 
 ## 3.33.0
