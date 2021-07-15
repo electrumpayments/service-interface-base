@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>service-interface-base</artifactId>
-  <version>3.33.0</version>
+  <version>3.34.0</version>
   <packaging>jar</packaging>
   <name>Service Interface Base</name>
   <description>Service Interface Base</description>
@@ -45,6 +45,7 @@
     <jaxb-core-version>2.3.0</jaxb-core-version>
     <testng-version>7.0.0</testng-version>
     <mockito-core-version>2.25.0</mockito-core-version>
+    <electrum-message-sdk-version>2.0.0</electrum-message-sdk-version>
     <jacoco.skip>true</jacoco.skip> <!-- skip code coverage unless maven is run with -Djacoco.skip=false -->
     <sonar.coverage.jacoco.xmlReportPaths>
       ${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml
@@ -124,6 +125,12 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>${testng-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.electrum</groupId>
+      <artifactId>electrum-message-sdk</artifactId>
+      <version>${electrum-message-sdk-version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

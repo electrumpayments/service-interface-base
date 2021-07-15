@@ -1,13 +1,17 @@
 package io.electrum.vas.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.sdk.masking2.MaskPan;
+import io.electrum.sdk.masking2.Masked;
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Model for payments made using loyalty programme cards", parent = PaymentMethod.class)
 public class LoyaltyCardPayment extends PaymentMethod {
@@ -20,10 +24,16 @@ public class LoyaltyCardPayment extends PaymentMethod {
       setType(PaymentMethodType.LOYALTY_CARD);
    }
 
+   public LoyaltyCardPayment cardNumber(String cardNumber) {
+      this.cardNumber = cardNumber;
+      return this;
+   }
+
    @ApiModelProperty(required = true, value = "Primary account number of the loyalty programme card used to make a payment")
    @JsonProperty("cardNumber")
    @NotNull
    @Pattern(regexp = "[0-9]{16}")
+   @Masked(MaskPan.class)
    public String getCardNumber() {
       return cardNumber;
    }
@@ -34,9 +44,12 @@ public class LoyaltyCardPayment extends PaymentMethod {
 
    @Override
    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      if (!super.equals(o)) return false;
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
       LoyaltyCardPayment that = (LoyaltyCardPayment) o;
       return Objects.equals(cardNumber, that.cardNumber);
    }

@@ -1,0 +1,15 @@
+{
+  "type":"LOYALTY_CARD",
+  "name":"Loyalty Card Payment",
+  "amount":{
+    "amount":100,
+    "currency":"710"
+  },
+  "issuer":{
+    "id":"1234InsId",
+    "name":"Institution"
+  },
+  "proxy":"12345",
+  "proxyType":"UNKNOWN",
+  "cardNumber":"1111222233334444"
+}

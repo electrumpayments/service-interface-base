@@ -128,7 +128,8 @@ public class PaymentMethod {
       return this;
    }
 
-   @ApiModelProperty(value = "The PIN associated with this payment method. Various PIN formats are supported (clear, encrypted, hashed etc.)")
+   @ApiModelProperty(value = "The PIN associated with this payment method. Various PIN formats are supported (clear, "
+         + "encrypted, hashed etc.). NOTE: A pin is not expected in a response and will not be translated.")
    @JsonProperty("pin")
    @Valid
    public Pin getPin() {
@@ -144,8 +145,8 @@ public class PaymentMethod {
       return this;
    }
 
-   @ApiModelProperty(value = "An alternative identifier for the customer's source of funds. Acts as a stand in for " +
-           "the customer identifier. E.g. a customer's MSISDN or email address.")
+   @ApiModelProperty(value = "An alternative identifier for the customer's source of funds. Acts as a stand in for "
+         + "the customer identifier. E.g. a customer's MSISDN or email address.")
    @JsonProperty("proxy")
    @Size(min = 0, max = 40)
    @Masked
